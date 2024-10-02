@@ -3,7 +3,7 @@
 define("DB_HOST","localhost");
 
 //Nombre de la base de datos
-define("DB_NAME", "admin_brartnet");
+define("DB_NAME", "admin_pasion_center");
 
 //Usuario de la base de datos
 define("DB_USERNAME", "root");
