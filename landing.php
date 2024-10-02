@@ -7,12 +7,12 @@
   <meta charset="UTF-8">
   <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> Inicio | Corporación Brartnet </title>
+  <title> Inicio | Pasión Center Import </title>
   <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
   <meta name="Author" content="Spruko Technologies Private Limited">
 
   <!-- Favicon -->
-  <link rel="icon" href="../assets/images/brand-logos/ico-brartnet.svg" type="image/x-icon">
+  <link rel="icon" href="../assets/images/brand-logos/ico-pasion-center.svg" type="image/x-icon">
 
   <!-- Bootstrap Css -->
   <link id="style" href="../assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">

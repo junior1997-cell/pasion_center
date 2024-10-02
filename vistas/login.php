@@ -9,21 +9,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Content-Language" content="es">
 
-  <title> Inicio | Corporación Brartnet </title>
+  <title> Inicio | Pasión Center Import </title>
 
   <meta name="description" content="Proveedor de servicios de internet de alta velocidad en Perú. Ofrecemos conexiones rápidas y confiables para hogares y empresas. ¡Contáctanos para obtener más información!">
   <meta name="keywords" content="brartnet, tocache, internet tocache, internet, proveedor de internet, servicios de internet, alta velocidad, conexiones de internet, internet en Perú">
-  <meta name="author" content="Corporación Brartnet">  
+  <meta name="author" content="Pasión Center Import">  
   <meta name="robots" content="index, follow">
   <!-- FACEBOOK -->
-  <meta property="og:title" content="Corporación Brartnet - Proveedor de Servicios de Internet en Perú">
+  <meta property="og:title" content="Pasión Center Import - Proveedor de Servicios de Internet en Perú">
   <meta property="og:description" content="Proveedor de servicios de internet de alta velocidad en Perú. Ofrecemos conexiones rápidas y confiables para hogares y empresas. ¡Contáctanos para obtener más información!">
   <meta property="og:image" content="assets/images/brand-logos/desktop-white.png">
   <meta property="og:url" content="https://corporacionbrartnet.jdl.pe">
   <!-- TWITTER -->
   <!-- <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@nombre_de_usuario_de_twitter"> -->
-  <meta name="twitter:title" content="Corporación Brartnet">
+  <meta name="twitter:title" content="Pasión Center Import">
   <meta name="twitter:description" content="Proveedor de servicios de internet de alta velocidad en Perú. Ofrecemos conexiones rápidas y confiables para hogares y empresas. ¡Contáctanos para obtener más información!">
   <meta name="twitter:image" content="assets/images/brand-logos/desktop-white.png">
 
@@ -31,7 +31,7 @@
     {
       "@context": "http://schema.org",
       "@type": "Organization",
-      "name": "Corporación Brartnet",
+      "name": "Pasión Center Import",
       "url": "https://corporacionbrartnet.jdl.pe",
       "description": "Proveedor de servicios de internet de alta velocidad en Perú. Ofrecemos conexiones rápidas y confiables para hogares y empresas. ¡Contáctanos para obtener más información!"
     }
@@ -40,7 +40,7 @@
   <link rel="canonical" href="https://corporacionbrartnet.jdl.pe">
 
   <!-- Favicon -->
-  <link rel="icon" href="../assets/images/brand-logos/ico-brartnet.svg" type="image/x-icon">
+  <link rel="icon" href="../assets/images/brand-logos/ico-pasion-center.svg" type="image/x-icon">
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
   <!-- CSS Implementing Plugins -->

@@ -13,7 +13,7 @@
   <meta name="keywords" content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
   <!-- Favicon -->
-  <link rel="icon" href="../assets/images/brand-logos/ico-brartnet.svg" type="image/x-icon">
+  <link rel="icon" href="../assets/images/brand-logos/ico-pasion-center.svg" type="image/x-icon">
   <!-- Main Theme Js -->
   <script src="../assets/js/authentication-main.js"></script>
   <!-- Bootstrap Css -->
