@@ -8,7 +8,7 @@
   }else{
     ?>
     <!DOCTYPE html>
-    <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="icon-overlay-close" loader="enable">
+    <html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" style="--primary-rgb: 78, 172, 76;" data-bg-img="bgimg4" data-toggled="icon-overlay-close" loader="enable">
 
       <head>
         

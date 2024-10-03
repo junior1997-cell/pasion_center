@@ -431,7 +431,7 @@
         <source src="../assets/images/authentication/fond.mp4" type="video/mp4" />
       </video/> 
       <!-- <img class="inter" src="../assets/images/authentication/globo.png" alt=""> -->
-      <img class="inter2" src="../assets/images/authentication/internet-de-las-cosas.png" alt="" style="widht:500px;">
+      <img class="inter2" src="../assets/images/authentication/internet-de-las-cosas.png" alt="" style="width:500px;">
       <img class="inter3" src="../assets/images/authentication/wifi (1).png" alt="">
       <!-- <img class="inter4" src="../assets/images/authentication/wifi.png" alt=""> -->
       <div class="row justify-content-center align-items-center h-100 form_ed">

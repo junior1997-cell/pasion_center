@@ -9,7 +9,7 @@
 
     ?>
       <!DOCTYPE html>
-      <html lang="es" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="icon-overlay-close" loader="enable">
+      <html lang="es" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" style="--primary-rgb: 78, 172, 76;" data-bg-img="bgimg4" data-menu-styles="dark" data-toggled="icon-overlay-close" loader="enable">
 
         <head>
           

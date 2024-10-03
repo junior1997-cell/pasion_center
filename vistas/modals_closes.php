@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="dark" data-toggled="close">
+<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" style="--primary-rgb: 78, 172, 76;" data-bg-img="bgimg4" data-menu-styles="dark" data-toggled="close">
 
   <head>
     <?php $title_page = "Inicio 1"; include("template/head.php"); ?>
