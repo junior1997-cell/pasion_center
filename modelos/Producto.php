@@ -35,7 +35,11 @@
     public function insertar($tipo, $codigo_alterno, $categoria, $u_medida, $marca, $nombre, $descripcion, $stock, 
       $stock_min, $precio_v, $precio_c, $precio_x_mayor, $precio_dist, $precio_esp, $img_producto)	{
       
-      $sql_0 = "SELECT * FROM producto WHERE nombre = '$nombre';";
+      $sql_0 = "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca
+      FROM producto AS p
+      INNER JOIN sunat_unidad_medida AS sum ON p.idsunat_unidad_medida = sum.idsunat_unidad_medida
+      INNER JOIN categoria AS cat ON p.idcategoria = cat.idcategoria
+      INNER JOIN marca AS mc ON p.idmarca = mc.idmarca WHERE p.nombre = '$nombre' AND p.idcategoria = '$categoria' AND p.idmarca = '$marca';";
       $existe = ejecutarConsultaArray($sql_0); if ($existe['status'] == false) { return $existe;}      
     
       if ( empty($existe['data']) ) {
@@ -52,6 +56,8 @@
         foreach ($existe['data'] as $key => $value) {
           $info_repetida .= '<li class="text-left font-size-13px">
             <span class="font-size-15px text-danger"><b>'.$value['nombre'].'</span><br>
+            <span class="font-size-15px ">Categoria: <b>'.$value['categoria'].'</span><br>
+            <span class="font-size-15px ">Marca: <b>'.$value['marca'].'</span><br>
             <b>Papelera: </b>'.( $value['estado']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO') .' <b>|</b>
             <b>Eliminado: </b>'. ($value['estado_delete']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO').'<br>
             <hr class="m-t-2px m-b-2px">
@@ -64,7 +70,11 @@
     public function editar($idproducto, $tipo, $codigo_alterno, $categoria, $u_medida, $marca, $nombre, $descripcion, $stock, 
     $stock_min, $precio_v, $precio_c, $precio_x_mayor, $precio_dist, $precio_esp, $img_producto) {
 
-      $sql_0 = "SELECT * FROM producto WHERE nombre = '$nombre' AND idproducto <> '$idproducto';";
+      $sql_0 = "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca
+      FROM producto AS p
+      INNER JOIN sunat_unidad_medida AS sum ON p.idsunat_unidad_medida = sum.idsunat_unidad_medida
+      INNER JOIN categoria AS cat ON p.idcategoria = cat.idcategoria
+      INNER JOIN marca AS mc ON p.idmarca = mc.idmarca WHERE p.nombre = '$nombre' AND p.idcategoria = '$categoria' AND p.idmarca = '$marca'  AND p.idproducto <> '$idproducto';";
       $existe = ejecutarConsultaArray($sql_0); if ($existe['status'] == false) { return $existe;}
         
       if ( empty($existe['data']) ) {
@@ -83,6 +93,8 @@
         foreach ($existe['data'] as $key => $value) {
           $info_repetida .= '<li class="text-left font-size-13px">
             <span class="font-size-15px text-danger"><b>'.$value['nombre'].'</span><br>
+            <span class="font-size-15px ">Categoria: <b>'.$value['categoria'].'</span><br>
+            <span class="font-size-15px ">Marca: <b>'.$value['marca'].'</span><br>
             <b>Papelera: </b>'.( $value['estado']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO') .' <b>|</b>
             <b>Eliminado: </b>'. ($value['estado_delete']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO').'<br>
             <hr class="m-t-2px m-b-2px">

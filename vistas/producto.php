@@ -124,6 +124,7 @@ if (!isset($_SESSION["user_nombre"])) {
                             <th style="border-top: 1px solid #f3f3f3 !important;">Nombre</th>
                             <th style="border-top: 1px solid #f3f3f3 !important;">Código</th>
                             <th style="border-top: 1px solid #f3f3f3 !important;">Código Alterno</th>
+                            <th style="border-top: 1px solid #f3f3f3 !important;">ID</th>
                           </tr>
                         </thead>
                         <tbody></tbody>
@@ -145,6 +146,7 @@ if (!isset($_SESSION["user_nombre"])) {
                             <th>Nombre</th>
                             <th>Código</th>
                             <th>Código Alterno</th>
+                            <th >ID</th>
                           </tr>
                         </tfoot>
 

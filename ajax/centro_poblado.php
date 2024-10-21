@@ -58,11 +58,12 @@ if (!isset($_SESSION["user_nombre"])) {
 
             $data[] = array(
               "0" => $cont++,
-              "1" => '<button class="btn btn-icon btn-sm btn-warning-light" onclick="mostrar_centro_poblado(' . $value['idcentro_poblado'] . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>'.
-                ' <button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="eliminar_centro_poblado(' . $value['idcentro_poblado'] . ', \'' . encodeCadenaHtml($value['nombre']) . '\')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>',         
+              "1" => ($value['idcentro_poblado'] == 1 ? '<i class="bi bi-exclamation-triangle text-danger fs-6"></i>' : '<button class="btn btn-icon btn-sm border-warning btn-warning-light" onclick="mostrar_centro_poblado(' . $value['idcentro_poblado'] . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>'.
+                ' <button  class="btn btn-icon btn-sm border-danger btn-danger-light product-btn" onclick="eliminar_centro_poblado(' . $value['idcentro_poblado'] . ', \'' . encodeCadenaHtml($value['nombre']) . '\')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>'),         
               "2" => $value['nombre'],
-              "3" => $value['descripcion'],
-              "4" => ($value['estado'] == '1') ? '<span class="badge bg-success-transparent"><i class="ri-check-fill align-middle me-1"></i>Activo</span>' : '<span class="badge bg-danger-transparent"><i class="ri-close-fill align-middle me-1"></i>Desactivado</span>'
+              "3" => $value['nombre_distrito'] . ' / '. $value['nombre_provincia'] . ' / '. $value['nombre_departamento']  ,
+              "4" => '<textarea cols="30" rows="1" class="textarea_datatable bg-light " readonly="">' . $value['descripcion'] . '</textarea>',
+              "5" => ($value['estado'] == '1') ? '<span class="badge bg-success-transparent"><i class="ri-check-fill align-middle me-1"></i>Activo</span>' : '<span class="badge bg-danger-transparent"><i class="ri-close-fill align-middle me-1"></i>Desactivado</span>'
 
             );
           }

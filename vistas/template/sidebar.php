@@ -100,7 +100,7 @@
         <li class="slide has-sub">
           <a href="javascript:void(0);" class="side-menu__item">
             <i class='bx bx-cart-add side-menu__icon'></i>
-            <span class="side-menu__label">Realizar cobro<span class="badge bg-secondary-transparent ms-2">New</span></span>
+            <span class="side-menu__label">Realizar venta<span class="badge bg-secondary-transparent ms-2">New</span></span>
             <i class="fe fe-chevron-right side-menu__angle"></i>
           </a>
           <ul class="slide-menu child1">
@@ -163,6 +163,16 @@
             <i class='bx bx-dollar-circle side-menu__icon' ></i><span class="side-menu__label"> Gastos Trabajador</span>
           </a>          
         </li>
+        <?php } ?>
+        <!-- End::slide --> 
+
+        <!-- Start::slide -->
+        <?php  if ($_SESSION['gastos_trabajador'] == '1') { ?>
+        <!-- <li class="slide">
+          <a href="gasto_de_trabajador.php" class="side-menu__item">
+            <i class='bx bx-dollar-circle side-menu__icon' ></i><span class="side-menu__label"> Otros Gastos</span>
+          </a>          
+        </li> -->
         <?php } ?>
         <!-- End::slide --> 
         

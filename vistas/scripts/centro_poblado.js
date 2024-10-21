@@ -68,7 +68,11 @@ function tabla_principal_centro_poblado() {
     },
     createdRow: function (row, data, ixdex) {
       // columna: #
-      if (data[6] != '') { $("td", row).eq(6).addClass("text-center"); }
+      if (data[1] != '') { $("td", row).eq(1).addClass("text-nowrap text-center"); }
+      // columna: #
+      if (data[2] != '') { $("td", row).eq(2).addClass("text-nowrap"); }
+      // columna: #
+      if (data[3] != '') { $("td", row).eq(3).addClass("text-nowrap"); }
     },
 		language: {
       lengthMenu: "_MENU_ ", search: "Buscar:",

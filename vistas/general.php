@@ -55,105 +55,7 @@ if (!isset($_SESSION["user_nombre"])) {
               <div class="col-12 col-lg-12 col-xl-12 p-0">
                 <div class="tab-content">
                   <div class="tab-pane fade show active" id="dato-cliente-pane" role="tabpanel" tabindex="0">
-                    <div class="row">
-
-                      <!-- :::::::::::::::: P L A N E S :::::::::::::::: -->
-                      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-6 col-xxl-6">
-                        <div class="d-md-flex d-block align-items-center justify-content-between mb-4 mt-2 page-header-breadcrumb">
-                          <div>
-                            <div class="d-md-flex d-block align-items-center ">
-                              <button class="btn-modal-effect btn btn-primary label-btn m-r-10px" onclick="limpiar_form();" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" data-bs-target="#modal-agregar-plan"> <i class="ri-user-add-line label-btn-icon me-2"></i>Agregar </button>
-                              <div>
-                                <p class="fw-semibold fs-18 mb-0">Planes</p>
-                                <span class="fs-semibold text-muted">Administra los planes de manera eficiente.</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="btn-list mt-md-0 mt-2">
-                            <nav>
-                              <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">Planes</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Home</li>
-                              </ol>
-                            </nav>
-                          </div>
-                        </div>
-                        <div class="card custom-card">
-                          <div class="card-body table-responsive">
-                            <table id="tabla-plan" class="table table-bordered w-100" style="width: 100%;">
-                              <thead>
-                                <tr>
-                                  <th class="text-center">#</th>
-                                  <th class="text-center">Acciones</th>
-                                  <th>Descripción</th>
-                                  <th>Costo</th>
-                                  <th class="text-center">Estado</th>
-                                </tr>
-                              </thead>
-                              <tbody></tbody>
-                              <tfoot>
-                                <tr>
-                                  <th class="text-center">#</th>
-                                  <th class="text-center">Acciones</th>
-                                  <th>Descripción</th>
-                                  <th>Costo</th>
-                                  <th class="text-center">Estado</th>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- :::::::::::::::: Z O N A :::::::::::::::: -->
-                      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-6 col-xxl-6">
-                        <div class="d-md-flex d-block align-items-center justify-content-between mb-4 mt-2 page-header-breadcrumb">
-                          <div>
-                            <div class="d-md-flex d-block align-items-center ">
-                              <button class="btn-modal-effect btn btn-primary label-btn m-r-10px" onclick="limpiar_zona();" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" data-bs-target="#modal-agregar-zona"> <i class="ri-user-add-line label-btn-icon me-2"></i>Agregar </button>
-                              <div>
-                                <p class="fw-semibold fs-18 mb-0"><b>Zonas</b></p>
-                                <span class="fs-semibold text-muted">Administra de manera eficiente las zonas.</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="btn-list mt-md-0 mt-2">
-                            <nav>
-                              <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">Zonas</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Home</li>
-                              </ol>
-                            </nav>
-                          </div>
-                        </div>
-                        <div class="card custom-card">
-                          <div class="card-body table-responsive">
-                            <table id="tabla-zona" class="table table-bordered w-100" style="width: 100%;">
-                              <thead>
-                                <tr>
-                                  <th class="text-center">#</th>
-                                  <th class="text-center">Acciones</th>
-                                  <th>Descripción</th>
-                                  <th>Ip Zona</th>
-                                  <th class="text-center">Estado</th>
-                                </tr>
-                              </thead>
-                              <tbody></tbody>
-                              <tfoot>
-                                <tr>
-                                  <th class="text-center">#</th>
-                                  <th class="text-center">Acciones</th>
-                                  <th>Descripción</th>
-                                  <th>Ip Zona</th>
-                                  <th class="text-center">Estado</th>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
+                    <div class="row">                      
 
                       <!-- :::::::::::::::: C E N T R O    P O B L A D O :::::::::::::::: -->
                       <div class="col-sm-12 col-md-12 col-lg-8 col-xl-6 col-xxl-6">
@@ -184,6 +86,7 @@ if (!isset($_SESSION["user_nombre"])) {
                                   <th class="text-center">#</th>
                                   <th class="text-center">Acciones</th>
                                   <th>Nombre</th>
+                                  <th>Distrito / Provincia / Departamento</th>
                                   <th>Descripción</th>
                                   <th class="text-center">Estado</th>
                                 </tr>
@@ -194,6 +97,7 @@ if (!isset($_SESSION["user_nombre"])) {
                                   <th class="text-center">#</th>
                                   <th class="text-center">Acciones</th>
                                   <th>Nombre</th>
+                                  <th>Distrito/Provincia/Depa</th>
                                   <th>Descripción</th>
                                   <th class="text-center">Estado</th>
                                 </tr>
@@ -368,95 +272,7 @@ if (!isset($_SESSION["user_nombre"])) {
                   </div>
                 </div>
               </div>
-            </div>
-
-            <!-- MODAL:: REGISTRAR PLAN - charge 1 -->
-            <div class="modal fade modal-effect" id="modal-agregar-plan" role="dialog" tabindex="-1" aria-labelledby="modal-agregar-pagoLabel" aria-hidden="true">
-              <div class="modal-dialog modal-md modal-dialog-scrollabel">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title" id="modal-agregar-pagoLabel1">Planes</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form name="form-agregar-plan" id="form-agregar-plan" method="POST" class="needs-validation" novalidate>
-                      <div class="row" id="cargando-1-fomulario">
-                        <input type="hidden" name="idplan" id="idplan">
-
-                        <div class="col-md-8">
-                          <div class="form-label">
-                            <label for="nombre_plan" class="form-label">Nombre del Plan(*)</label>
-                            <input class="form-control" name="nombre_plan" id="nombre_plan" />
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="costo_plan" class="form-label">Monto(*)</label>
-                            <input type="number" class="form-control" name="costo_plan" id="costo_plan" />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row" id="cargando-2-fomulario" style="display: none;">
-                        <div class="col-lg-12 text-center">
-                          <div class="spinner-border me-4" style="width: 3rem; height: 3rem;" role="status"></div>
-                          <h4 class="bx-flashing">Cargando...</h4>
-                        </div>
-                      </div>
-                      <button type="submit" style="display: none;" id="submit-form-plan">Submit</button>
-                    </form>
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" onclick="limpiar_form();"><i class="las la-times"></i> Close</button>
-                    <button type="button" class="btn btn-sm btn-primary" id="guardar_registro_plan"><i class="bx bx-save bx-tada"></i> Guardar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End::modal-registrar-plan -->
-
-            <!-- MODAL:: REGISTRAR ZONA - charge 3 -->
-            <div class="modal fade modal-effect" id="modal-agregar-zona" role="dialog" tabindex="-1" aria-labelledby="modal-agregar-zonaLabel" aria-hidden="true">
-              <div class="modal-dialog modal-md modal-dialog-scrollabel">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h6 class="modal-title" id="modal-agregar-zonaLabel">Zona</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form name="form-agregar-zona" id="form-agregar-zona" method="POST" class="needs-validation" novalidate>
-                      <div class="row" id="cargando-3-fomulario">
-                        <input type="hidden" name="idzona_antena" id="idzona_antena">
-
-                        <div class="col-12">
-                          <div class="form-label">
-                            <label for="nombre_zona" class="form-label">Nombre del Zona(*)</label>
-                            <input class="form-control" name="nombre_zona" id="nombre_zona" />
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <label for="ip_antena" class="form-label">Ip Zona(*)</label>
-                            <input type="text" class="form-control" name="ip_antena" id="ip_antena" />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row" id="cargando-4-fomulario" style="display: none;">
-                        <div class="col-lg-12 text-center">
-                          <div class="spinner-border me-4" style="width: 3rem; height: 3rem;" role="status"></div>
-                          <h4 class="bx-flashing">Cargando...</h4>
-                        </div>
-                      </div>
-                      <button type="submit" style="display: none;" id="submit-form-zona">Submit</button>
-                    </form>
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" onclick="limpiar_zona();"><i class="las la-times"></i> Close</button>
-                    <button type="button" class="btn btn-sm btn-primary" id="guardar_registro_zona"><i class="bx bx-save bx-tada"></i> Guardar</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End::modal-registrar-zona -->
+            </div>            
 
             <!-- MODAL::REGISTRAR CENTRO POBLADO - charge 5 -->
             <div class="modal fade modal-effect" id="modal-agregar-centro-poblado" role="dialog" tabindex="-1" aria-labelledby="modal-agregar-centro-poblado" aria-hidden="true">
@@ -715,8 +531,6 @@ if (!isset($_SESSION["user_nombre"])) {
     <?php include("template/scripts.php"); ?>
     <?php include("template/custom_switcherjs.php"); ?>
 
-    <script src="scripts/plan.js?version_jdl=1.31"></script>
-    <script src="scripts/zona.js?version_jdl=1.31"></script>
     <script src="scripts/centro_poblado.js?version_jdl=1.31"></script>
     <script src="scripts/bancos.js?version_jdl=1.31"></script>
     <script src="scripts/cargo_trabajador.js?version_jdl=1.31"></script>

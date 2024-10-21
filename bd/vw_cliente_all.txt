@@ -1,0 +1,29 @@
+CREATE VIEW `vw_cliente_all` AS
+
+SELECT
+	-- ::::::::::::::: DATOS CLIENTE ::::::::::::::: 
+	LPAD (pc.idpersona_cliente, 5, '0') as idpersona_cliente_v2,
+	pc.idpersona_cliente,
+	pc.fecha_afiliacion,
+	cp.nombre as centro_poblado,
+	pc.nota,
+	pc.estado as estado_pc,	pc.estado_delete as estado_delete_pc,
+	CASE
+		WHEN p.tipo_persona_sunat = 'NATURAL' THEN CONCAT (p.nombre_razonsocial,' ',p.apellidos_nombrecomercial	)
+		WHEN p.tipo_persona_sunat = 'JURÍDICA' THEN p.nombre_razonsocial
+		ELSE '-'
+	END AS cliente_nombre_completo,
+
+	-- ::::::::::::::: DATOS PERSONA CLIENTE ::::::::::::::: 
+	p.idpersona, p.idtipo_persona, p.idbancos, p.idcargo_trabajador, p.tipo_persona_sunat, p.nombre_razonsocial, p.apellidos_nombrecomercial, 
+	p.tipo_documento, p.numero_documento, p.fecha_nacimiento, p.celular, p.direccion, p.departamento, p.provincia, p.distrito, p.cod_ubigeo, p.correo, 
+	p.cuenta_bancaria, p.cci, p.titular_cuenta, p.foto_perfil, p.estado as estado_p, p.estado_delete as estado_delete_p,	
+	-- ::::::::::::::: DATOS SUNAT ::::::::::::::: 
+	sc06.abreviatura as tipo_documento_abrev_nombre
+
+FROM
+	persona_cliente as pc
+	INNER JOIN persona AS p on pc.idpersona = p.idpersona	
+	INNER JOIN sunat_c06_doc_identidad as sc06 on p.tipo_documento = sc06.code_sunat
+	INNER JOIN centro_poblado as cp on pc.idcentro_poblado = cp.idcentro_poblado
+ORDER BY	pc.idpersona_cliente DESC

@@ -104,13 +104,19 @@ Class CentroPoblado
 
 	//Implementar un método para mostrar los datos de un registro a modificar
 	public function mostrar($idcentro_poblado) {
-		$sql="SELECT * FROM centro_poblado WHERE idcentro_poblado='$idcentro_poblado'";
+		$sql="SELECT * FROM vw_ubigeo_depa_prov_dist_cp	 WHERE idcentro_poblado='$idcentro_poblado'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
 	//Implementar un método para listar los registros
 	public function tabla_principal_centro_poblado() {
-		$sql="SELECT * FROM centro_poblado WHERE estado=1  AND estado_delete=1 ORDER BY nombre ASC";
+		$sql="SELECT cp.* 
+		FROM vw_ubigeo_depa_prov_dist_cp as cp
+		WHERE cp.estado=1  AND cp.estado_delete=1 
+		ORDER BY CASE 
+        WHEN cp.nombre_centro_problado = 'NINGUNO' THEN 0
+        ELSE 1 
+    END,  cp.nombre_distrito, cp.nombre_centro_problado ASC";
 		return ejecutarConsulta($sql);		
 	}
 
@@ -121,3 +127,5 @@ Class CentroPoblado
 	}
 }
 ?>
+
+
