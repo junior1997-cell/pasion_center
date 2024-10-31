@@ -19,7 +19,7 @@ function init() {
   lista_select2("../ajax/cliente.php?op=select2_filtro_mes_afiliacion",   '#filtro_mes_afiliacion',       null, '.charge_filtro_mes_afiliacion');
   lista_select2("../ajax/cliente.php?op=select2_filtro_distrito", '#filtro_distrito', null, '.charge_filtro_distrito');  
 
-  lista_select2("../ajax/facturacion.php?op=select2_banco", '#f_metodo_pago', null, 'charge_f_metodo_pago');
+  //lista_select2("../ajax/facturacion.php?op=select2_banco", '#f_metodo_pago', null, 'charge_f_metodo_pago');
 
   lista_select2("../ajax/ajax_general.php?op=select2_tipo_documento", '#tipo_documento', null);
   lista_select2("../ajax/ajax_general.php?op=select2_distrito", '#distrito', null);
@@ -43,7 +43,7 @@ function init() {
   $("#tipo_persona_sunat").select2({ theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
   $("#idselec_centroProbl").select2({ theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
 
-  $("#f_metodo_pago").select2({ templateResult: templateBanco, theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
+  //$("#f_metodo_pago").select2({ templateResult: templateBanco, theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
 }
 
 function templateDistrito (state) {
@@ -53,14 +53,14 @@ function templateDistrito (state) {
   return $state;
 }
 
-function templateBanco (state) {
+/*function templateBanco (state) {
   //console.log(state);
   if (!state.id) { return state.text; }
   var baseUrl = state.title != '' ? `../assets/modulo/bancos/${state.title}`: '../assets/modulo/bancos/logo-sin-banco.svg'; 
   var onerror = `onerror="this.src='../assets/modulo/bancos/logo-sin-banco.svg';"`;
   var $state = $(`<span><img src="${baseUrl}" class="img-circle mr-2 w-25px" ${onerror} />${state.text}</span>`);
   return $state;
-};
+};*/
 
 //Función limpiar
 function limpiar_cliente() {
@@ -197,9 +197,9 @@ function tabla_principal_cliente( filtro_mes_afiliacion, filtro_distrito) {
     dom: "<'row'<'col-md-3'B><'col-md-3 float-left'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",//Definimos los elementos del control de tabla
     buttons: [
       { text: '<i class="fa-solid fa-arrows-rotate"></i> ', className: "buttons-reload btn btn-outline-info btn-wave ", action: function (e, dt, node, config) { if (tabla_cliente) { tabla_cliente.ajax.reload(null, false); } } },
-      { extend: 'copy', exportOptions: { columns: [0,9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 8], }, text: `<i class="fas fa-copy" ></i>`, className: "btn btn-outline-dark btn-wave ", footer: true, },
-      { extend: 'excel', exportOptions: { columns: [0,9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 8], }, title: 'Lista de Clientes', text: `<i class="far fa-file-excel fa-lg" ></i>`, className: "btn btn-outline-success btn-wave ", footer: true, },
-      { extend: 'pdf', exportOptions: { columns: [0,9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 8], }, title: 'Lista de Clientes', text: `<i class="far fa-file-pdf fa-lg"></i>`, className: "btn btn-outline-danger btn-wave ", footer: false, orientation: 'landscape', pageSize: 'LEGAL', },
+      { extend: 'copy', exportOptions: { columns: [0,9, 10, 11, 3, 5, 6, 7], }, text: `<i class="fas fa-copy" ></i>`, className: "btn btn-outline-dark btn-wave ", footer: true, },
+      { extend: 'excel', exportOptions: { columns: [0,9, 10, 11, 3, 5, 6, 7], }, title: 'Lista de Clientes', text: `<i class="far fa-file-excel fa-lg" ></i>`, className: "btn btn-outline-success btn-wave ", footer: true, },
+      { extend: 'pdf', exportOptions: { columns: [0,9, 10, 11, 3, 5, 6, 7], }, title: 'Lista de Clientes', text: `<i class="far fa-file-pdf fa-lg"></i>`, className: "btn btn-outline-danger btn-wave ", footer: false, orientation: 'landscape', pageSize: 'LEGAL', },
       { extend: "colvis", text: `<i class="fas fa-outdent"></i>`, className: "btn btn-outline-primary", exportOptions: { columns: "th:not(:last-child)", }, },
     ],
     ajax: {
@@ -258,7 +258,7 @@ function guardar_y_editar_cliente(e) {
       try {
         e = JSON.parse(e); console.log(e);
         if (e.status == true) {
-          Swal.fire("Correcto!", "Color registrado correctamente.", "success");
+          Swal.fire("Correcto!", "Registrado correctamente.", "success");
           tabla_cliente.ajax.reload(null, false);
           limpiar_cliente();
           wiev_tabla_formulario(1);

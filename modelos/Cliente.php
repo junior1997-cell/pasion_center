@@ -41,7 +41,7 @@ class Cliente
 
 			$id = $inst_persona['data'];
 
-			$sql2 = "INSERT INTO persona_cliente(idpersona, idcentro_poblado, fecha_afiliacion, ,nota) 
+			$sql2 = "INSERT INTO persona_cliente(idpersona, idcentro_poblado, fecha_afiliacion,nota) 
 			VALUES ('$id', '$idselec_centroProbl', '$fecha_afiliacion','$nota')";
 			$insertar =  ejecutarConsulta($sql2, 'C');	if ($inst_persona['status'] == false) {	return $inst_persona;	}
 
@@ -96,7 +96,7 @@ class Cliente
 		idpersona ='$idpersona',
 		idcentro_poblado='$idselec_centroProbl',
 		fecha_afiliacion='$fecha_afiliacion',
-		nota='$nota',
+		nota='$nota'
 		WHERE idpersona_cliente='$idpersona_cliente';"; 
 
 		$editar =  ejecutarConsulta($sql, 'U');	if ($editar['status'] == false) {	return $editar;	}
@@ -138,13 +138,15 @@ class Cliente
 	}
 
 	//Implementar un método para listar los registros
-	public function tabla_principal_cliente( $filtro_mes_afiliacion, $filtro_distrito)	{
+	public function tabla_principal_cliente( $filtro_mes_afi, $filtro_dist)	{
+
+		//var_dump($filtro_mes_afiliacion); die();
 
 		$filtro_mes_afiliacion  = ''; $filtro_distrito  = ''; 
 
-		if ( empty($filtro_mes_afiliacion) 		|| $filtro_mes_afiliacion 		== 'TODOS' ) { } else{ 	$filtro_mes_afiliacion 		= "AND DAY(vw_c.fecha_cancelacion)  = '$filtro_mes_afiliacion'";	}
-		if ( empty($filtro_distrito) 				|| $filtro_distrito 				== 'TODOS' ) { } else{	$filtro_distrito 		= "AND vw_c.idplan = '$filtro_distrito'";	}
-		
+		if ( empty($filtro_mes_afi) 		|| $filtro_mes_afi 		== 'TODOS' ) { } else{ 	$filtro_mes_afiliacion 		= "AND DATE_FORMAT(vw_c.fecha_afiliacion, '%Y-%m')  = '$filtro_mes_afi'";	}
+		if ( empty($filtro_dist) 				|| $filtro_dist 				== 'TODOS' ) { } else{	$filtro_distrito 		= "AND vw_c.distrito = '$filtro_dist'";	}
+		//var_dump($filtro_mes_afiliacion); die();
 		$sql = "SELECT 		
 		vw_c.*		
 		FROM vw_cliente_all as vw_c		

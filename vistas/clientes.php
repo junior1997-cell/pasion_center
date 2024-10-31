@@ -62,8 +62,8 @@ if (!isset($_SESSION["user_nombre"])) {
             <div class="btn-list mt-md-0 mt-2">
               <nav>
                 <ol class="breadcrumb mb-0">
-                  <li class="breadcrumb-item"><a href="javascript:void(0);">Zonas</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Home</li>
+                  <li class="breadcrumb-item"><a href="javascript:void(0);">Realizar Ventas</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Clientes</li>
                 </ol>
               </nav>
             </div>
