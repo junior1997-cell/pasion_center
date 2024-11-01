@@ -73,7 +73,7 @@ function templateBanco (state) {
   var onerror = `onerror="this.src='../assets/modulo/bancos/logo-sin-banco.svg';"`;
   var $state = $(`<span><img src="${baseUrl}" class="img-circle mr-2 w-25px" ${onerror} />${state.text}</span>`);
   return $state;
-};*/
+}
 
 //Función limpiar
 function limpiar_cliente() {

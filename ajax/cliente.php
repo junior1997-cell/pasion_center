@@ -223,10 +223,10 @@ if (!isset($_SESSION["user_nombre"])) {
       // ══════════════════════════════════════  CENTRO POBLADO ══════════════════════════════════════
       case 'guardar_y_editar_centro_poblado':
         if (empty($idcentro_poblado)) {
-          $rspta = $_cliente->insertar($idubigeo_distrito, $nombre_cp, $descripcion_cp);
+          $rspta = $centro_poblado->insertar($idubigeo_distrito, $nombre_cp, $descripcion_cp);
           echo json_encode($rspta, true);
         } else {
-          $rspta = $_cliente->editar($idcentro_poblado, $idubigeo_distrito, $nombre_cp, $descripcion_cp);
+          $rspta = $centro_poblado->editar($idcentro_poblado, $idubigeo_distrito, $nombre_cp, $descripcion_cp);
           echo json_encode($rspta, true);
         }
       break; 
