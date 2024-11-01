@@ -28,6 +28,7 @@
       return $compra;
     }
 
+
     public function insertar(
       // DATOS TABLA COMPRA
       $idproveedor,  $tipo_comprobante, $serie, $impuesto, $descripcion,
@@ -51,7 +52,12 @@
           VALUES ('$idproducto[$i]', '$id', '$cantidad[$i]', '$precio_sin_igv[$i]', '$precio_igv[$i]', '$precio_con_igv[$i]', '$descuento[$i]', '$subtotal_producto[$i]');";
           $detalle_new =  ejecutarConsulta_retornarID($sql_2, 'C'); if ($detalle_new['status'] == false) { return  $detalle_new;}          
           $id_d = $detalle_new['data'];
+
+          $sql3="UPDATE `producto` SET stock =stock +'$cantidad[$i]' WHERE `idproducto`='$idproducto[$i]';";
+          $up_stock_prod = ejecutarConsulta($sql3); if ($up_stock_prod['status'] == false) { return  $up_stock_prod;}
+
           $i = $i + 1;
+
         }
       }
       return $detalle_new;
@@ -140,6 +146,7 @@
 
 
 
+
     public function listar_tabla_producto(){
       $sql = "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca
       FROM producto AS p
@@ -169,6 +176,14 @@
       WHERE (p.codigo = '$codigo' OR p.codigo_alterno = '$codigo' ) AND p.estado = 1 AND p.estado_delete = 1;";
         return ejecutarConsultaSimpleFila($sql);
       
+    }
+
+    //select2 proveedores
+
+    function listar_proveedor(){
+      $sql = "SELECT idpersona, nombre_razonsocial AS nombre, apellidos_nombrecomercial AS apellido, numero_documento
+      FROM persona WHERE idtipo_persona = 4  AND estado_delete = 1 AND idpersona > 2;";
+      return ejecutarConsultaArray($sql);
     }
 
   }

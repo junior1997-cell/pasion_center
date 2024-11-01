@@ -10,12 +10,12 @@ if (!isset($_SESSION["user_nombre"])) {
   if ($_SESSION['lista_de_compras'] == 1) {
 
     require_once "../modelos/Compras.php";
-    require_once "../modelos/Gasto_de_trabajador.php";
+    //require_once "../modelos/Gasto_de_trabajador.php";
     require_once "../modelos/Correlacion_comprobante.php";
     require_once "../modelos/Producto.php";
 
     $compras            = new Compras();    
-    $gasto_trab         = new Gasto_de_trabajador();    
+    //$gasto_trab         = new Gasto_de_trabajador();    
     $correlacion_compb  = new Correlacion_comprobante();    
     $productos          = new Producto();
 
@@ -248,7 +248,7 @@ if (!isset($_SESSION["user_nombre"])) {
 
       // ══════════════════════════════════════ S E L E C T 2 ══════════════════════════════════════
       case 'listar_proveedor':
-        $rspta = $gasto_trab->listar_proveedor(); $cont = 1; $data = "";
+        $rspta = $compras->listar_proveedor(); $cont = 1; $data = "";
         if($rspta['status'] == true){
           foreach ($rspta['data'] as $key => $value) {
             $data .= '<option  value=' . $value['idpersona']  . '>' . $value['nombre'] . ' '. $value['apellido'] . ' - '. $value['numero_documento'] . '</option>';
