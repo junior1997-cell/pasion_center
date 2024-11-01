@@ -11,25 +11,24 @@ Class CentroPoblado
 	}
 
 	//Implementamos un método para insertar registros
-	public function insertar($nombre, $descripcion) {		
-		$sql_0 = "SELECT * FROM centro_poblado  WHERE nombre = '$nombre';";
+	public function insertar($idubigeo_distrito, $nombre, $descripcion) {		
+
+		$sql_0 = "SELECT * FROM vw_ubigeo_depa_prov_dist_cp  WHERE nombre_centro_poblado = '$nombre' and idubigeo_distrito = '$idubigeo_distrito';";
     $existe = ejecutarConsultaArray($sql_0); if ($existe['status'] == false) { return $existe;}
       
     if ( empty($existe['data']) ) {
-			$sql="INSERT INTO centro_poblado(nombre, descripcion)VALUES('$nombre', '$descripcion')";
+			$sql="INSERT INTO centro_poblado(idubigeo_distrito, nombre, descripcion)VALUES($idubigeo_distrito, '$nombre', '$descripcion')";
 			$insertar =  ejecutarConsulta_retornarID($sql, 'C'); if ($insertar['status'] == false) {  return $insertar; } 
-			
-			//add registro en nuestra bitacora
-			// $sql_bit = "INSERT INTO bitacora_bd( nombre_tabla, id_tabla, accion, id_user) VALUES ('centro_poblado','".$insertar['data']."','Nueva centro_poblado registrado','" . $_SESSION['idusuario'] . "')";
-			// $bitacora = ejecutarConsulta($sql_bit); if ( $bitacora['status'] == false) {return $bitacora; }   
-			
+						
 			return $insertar;
 		} else {
 			$info_repetida = ''; 
 
 			foreach ($existe['data'] as $key => $value) {
 				$info_repetida .= '<li class="text-left font-size-13px">
-					<span class="font-size-15px text-danger"><b>Nombre: </b>'.$value['nombre'].'</span><br>
+					<span class="font-size-15px text-danger"><b>Nombre: </b>'.$value['nombre_centro_poblado'].'</span><br>
+					<span class="font-size-15px "><b>Distrito: </b>'.$value['nombre_distrito'].'</span><br>
+					<span class="font-size-15px"><b>Provincia: </b>'.$value['nombre_provincia'].'</span><br>
 					<b>Descripción: </b>'.$value['descripcion'].'<br>
 					<b>Papelera: </b>'.( $value['estado']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO') .' <b>|</b>
 					<b>Eliminado: </b>'. ($value['estado_delete']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO').'<br>
@@ -41,18 +40,13 @@ Class CentroPoblado
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($idcentro_poblado, $nombre, $descripcion) {
-		$sql_0 = "SELECT * FROM centro_poblado  WHERE nombre = '$nombre' AND idcentro_poblado <> '$idcentro_poblado';";
+	public function editar($idcentro_poblado, $idubigeo_distrito, $nombre, $descripcion) {
+		$sql_0 = "SELECT * FROM vw_ubigeo_depa_prov_dist_cp  WHERE nombre_centro_poblado = '$nombre' and idubigeo_distrito = '$idubigeo_distrito' AND idcentro_poblado <> '$idcentro_poblado';";
     $existe = ejecutarConsultaArray($sql_0); if ($existe['status'] == false) { return $existe;}
       
     if ( empty($existe['data']) ) {
-			$sql="UPDATE centro_poblado SET nombre='$nombre', descripcion ='$descripcion' WHERE idcentro_poblado='$idcentro_poblado'";
+			$sql="UPDATE centro_poblado SET idubigeo_distrito = '$idubigeo_distrito', nombre='$nombre', descripcion ='$descripcion' WHERE idcentro_poblado='$idcentro_poblado'";
 			$editar =  ejecutarConsulta($sql, 'U');	if ( $editar['status'] == false) {return $editar; } 
-		
-			//add registro en nuestra bitacora
-			// $sql_bit = "INSERT INTO bitacora_bd( nombre_tabla, id_tabla, accion, id_user) 
-			// VALUES ('centro_poblado','$idcentro_poblado','centro_poblado editada','" . $_SESSION['idusuario'] . "')";
-			// $bitacora = ejecutarConsulta($sql_bit); if ( $bitacora['status'] == false) {return $bitacora; }  
 		
 			return $editar;
 		} else {
@@ -60,7 +54,9 @@ Class CentroPoblado
 
 			foreach ($existe['data'] as $key => $value) {
 				$info_repetida .= '<li class="text-left font-size-13px">
-					<span class="font-size-15px text-danger"><b>Nombre: </b>'.$value['nombre'].'</span><br>
+					<span class="font-size-15px text-danger"><b>Nombre: </b>'.$value['nombre_centro_poblado'].'</span><br>
+					<span class="font-size-15px "><b>Distrito: </b>'.$value['nombre_distrito'].'</span><br>
+					<span class="font-size-15px"><b>Provincia: </b>'.$value['nombre_provincia'].'</span><br>
 					<b>Descripción: </b>'.$value['descripcion'].'<br>
 					<b>Papelera: </b>'.( $value['estado']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO') .' <b>|</b>
 					<b>Eliminado: </b>'. ($value['estado_delete']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO').'<br>
@@ -114,9 +110,9 @@ Class CentroPoblado
 		FROM vw_ubigeo_depa_prov_dist_cp as cp
 		WHERE cp.estado=1  AND cp.estado_delete=1 
 		ORDER BY CASE 
-        WHEN cp.nombre_centro_problado = 'NINGUNO' THEN 0
+        WHEN cp.nombre_centro_poblado = 'NINGUNO' THEN 0
         ELSE 1 
-    END,  cp.nombre_distrito, cp.nombre_centro_problado ASC";
+    END,  cp.nombre_distrito, cp.nombre_centro_poblado ASC";
 		return ejecutarConsulta($sql);		
 	}
 

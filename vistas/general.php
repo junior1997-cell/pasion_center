@@ -286,13 +286,38 @@ if (!isset($_SESSION["user_nombre"])) {
                     <form name="form-agregar-centro-poblado" id="form-agregar-centro-poblado" method="POST" class="needs-validation" novalidate>
                       <div class="row" id="cargando-5-fomulario">
                         <input type="hidden" name="idcentro_poblado" id="idcentro_poblado">
+                        <input type="hidden" name="idubigeo_distrito" id="idubigeo_distrito">
 
                         <div class="col-12">
                           <div class="form-label">
                             <label for="nombre_cp" class="form-label">Nombre(*)</label>
                             <input class="form-control" name="nombre_cp" id="nombre_cp" />
                           </div>
+                        </div>                        
+
+                        <!-- Distrito -->
+                        <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-xl-12 col-xxl-12" style="margin-bottom: 20px;">
+                          <div class="form-group">
+                            <label for="distrito_cp" class="form-label">Distrito: </label></label>
+                            <select name="distrito_cp" id="distrito_cp" class="form-control" placeholder="Seleccionar" onchange="delay(function(){llenar_dep_prov_ubig(this)}, 50 ); ">
+                            </select>
+                          </div>
                         </div>
+
+                        <div class="col-6">
+                          <div class="form-label">
+                            <label for="provincia_cp" class="form-label">Provincia(*)</label>
+                            <input class="form-control" name="provincia_cp" id="provincia_cp" readonly />
+                          </div>
+                        </div>
+
+                        <div class="col-6">
+                          <div class="form-label">
+                            <label for="departamento_cp" class="form-label">Departamento(*)</label>
+                            <input class="form-control" name="departamento_cp" id="departamento_cp" readonly />
+                          </div>
+                        </div>
+
                         <div class="col-12">
                           <div class="form-group">
                             <label for="descripcion_cp" class="form-label">Descripcion</label>

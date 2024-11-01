@@ -14,16 +14,17 @@ if (!isset($_SESSION["user_nombre"])) {
     $centro_poblado = new CentroPoblado();
 
     $idcentro_poblado   = isset($_POST["idcentro_poblado"]) ? limpiarCadena($_POST["idcentro_poblado"]) : "";
-    $nombre_cp             = isset($_POST["nombre_cp"]) ? limpiarCadena($_POST["nombre_cp"]) : "";
-    $descripcion_cp        = isset($_POST["descripcion_cp"]) ? limpiarCadena($_POST["descripcion_cp"]) : "";
+    $idubigeo_distrito  = isset($_POST["idubigeo_distrito"]) ? limpiarCadena($_POST["idubigeo_distrito"]) : "";
+    $nombre_cp          = isset($_POST["nombre_cp"]) ? limpiarCadena($_POST["nombre_cp"]) : "";
+    $descripcion_cp     = isset($_POST["descripcion_cp"]) ? limpiarCadena($_POST["descripcion_cp"]) : "";
 
     switch ($_GET["op"]) {
       case 'guardar_y_editar_centro_poblado':
         if (empty($idcentro_poblado)) {
-          $rspta = $centro_poblado->insertar($nombre_cp, $descripcion_cp);
+          $rspta = $centro_poblado->insertar($idubigeo_distrito, $nombre_cp, $descripcion_cp);
           echo json_encode($rspta, true);
         } else {
-          $rspta = $centro_poblado->editar($idcentro_poblado, $nombre_cp, $descripcion_cp);
+          $rspta = $centro_poblado->editar($idcentro_poblado, $idubigeo_distrito, $nombre_cp, $descripcion_cp);
           echo json_encode($rspta, true);
         }
       break;

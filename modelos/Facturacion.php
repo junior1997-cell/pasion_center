@@ -216,7 +216,7 @@
 
     public function mostrar_detalle_venta($idventa){
 
-      $sql_1 = "SELECT v.*, CONCAT(v.serie_comprobante, '-', v.numero_comprobante) as serie_y_numero_comprobante, DATE_FORMAT(v.fecha_emision, '%d/%m/%Y %h:%i:%s %p') AS fecha_emision_format, 
+      $sql_1 = "SELECT v.*, LPAD(v.idventa, 5, '0') AS idventa_v2, CONCAT(v.serie_comprobante, '-', v.numero_comprobante) as serie_y_numero_comprobante, DATE_FORMAT(v.fecha_emision, '%d/%m/%Y %h:%i:%s %p') AS fecha_emision_format, 
       DATE_FORMAT(v.fecha_emision, '%h:%i:%s %p') AS fecha_emision_hora12, DATE_FORMAT(v.fecha_emision, '%d/%m/%Y') AS fecha_emision_dmy,
       DATE_FORMAT(v.fecha_emision, '%Y-%m-%d') as fecha_emision_format, LEFT(v.periodo_pago_month, 3) as periodo_pago_month_v2,
       v.estado, p.idpersona, pc.idpersona_cliente, p.nombre_razonsocial, p.apellidos_nombrecomercial, 
@@ -224,7 +224,7 @@
         WHEN p.tipo_persona_sunat = 'NATURAL' THEN CONCAT(p.nombre_razonsocial, ' ', p.apellidos_nombrecomercial) 
         WHEN p.tipo_persona_sunat = 'JURÍDICA' THEN p.nombre_razonsocial 
         ELSE '-'
-      END AS cliente_nombre_completo, 
+      END AS cliente_nombre_completo,  pc.landing_user,
       p.tipo_documento, p.numero_documento, p.direccion, p.celular, p.correo,
       tc.abreviatura as nombre_comprobante, sdi.abreviatura as nombre_tipo_documento,
       pu.nombre_razonsocial as user_en_atencion, IFNULL(cnc.nombre, '') as nc_nombre_motivo

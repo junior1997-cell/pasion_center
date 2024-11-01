@@ -65,6 +65,9 @@ if (!isset($_SESSION["user_nombre"])) {
     $c_numero_documento   = $venta_f['data']['venta']['numero_documento'];
     $c_direccion          = mb_convert_encoding($venta_f['data']['venta']['direccion'], 'UTF-8', mb_detect_encoding($venta_f['data']['venta']['direccion'], "UTF-8, ISO-8859-1, ISO-8859-15", true));
     
+    $c_landing_user       = mb_convert_encoding($venta_f['data']['venta']['landing_user'], 'UTF-8', mb_detect_encoding($venta_f['data']['venta']['landing_user'], "UTF-8, ISO-8859-1, ISO-8859-15", true));
+    $c_idventa_v2         = $venta_f['data']['venta']['idventa_v2'];
+    
     // Data comprobante ================================================================================
     $metodo_pago          = mb_convert_encoding($venta_f['data']['venta']['metodo_pago'], 'UTF-8', mb_detect_encoding($venta_f['data']['venta']['metodo_pago'], "UTF-8, ISO-8859-1, ISO-8859-15", true));
     $mp_serie_comprobante = $venta_f['data']['venta']['mp_serie_comprobante'] == null || $venta_f['data']['venta']['mp_serie_comprobante'] == '' ? '-': mb_convert_encoding($venta_f['data']['venta']['mp_serie_comprobante'], 'UTF-8', mb_detect_encoding($venta_f['data']['venta']['mp_serie_comprobante'], "UTF-8, ISO-8859-1, ISO-8859-15", true));
@@ -249,7 +252,10 @@ if (!isset($_SESSION["user_nombre"])) {
           <tr><td >           <b>VUELTO</b></td>                        <td>:</td> <td> <?php echo $total_vuelto; ?> </td></tr>  
           <tr><td >           <b>Nro. Baucher</b>                      <td>:</td> <td> <?php echo $mp_serie_comprobante; ?></td> </td></tr>
           <tr><td colspan="3"><div style="border-bottom: 1px dotted black; margin-top: 8px; margin-bottom: 8px;" ></div></td></tr>        
-        </table>       
+          <tr><td >           <b>Nro. Operación</b>                      <td>:</td> <td> <?php echo $c_idventa_v2; ?></td> </td></tr>
+          <tr><td >           <b>Codigo Usuario</b>                      <td>:</td> <td> <?php echo $c_landing_user; ?></td> </td></tr>
+        </table>     
+           
 
         <table border='0' align="center" width='300px' style='font-size: 12px'>
           <tbody>

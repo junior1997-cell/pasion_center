@@ -1,35 +1,71 @@
 var tabla_centro_poblado;
 
+// ══════════════════════════════════════ I N I T I A L I Z E   S E L E C T C H O I C E ══════════════════════════════════════
+
+const choice_distrito       = new Choices('#distrito_cp',  {  removeItemButton: true,noResultsText: 'No hay resultados.', } );
+
+
 //Función que se ejecuta al inicio
 function init_cp() {
-  
-  $("#bloc_Recurso").addClass("menu-open");
-
-  $("#mRecurso").addClass("active");
 
   tabla_principal_centro_poblado();
-
+  // ══════════════════════════════════════ G U A R D A R   F O R M ══════════════════════════════════════
   // $("#guardar_registro_centro_poblado").on("click", function (e) { $("#submit-form-plan").submit(); });
   $("#guardar_registro_cp").on("click", function (e) { if ( $(this).hasClass('send-data')==false) { $("#submit-form-cp").submit(); }  });
 
+  // ══════════════════════════════════════ S E L E C T 2 ══════════════════════════════════════
+  lista_selectChoice("../ajax/ajax_general.php?op=selectChoice_distrito", choice_distrito, null);
 }
 
-/*==========================================================================================
--------------------------------------------P L A N E S-------------------------------------
-==========================================================================================*/
 
 //Función limpiar_form
 function limpiar_centro_poblado() {
   $("#guardar_registro_cp").html('<i class="bx bx-save bx-tada"></i> Guardar').removeClass('disabled');
   //Mostramos los Materiales
   $("#idcentro_poblado").val("");
+  $("#idubigeo_distrito").val("");
+
   $("#nombre_cp").val("");
   $("#descripcion_cp").val("");
+
+  choice_distrito.setChoiceByValue('TARAPOTO').passedElement.element.dispatchEvent(new Event('change'));  
 
   // Limpiamos las validaciones
   $(".form-control").removeClass('is-valid');
   $(".form-control").removeClass('is-invalid');
   $(".error.invalid-feedback").remove();
+}
+
+function llenar_dep_prov_ubig(input) {
+
+  $(".chargue-pro").html(`<div class="spinner-border spinner-border-sm" role="status" ></div>`); 
+  $(".chargue-dep").html(`<div class="spinner-border spinner-border-sm" role="status" ></div>`); 
+  $(".chargue-ubi").html(`<div class="spinner-border spinner-border-sm" role="status" ></div>`); 
+
+  // if ($(input).select2("val") == null || $(input).select2("val") == '') { 
+  if ($('#distrito_cp').val() == null || $('#distrito_cp').val() == '') { 
+    $("#departamento_cp").val(""); 
+    $("#provincia_cp").val(""); 
+    $("#idubigeo_distrito").val(""); 
+
+    $(".chargue-pro").html(''); $(".chargue-dep").html(''); $(".chargue-ubi").html('');
+  } else {
+    // var iddistrito =  $(input).select2('data')[0].element.attributes.iddistrito.value;
+    var iddistrito = choice_distrito.getValue().customProperties.idubigeo_distrito;
+    $("#idubigeo_distrito").val(iddistrito);
+    $.post(`../ajax/ajax_general.php?op=select2_distrito_id&id=${iddistrito}`, function (e) {   
+      e = JSON.parse(e); console.log(e);
+      if (e.status == true) {
+        $("#departamento_cp").val(e.data.departamento); 
+        $("#provincia_cp").val(e.data.provincia);   
+      } else {
+        ver_errores(e);
+      }
+      $(".chargue-pro").html(''); $(".chargue-dep").html(''); $(".chargue-ubi").html('');
+      $("#form-agregar-centro-poblado").valid();
+      
+    });
+  }  
 }
 
 //Función Listar
@@ -150,7 +186,12 @@ function mostrar_centro_poblado(idcentro_poblado) {
     if (e.status) {
       $("#idcentro_poblado").val(e.data.idcentro_poblado);
       $("#nombre_cp").val(e.data.nombre);        
-      $("#descripcion_cp").val(e.data.descripcion)    
+      $("#descripcion_cp").val(e.data.descripcion);
+      choice_distrito.setChoiceByValue('TARAPOTO');
+
+      $("#idubigeo_distrito").val(e.data.idubigeo_distrito);
+      $("#provincia_cp").val(e.data.nombre_provincia);
+      $("#departamento_cp").val(e.data.nombre_departamento);
 
       $("#cargando-1-fomulario").show();
       $("#cargando-2-fomulario").hide();

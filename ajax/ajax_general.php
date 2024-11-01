@@ -170,7 +170,12 @@ if (!isset($_SESSION["user_nombre"])) {
 
         foreach ($rspta['data'] as $key => $value) {
           $data[] = [
-            'value' => $value['nombre'], 'label' => $value['nombre'], 'disabled'  => false, 'selected'  => false, 
+            'value' => $value['nombre'], 'label' => $value['nombre'] . ' (' . $value['provincia_min'] . ' | '. $value['departamento_min'] . ')', 'disabled'  => false, 'selected'  => false, 
+            'customProperties' => [
+              'idubigeo_distrito' => $value['idubigeo_distrito'],
+              'idubigeo_provincia' => $value['idubigeo_provincia'],
+              'idubigeo_departamento' => $value['idubigeo_departamento']
+            ]
           ];
         }
 
