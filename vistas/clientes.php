@@ -355,7 +355,7 @@ if (!isset($_SESSION["user_nombre"])) {
                             <!-- fecha afiliacion -->
                             <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3" style="margin-bottom: 20px;">
                               <div class="form-group">
-                                <label class="form-label" for="fecha_afiliacion">Fecha Afiliación <sup class="text-danger">*</sup></label>
+                                <label class="form-label" for="fecha_afiliacion">Fecha Afiliación <sup class="text-danger">(no editable)*</sup></label>
                                 <input type="date" name="fecha_afiliacion" class="form-control inpur_edit" id="fecha_afiliacion" readonly />
                               </div>
                             </div>                            

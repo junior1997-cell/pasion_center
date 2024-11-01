@@ -19,7 +19,7 @@ class Cliente
 	D-- delete -- eliminar*/	
 
 	//Implementamos un método para insertar registros
-	public function insertar_cliente(	$idtipo_persona, $idbancos,	$idcargo_trabajador, $idpersona_cliente, $tipo_persona_sunat,	
+	public function insertar_cliente(	$idtipo_persona, $idbancos,	$idcargo_trabajador,  $tipo_persona_sunat,	
 	$tipo_documento, $numero_documento,	$nombre_razonsocial, $apellidos_nombrecomercial, $fecha_nacimiento,	$celular,	$direccion,	
 	$distrito, $departamento, $provincia, $ubigeo, $correo, $idselec_centroProbl, $fecha_afiliacion, $nota, $img_perfil	) {
 		
@@ -43,7 +43,7 @@ class Cliente
 
 			$sql2 = "INSERT INTO persona_cliente(idpersona, idcentro_poblado, fecha_afiliacion,nota) 
 			VALUES ('$id', '$idselec_centroProbl', '$fecha_afiliacion','$nota')";
-			$insertar =  ejecutarConsulta($sql2, 'C');	if ($inst_persona['status'] == false) {	return $inst_persona;	}
+			$insertar =  ejecutarConsulta($sql2, 'C');	if ($insertar['status'] == false) {	return $insertar;	}
 
 			return $insertar;
 		} else {
@@ -52,7 +52,7 @@ class Cliente
 			foreach ($buscando['data'] as $key => $value) {
 				$info_repetida .= '<li class="text-left font-size-13px">
 					<span class="font-size-15px text-danger"><b>Nombre: </b>'.$value['cliente_nombre_completo'].'</span><br>
-					<span class="font-size-15px text-danger"><b>Nombre: </b>'.$value['numero_documento'].'</span><br>
+					<span class="font-size-15px text-danger"><b>DNI: </b>'.$value['numero_documento'].'</span><br>
 					<b>Distrito: </b>'.$value['distrito'].'<br>
 					<b>Papelera: </b>'.( $value['estado']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO') .' <b>|</b>
 					<b>Eliminado: </b>'. ($value['estado_delete']==0 ? '<i class="fas fa-check text-success"></i> SI':'<i class="fas fa-times text-danger"></i> NO').'<br>
@@ -255,7 +255,7 @@ class Cliente
 
 	public function selec_centroProbl(){
 		$sql="SELECT *
-		FROM vw_ubigeo_depa_prov_dist_cp WHERE estado='1' and estado_delete='1';";
+		FROM vw_ubigeo_depa_prov_dist_cp WHERE estado='1' and estado_delete='1' order by nombre_departamento, nombre_provincia, nombre_distrito, nombre_centro_poblado;";
 		return ejecutarConsulta($sql);
 	}
 }

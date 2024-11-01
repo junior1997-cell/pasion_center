@@ -50,6 +50,8 @@ function init() {
   $("#idcentropoblado").select2({ templateResult: templateCentroPoblando, theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
 
   //$("#f_metodo_pago").select2({ templateResult: templateBanco, theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
+
+  no_select_over_18('#fecha_nacimiento');
 }
 
 function templateDistrito (state) {
@@ -92,11 +94,10 @@ function limpiar_cliente() {
   $("#celular").val("");
   $("#correo").val("");
 
-  $("#direccion").val("");
+  $("#idcentropoblado").val('1').trigger("change");
   $("#distrito").val('TARAPOTO').trigger("change");
-  
+  $("#direccion").val("");
 
-  $("#idcentropoblado").val('').trigger("change");
   $("#fecha_afiliacion").val("");
   $("#nota").val("");
 
@@ -409,7 +410,7 @@ function eliminar_cliente(idtrabajador, nombre) {
         icon: "warning",
         title: 'Antes de dar de baja ingrese una Observación',
         input: 'textarea',        
-        inputAttributes: { autocapitalize: 'off', Class: 'form-control', Placeholder: 'ejemp: Corte de servicio por falta de pago.',  },
+        inputAttributes: { autocapitalize: 'off', Class: 'form-control', Placeholder: 'ejemp: Creado por error, Cliente duplicado.',  },
         customClass: {
           validationMessage: 'my-validation-message',
         },

@@ -263,7 +263,7 @@ if (!isset($_SESSION["user_nombre"])) {
       if ($rspta['status']) {
 
         foreach ($rspta['data'] as $key => $value) {
-          $data  .= '<option value="' . $value['idbancos'] . '"  >' . $value['nombre']  . '</option>';
+          $data  .= '<option value="' . $value['idbancos'] . '" title="' . $value['icono'] . '" >' . $value['nombre']  . '</option>';
         }
 
         $retorno = array(

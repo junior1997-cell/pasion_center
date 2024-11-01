@@ -40,7 +40,7 @@ if (!isset($_SESSION["user_nombre"])) {
     $provincia                  = isset($_POST["provincia"]) ? limpiarCadena($_POST["provincia"]) : "";
     $ubigeo                     = isset($_POST["ubigeo"]) ? limpiarCadena($_POST["ubigeo"]) : "";
     $correo                     = isset($_POST["correo"]) ? limpiarCadena($_POST["correo"]) : "";  
-    $idselec_centroProbl        = isset($_POST["idselec_centroProbl"]) ? limpiarCadena($_POST["idselec_centroProbl"]) : "";   
+    $idcentropoblado        = isset($_POST["idcentropoblado"]) ? limpiarCadena($_POST["idcentropoblado"]) : "";   
     $fecha_afiliacion           = isset($_POST["fecha_afiliacion"]) ? limpiarCadena($_POST["fecha_afiliacion"]) : "";
     $nota                       = isset($_POST["nota"]) ? limpiarCadena($_POST["nota"]) : "";
     
@@ -70,8 +70,7 @@ if (!isset($_SESSION["user_nombre"])) {
           $rspta = $_cliente->insertar_cliente(
             $idtipo_persona,
             $idbancos,
-            $idcargo_trabajador,
-            $idpersona_cliente,
+            $idcargo_trabajador,            
             $tipo_persona_sunat,
             $tipo_documento,
             $numero_documento,
@@ -85,7 +84,7 @@ if (!isset($_SESSION["user_nombre"])) {
             $provincia,
             $ubigeo,
             $correo,  
-            $idselec_centroProbl,   
+            $idcentropoblado,   
             $fecha_afiliacion,
             $nota,          
             $img_perfil
@@ -118,7 +117,7 @@ if (!isset($_SESSION["user_nombre"])) {
             $provincia,
             $ubigeo,
             $correo,  
-            $idselec_centroProbl,   
+            $idcentropoblado,   
             $fecha_afiliacion,
             $nota,        
             $img_perfil
@@ -163,24 +162,23 @@ if (!isset($_SESSION["user_nombre"])) {
 
             $data[] = array(
               "0" => $cont++,
-              "1" => '<button class="btn btn-icon btn-sm border-warning btn-warning-light" onclick="mostrar_cliente(' . $value['idpersona_cliente'] . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>                
+              "1" =>  ($value['idpersona'] == 1 ? '<i class="bi bi-exclamation-triangle text-danger fs-6"></i>' : '<button class="btn btn-icon btn-sm border-warning btn-warning-light" onclick="mostrar_cliente(' . $value['idpersona_cliente'] . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>                
               <div class="btn-group ">
                 <button type="button" class="btn btn-info btn-sm dropdown-toggle py-1" data-bs-toggle="dropdown" aria-expanded="false"> <i class="ri-settings-4-line"></i></button>
-                <ul class="dropdown-menu">
-                  
-                  <li><a class="dropdown-item" href="javascript:void(0);" onclick="realizar_pago(' . $value['idpersona_cliente'] . ');" ><i class="ti ti-coin"></i> Realizar Pago</a></li>
+                <ul class="dropdown-menu">'.                 
+                  '<li><a class="dropdown-item" href="javascript:void(0);" onclick="realizar_pago(' . $value['idpersona_cliente'] . ');" ><i class="ti ti-coin"></i> Realizar Pago</a></li>
                   <li><a class="dropdown-item" href="javascript:void(0);" onclick="ver_pagos_x_cliente(' . $value['idpersona_cliente'] . ');" ><i class="ti ti-checkup-list"></i> Listar pagos</a></li> '.
                   ( $value['estado_pc'] == '1' ? '<li><a class="dropdown-item text-danger" href="javascript:void(0);" onclick="eliminar_cliente(' . $value['idpersona_cliente'] . ', \'' . encodeCadenaHtml($value['cliente_nombre_completo']) . '\')"><i class="ri-delete-bin-line"></i> Dar de baja o Eliminar</a></li>': 
                   '<li><a class="dropdown-item text-success" href="javascript:void(0);" onclick="activar(' . $value['idpersona_cliente'] . ', \'' . encodeCadenaHtml($value['cliente_nombre_completo']) . '\')"><i class="ri-check-line"></i> Reactivar</a></li>'
                   ).
                 '</ul>
-              </div>',
+              </div>' ),
               "2" => '<div class="d-flex flex-fill align-items-center">
                 <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen">
                   <span class="avatar"> <img class="w-35px h-auto" src="../assets/modulo/persona/perfil/' . $imagen_perfil . '" alt="" onclick="ver_img(\'' . $imagen_perfil . '\', \'' . encodeCadenaHtml($value['cliente_nombre_completo']) . '\')"> </span>
                 </div>
                 <div>
-                  <span class="d-block fw-semibold fs-12 text-primary">' . $value['cliente_nombre_completo'] . '</span>
+                  <span class="d-block fw-semibold fs-12 text-primary">' .  $value['cliente_nombre_completo'] . '</span>
                   <span class="text-muted fs-10 text-nowrap">' . $value['tipo_documento_abrev_nombre'] . ' : ' . $value['numero_documento'] . '</span> |
                   <span class="text-muted fs-10 text-nowrap">Cel.: ' . '<a href="tel:+51'.$value['celular'].'" data-bs-toggle="tooltip" title="Clic para hacer llamada">'.$value['celular'].'</a>' . '</span> |
                   <span class="text-muted fs-10 text-nowrap"><i class="ti ti-fingerprint fs-15"></i> ' . $value['idpersona_cliente_v2'] . '</span> 
@@ -379,7 +377,7 @@ if (!isset($_SESSION["user_nombre"])) {
         $data = "";
         if ($rspta['status'] == true) {
           foreach ($rspta['data'] as $key => $value) {
-            $data .= '<option  value="' . $value['idcentro_poblado']  . '" title= "'.$value['nombre_provincia'] . ' | '. $value['nombre_departamento'].'" >' . $value['nombre'] . '</option>';
+            $data .= '<option  value="' . $value['idcentro_poblado']  . '" title= "'.$value['nombre_distrito'] . ' | '.$value['nombre_provincia'] . ' | '. $value['nombre_departamento'].'" >' . $value['nombre'] . '</option>';
           }
 
           $retorno = array(

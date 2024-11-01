@@ -12,9 +12,19 @@ function init(){
 
   // ══════════════════════════════════════ I N I T I A L I Z E   S E L E C T 2 ══════════════════════════════════════  
   $("#tipo_documento").select2({  theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
-  $("#idbanco").select2({  theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
+  $("#idbanco").select2({ templateResult: templateBanco, theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
   $("#distrito").select2({  theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
+  $("#tipo_persona_sunat").select2({ theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
 
+}
+
+function templateBanco (state) {
+  //console.log(state);
+  if (!state.id) { return state.text; }
+  var baseUrl = state.title != '' ? `../assets/modulo/bancos/${state.title}`: '../assets/modulo/bancos/logo-sin-banco.svg'; 
+  var onerror = `onerror="this.src='../assets/modulo/bancos/logo-sin-banco.svg';"`;
+  var $state = $(`<span><img src="${baseUrl}" class="img-circle mr-2 w-25px" ${onerror} />${state.text}</span>`);
+  return $state;
 }
 
 //Función limpiar
@@ -179,6 +189,7 @@ function mostrar_proveedor(idpersona){
 		$('#idpersona_trabajador').val(e.data.idpersona_trabajador);
     $('#idtipo_persona').val(e.data.idtipo_persona);
 
+    $('#tipo_persona_sunat').val(e.data.tipo_persona_sunat).trigger("change");
     $('#tipo_documento').val(e.data.code_sunat).trigger("change");
     $('#numero_documento').val(e.data.numero_documento);
     $('#nombre_razonsocial').val(e.data.nombre_razonsocial);
@@ -372,3 +383,8 @@ $('#tipo_documento').change(function() {
   }
 
 });
+
+
+function reload_select() {
+  lista_select2("../ajax/ajax_general.php?op=select2_banco", '#idbanco', null, '.charge_idbanco');
+}

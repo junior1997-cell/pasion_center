@@ -122,8 +122,7 @@
                            
                           <div class="row gy-2" id="cargando-1-fomulario">
                             <!-- idpersona -->
-                            <input type="hidden" name="idpersona" id="idpersona" />   
-                            <input type="hidden" name="tipo_persona_sunat" id="tipo_persona_sunat" value="NATURAL" />   
+                            <input type="hidden" name="idpersona" id="idpersona" />                                 
                             <input type="hidden" name="idtipo_persona" id="idtipo_persona" value="4" />   
 
                             <div class="col-lg-12 col-xl-6- col-xxl-6">
@@ -136,6 +135,18 @@
                               <div class="card-body" style="border-radius: 5px; box-shadow: 0 0 2px rgb(0 0 0), 0 1px 5px 4px rgb(255 255 255 / 60%);">
                                 <div class="row">
 
+                                <!-- TIPO PERSONA -->
+                                <div class="mb-1 col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-4" >
+                                  <div class="form-group">
+                                    <label class="form-label" for="nombre_razonsocial">Tipo Persona: <sup class="text-danger">*</sup></label>
+                                    <select name="tipo_persona_sunat" id="tipo_persona_sunat" class="form-control" placeholder="Tipo Persona">
+                                      <option value="NATURAL">NATURAL</option>
+                                      <option value="JURÍDICA">JURÍDICA</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+
                                   <!-- Tipo documento -->
                                   <div class="mb-1 col-md-3 col-lg-3 col-xl-3 col-xxl-4">
                                     <div class="form-group">
@@ -145,7 +156,7 @@
                                   </div>
                                   
                                   <!--  Numero Documento -->
-                                  <div class="mb-1 col-md-3 col-lg-3 col-xl-3 col-xxl-5">
+                                  <div class="mb-1 col-md-3 col-lg-3 col-xl-3 col-xxl-4">
                                     <div class="form-group">
                                       <label for="numero_documento" class="form-label">Numero Documento:</label>
                                       <div class="input-group">                            
@@ -257,7 +268,11 @@
                                   <!-- Banco -->
                                   <div class="mb-1 col-md-3 col-lg-6 col-xl-6 col-xxl-4">
                                     <div class="form-group">
-                                      <label for="idbanco" class="form-label">Entidad Financiera:  </label></label>
+                                      <label for="idbanco" class="form-label">
+                                        <span class="badge bg-info m-r-4px cursor-pointer" onclick="reload_select();" data-bs-toggle="tooltip" title="Actualizar"><i class="las la-sync-alt"></i></span>
+                                        Entidad Financiera:  
+                                        <span class="charge_idbanco"></span>
+                                      </label>
                                       <select name="idbanco" id="idbanco" class="form-control" placeholder="Seleccionar">                                  
                                       </select>
                                     </div>                                         

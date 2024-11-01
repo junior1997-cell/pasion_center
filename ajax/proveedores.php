@@ -47,8 +47,9 @@ if (!isset($_SESSION["user_nombre"])) {
             $data[]=[
               "0" => $count++,
               "1" =>  '<div class="hstack gap-2 fs-15">' .
+                        ($value['idpersona'] == 2 ? '<i class="bi bi-exclamation-triangle text-danger fs-6"></i>' :
                         '<button class="btn btn-icon btn-sm btn-warning-light" onclick="mostrar_proveedor('.($value['idpersona']).')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>'.
-                        '<button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="eliminar_papelera_proveedor('.$value['idpersona'].'.,\''.$value['nombre_razonsocial'].'\')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>'.
+                        '<button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="eliminar_papelera_proveedor('.$value['idpersona'].'.,\''.$value['nombre_razonsocial'].'\')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>').
                       '</div>',
               "2" =>  '<div class="d-flex flex-fill align-items-center">
                         <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img src="../assets/modulo/proveedor/' . $img . '" alt="" onclick="ver_img(\'' . $img . '\', \'' . encodeCadenaHtml(($value['nombre_razonsocial']) .' '. ($value['apellidos_nombrecomercial'])) . '\')"> </span></div>
