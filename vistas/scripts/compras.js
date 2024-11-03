@@ -3,6 +3,7 @@ var tabla_productos;
 var array_data_compra = [];
 
 // ══════════════════════════════════════ I N I T I A L I Z E   S E L E C T C H O I C E ══════════════════════════════════════
+//const choice_distrito       = new Choices('#distrito_cp',  {  removeItemButton: true,noResultsText: 'No hay resultados.', } );
 
 const choice_distrito       = new Choices('#distrito',  {  removeItemButton: true,noResultsText: 'No hay resultados.', } );
 const choice_tipo_documento = new Choices('#tipo_documento',  {  removeItemButton: true,noResultsText: 'No hay resultados.', } );
@@ -27,15 +28,18 @@ function init(){
   lista_select2("../ajax/compras.php?op=select_marca", '#marca', null);
 
   lista_selectChoice("../ajax/ajax_general.php?op=selectChoice_distrito", choice_distrito, null);
+
   lista_selectChoice("../ajax/ajax_general.php?op=selectChoice_tipo_documento", choice_tipo_documento, null);  
   lista_selectChoice("../ajax/ajax_general.php?op=selectChoice_banco", choice_idbanco, null);
 
-  // ══════════════════════════════════════ I N I T I A L I Z E   S E L E C T 2 ══════════════════════════════════════  
+  
+
+  // ══════════════════════════════════════ I N I T I A L I Z E   S E L E C T 2 ══════════════════════════════════════ 
+  //$("#idbanco").select2({ templateResult: templateBanco, theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
   $("#idproveedor").select2({ theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
   $("#tipo_comprobante").select2({ theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
   
 }
-
 
 function show_hide_form(flag) {
 	if (flag == 1) {
@@ -669,8 +673,12 @@ function llenar_dep_prov_ubig(input) {
 
     $(".chargue-pro").html(''); $(".chargue-dep").html(''); $(".chargue-ubi").html('');
   } else {
-    // var iddistrito =  $(input).select2('data')[0].element.attributes.iddistrito.value;
-    var iddistrito = $('#distrito').val();
+     //var iddistrito =  $(input).select2('data')[0].element.attributes.idubigeo_distrito.value;
+     var iddistrito = choice_distrito.getValue().customProperties.idubigeo_distrito;
+     //$(input).select2('data')[0].element.attributes.iddistrito.value;
+    //var iddistrito = $('#distrito').val(); 
+    console.log(iddistrito);
+    
     $.post(`../ajax/ajax_general.php?op=select2_distrito_id&id=${iddistrito}`, function (e) {   
       e = JSON.parse(e); console.log(e);
       if (e.status == true) {
