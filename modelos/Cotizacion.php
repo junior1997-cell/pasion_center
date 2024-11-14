@@ -20,7 +20,7 @@
 
       $filtro_id_trabajador  = ''; $filtro_fecha = ""; $filtro_cliente = ""; $filtro_comprobante = ""; $filtro_estado_sunat = "";
 
-      if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {  $filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";    } 
+      if ($_SESSION['user_cargo'] == 'VENDEDOR') {  $filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";    } 
 
       if ( !empty($fecha_i) && !empty($fecha_f) ) { $filtro_fecha = "AND DATE_FORMAT(v.fecha_emision, '%Y-%m-%d') BETWEEN '$fecha_i' AND '$fecha_f'"; } 
       else if (!empty($fecha_i)) { $filtro_fecha = "AND DATE_FORMAT(v.fecha_emision, '%Y-%m-%d') = '$fecha_i'"; }
@@ -106,7 +106,7 @@
       $meses_espanol = array( 1 => "Ene", 2 => "Feb", 3 => "Mar", 4 => "Abr", 5 => "May", 6 => "Jun", 7 => "Jul", 8 => "Ago", 9 => "Sep", 10 => "Oct", 11 => "Nov", 12 => "Dic" );
 
       $filtro_id_trabajador  = '';
-      if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+      if ($_SESSION['user_cargo'] == 'VENDEDOR') {
         $filtro_id_trabajador = "pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
       } 
 
@@ -172,7 +172,7 @@
     // ══════════════════════════════════════ S E L E C T 2 ══════════════════════════════════════
     public function select2_cliente(){
       $filtro_id_trabajador  = '';
-      if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+      if ($_SESSION['user_cargo'] == 'VENDEDOR') {
         $filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
       } 
       $sql = "SELECT LPAD(pc.idpersona_cliente, 5, '0') as idcliente, pc.idpersona_cliente, p.idpersona,  p.nombre_razonsocial, p.apellidos_nombrecomercial,
@@ -193,7 +193,7 @@
 
     public function select2_comprobantes_anular($tipo_comprobante){
       $filtro_id_trabajador  = '';
-      if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+      if ($_SESSION['user_cargo'] == 'VENDEDOR') {
         $filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
       } 
       $sql = "SELECT v.idventa, v.tipo_comprobante, v.serie_comprobante, v.numero_comprobante,  
@@ -245,7 +245,7 @@
 
     public function select2_filtro_cliente(){
       $filtro_id_trabajador  = '';
-      if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+      if ($_SESSION['user_cargo'] == 'VENDEDOR') {
         $filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
       } 
       $sql="SELECT p.idpersona, pc.idpersona_cliente, 

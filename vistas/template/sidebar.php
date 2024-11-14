@@ -178,7 +178,7 @@
         
         <!-- Start::slide -->        
         <li class="slide">         
-          <a href="incidencias.php" class="side-menu__item">
+          <a href="no_disponible.php" class="side-menu__item">
             <i class='bx bx-task side-menu__icon' ></i><span class="side-menu__label">Incidencias</span>            
           </a>
         </li>        
@@ -300,7 +300,7 @@
 
         <!-- Start::slide -->
         <li class="slide">
-          <a href="landing_page.php" class="side-menu__item" target="_blank">
+          <a href="no_disponible.php" class="side-menu__item" target="_blank">
             <i class='bx bx-layer side-menu__icon'></i><span class="side-menu__label">Landing Page</span>
           </a>
         </li>

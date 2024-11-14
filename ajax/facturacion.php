@@ -20,7 +20,7 @@ if (!isset($_SESSION["user_nombre"])) {
 
     $facturacion        = new Facturacion();      
     $productos          = new Producto(); 
-    $avance_cobro        = new Avance_cobro();  
+    $avance_cobro       = new Avance_cobro();  
 
     date_default_timezone_set('America/Lima');  $date_now = date("d_m_Y__h_i_s_A");
     $imagen_error = "this.src='../assets/svg/404-v2.svg'";
@@ -260,7 +260,7 @@ if (!isset($_SESSION["user_nombre"])) {
               </div>',
               "2" =>  $value['idventa_v2'],
               "3" =>  $value['fecha_emision_format'],
-              "4" =>  $value['periodo_pago_mes_anio'] ,
+              "4" =>  '',
               "5" => '<div class="d-flex flex-fill align-items-center">
                 <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen">
                   <span class="avatar"> <img class="w-35px h-auto" src="../assets/modulo/persona/perfil/' . $img_proveedor . '" alt="" onclick="ver_img_pefil(' .$value['idpersona_cliente'] . ')" onerror="'.$imagen_error.'"> </span>
@@ -429,7 +429,7 @@ if (!isset($_SESSION["user_nombre"])) {
       break; 
 
       case 'mini_reporte':
-        $rspta=$facturacion->mini_reporte($_GET["periodo_facturado"]);
+        $rspta=$facturacion->mini_reporte($_GET["periodo_facturado"], $_GET["filtro_trabajador"]);
         echo json_encode($rspta, true);
       break; 
 
@@ -467,7 +467,7 @@ if (!isset($_SESSION["user_nombre"])) {
                 <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img class="w-35px h-auto" src="../assets/modulo/productos/' . $img . '" alt="" onclick="ver_img(\'' . $img . '\', \'' . encodeCadenaHtml(($value['nombre'])) . '\')"> </span></div>
                 <div>
                   <span class="d-block fs-12 fw-semibold text-primary nombre_producto_' . $value['idproducto'] . '">'.$value['nombre'] .'</span>
-                  <span class="d-block fs-10 text-muted">Marca: <b>'.$value['marca'].'</b> | Categoría: <b>'.$value['categoria'].'</b></span> 
+                  <span class="d-block fs-10 text-muted">Marca: <b>'.$value['nombre_marca'].'</b> | Categoría: <b>'.$value['nombre_categoria'].'</b></span> 
                 </div>
               </div>',             
               "3" => ($value['precio_venta']),
@@ -505,8 +505,7 @@ if (!isset($_SESSION["user_nombre"])) {
             $tipo_documento   = $value['tipo_documento'];
             $numero_documento = $value['numero_documento'];
             $direccion        = $value['direccion'];
-            $dia_cancelacion= $value['dia_cancelacion_v2'];
-            $data .= '<option tipo_documento="'.$tipo_documento.'" dia_cancelacion="'.$dia_cancelacion.'" numero_documento="'.$numero_documento.'" direccion="'.$direccion.'" value="' . $value['idpersona_cliente']  . '">' . $value['cliente_nombre_completo']  . ' - '. $value['nombre_tipo_documento'].': '. $value['numero_documento'] . ' - '. $value['plan_pago'].': '. $value['plan_costo'] . '</option>';
+            $data .= '<option tipo_documento="'.$tipo_documento.'"  numero_documento="'.$numero_documento.'" direccion="'.$direccion.'" value="' . $value['idpersona_cliente']  . '">' . $value['cliente_nombre_completo']  . ' - '. $value['tipo_documento_abrev_nombre'].': '. $value['numero_documento'] . '</option>';
           }
 
           $retorno = array(
@@ -518,6 +517,8 @@ if (!isset($_SESSION["user_nombre"])) {
 
         } else { echo json_encode($rspta, true); }      
       break;
+
+      
       
       case 'select2_comprobantes_anular':
         $rspta = $facturacion->select2_comprobantes_anular($_GET["tipo_comprobante"]); $cont = 1; $data = ""; #echo $rspta; die();
@@ -609,6 +610,26 @@ if (!isset($_SESSION["user_nombre"])) {
           echo json_encode($retorno, true);
   
         } else { echo json_encode($rspta, true); }
+      break;
+
+      case 'select2_filtro_trabajador':
+        $rspta = $facturacion->select2_filtro_trabajador(); $cont = 1; $data = "";
+        if($rspta['status'] == true){
+          foreach ($rspta['data'] as $key => $value) {
+            $tipo_documento   = $value['tipo_documento'];
+            $numero_documento = $value['numero_documento'];
+            $direccion        = $value['direccion'];
+            $data .= '<option tipo_documento="'.$tipo_documento.'"  numero_documento="'.$numero_documento.'" direccion="'.$direccion.'" value="' . $value['idpersona_trabajador']  . '">' . $value['cliente_nombre_completo']  . ' - '. $value['tipo_documento_abrev_nombre'].': '. $value['numero_documento'] . '</option>';
+          }
+
+          $retorno = array(
+            'status' => true, 
+            'message' => 'Salió todo ok', 
+            'data' => $data, 
+          );
+          echo json_encode($retorno, true);
+
+        } else { echo json_encode($rspta, true); }      
       break;
 
       case 'select_categoria':

@@ -53,7 +53,7 @@ Class Ubigeo
 		$sql="SELECT di.*, de.nombre as departamento,  LOWER(de.nombre) departamento_min, p.nombre as provincia,  LOWER(p.nombre) as provincia_min
 		FROM ubigeo_distrito as di 
 		INNER JOIN ubigeo_departamento as de ON de.idubigeo_departamento = di.idubigeo_departamento 
-		INNER JOIN ubigeo_provincia as p ON p.idubigeo_provincia = di.idubigeo_provincia WHERE di.estado = '1' ORDER BY p.nombre, di.nombre;";
+		INNER JOIN ubigeo_provincia as p ON p.idubigeo_provincia = di.idubigeo_provincia WHERE di.estado = '1' ORDER BY de.nombre, p.nombre, di.nombre;";
 		
 		return ejecutarConsultaArray($sql);		
 	}

@@ -82,7 +82,7 @@ function templateComprobante (state) {
 
 function show_hide_form(flag) {
 	if (flag == 1) {        // TABLA PRINCIPAL
-    if (localStorage.getItem('nube_cargo') == 'TÉCNICO DE RED') {
+    if (localStorage.getItem('nube_cargo') == 'VENDEDOR') {
       $("#div-tabla").show().removeClass('col-xl-9').addClass('col-xl-12');
       $("#div-mini-reporte").hide();
     } else {

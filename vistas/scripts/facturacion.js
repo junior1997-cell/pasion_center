@@ -9,15 +9,17 @@ var cambio_de_tipo_comprobante ;
 
 var filtro_estado_sunat = "" ;
 
+var chart_barra;
+
 // ══════════════════════════════════════ I N I T I A L I Z E   S E L E C T C H O I C E ══════════════════════════════════════
 
 // const choice_distrito       = new Choices('#distrito',  {  removeItemButton: true,noResultsText: 'No hay resultados.', } );
 // const choice_tipo_documento = new Choices('#f_tipo_documento',  {  removeItemButton: true,noResultsText: 'No hay resultados.', } );
 // const choice_idbanco        = new Choices('#idbanco',  {  removeItemButton: true,noResultsText: 'No hay resultados.', } );
 
-var myElement1 = document.getElementById('recent-jobs');
-myElement1.style.height = '300px'; // Cambia esta altura según tus necesidades
-new SimpleBar(myElement1, { autoHide: true });
+// var myElement1 = document.getElementById('recent-jobs');
+// myElement1.style.height = '300px'; // Cambia esta altura según tus necesidades
+// new SimpleBar(myElement1, { autoHide: true });
 
 async function init(){
 
@@ -41,9 +43,7 @@ async function init(){
   lista_select2("../ajax/facturacion.php?op=select2_codigo_x_anulacion_comprobante", '#f_nc_motivo_anulacion', '01');  
   lista_select2("../ajax/facturacion.php?op=select2_banco", '#f_metodo_pago', null, 'charge_f_metodo_pago');  
 
-  lista_select2("../ajax/facturacion.php?op=select2_periodo_contable", '#filtro-periodo-facturado', moment().format('YYYY-MM'));  
-
-  lista_select2("../ajax/persona_cliente.php?op=select2_filtro_trabajador", '#filtro-trabajador', localStorage.getItem('nube_id_persona_trabajador'), '.charge_filtro_trabajador');
+  lista_select2("../ajax/facturacion.php?op=select2_filtro_trabajador", '#filtro-trabajador', localStorage.getItem('nube_id_persona_trabajador'), '.charge_filtro_trabajador');
 
 
   // lista_select2("../ajax/facturacion.php?op=select_categoria", '#categoria', null);
@@ -113,7 +113,7 @@ function templateSerieNumero (state) {
 
 function show_hide_form(flag) {
 	if (flag == 1) {        // TABLA PRINCIPAL
-    if (localStorage.getItem('nube_cargo') == 'TÉCNICO DE RED') {
+    if (localStorage.getItem('nube_cargo') == 'VENDEDOR') {
       $("#div-tabla").show().removeClass('col-xl-9').addClass('col-xl-12');
       $("#div-mini-reporte").hide();
     } else {
@@ -150,46 +150,45 @@ function show_hide_form(flag) {
 
 function mini_reporte() {
 
-  $(".vw_total_factura").html(`<div class="spinner-border spinner-border-sm" role="status"></div>`);
-  $(".vw_total_boleta").html(`<div class="spinner-border spinner-border-sm" role="status"></div>`);
-  $(".vw_total_ticket").html(`<div class="spinner-border spinner-border-sm" role="status"></div>`);
+  $("#html_top_5_productos").html(`<div class="spinner-border spinner-border-sm" role="status"></div>`);
 
-  var periodo_facturado = $("#filtro-periodo-facturado").val();
+  var periodo_facturado = $("#filtro-periodo").val(), filtro_trabajador = $("#filtro-trabajador").val();
 
-  $.getJSON(`../ajax/facturacion.php?op=mini_reporte`, {periodo_facturado:periodo_facturado}, function (e, textStatus, jqXHR) {
-
-    if (e.status == true) {      
-
-      e.data.coun_comprobante.forEach((val, key) => {
-        if (val.tipo_comprobante == '01') { $(".vw_count_factura").html( val.cantidad ); }
-        if (val.tipo_comprobante == '03') { $(".vw_count_boleta").html( val.cantidad ); }
-        if (val.tipo_comprobante == '12') { $(".vw_count_ticket").html( val.cantidad ); }
-      });
+  $.getJSON(`../ajax/facturacion.php?op=mini_reporte`, {periodo_facturado, filtro_trabajador}, function (e, textStatus, jqXHR) {
     
-      $(".vw_total_factura").html( `${formato_miles(e.data.factura)}` ).addClass('count-up');
-      $(".vw_total_factura_p").html( `${e.data.factura_p >= 0? '<i class="ri-arrow-up-s-line me-1 align-middle"></i>' : '<i class="ri-arrow-down-s-line me-1 align-middle"></i>'} ${(e.data.factura_p)}%` );
-      e.data.factura_p >= 0? $(".vw_total_factura_p").addClass('text-success').removeClass('text-danger') : $(".vw_total_factura_p").addClass('text-danger').removeClass('text-success') ;
-
-      $(".vw_total_boleta").html( `${formato_miles(e.data.boleta)}` ).addClass('count-up');
-      $(".vw_total_boleta_p").html( `${e.data.boleta_p >= 0? '<i class="ri-arrow-up-s-line me-1 align-middle"></i>' : '<i class="ri-arrow-down-s-line me-1 align-middle"></i>'} ${(e.data.boleta_p)}%` );
-      e.data.boleta_p >= 0? $(".vw_total_boleta_p").addClass('text-success').removeClass('text-danger') : $(".vw_total_boleta_p").addClass('text-danger').removeClass('text-success') ;
-
-      $(".vw_total_ticket").html( `${formato_miles(e.data.ticket)}` ).addClass('count-up');
-      $(".vw_total_ticket_p").html( `${e.data.ticket_p >= 0? '<i class="ri-arrow-up-s-line me-1 align-middle"></i>' : '<i class="ri-arrow-down-s-line me-1 align-middle"></i>'} ${(e.data.ticket_p)}%` );
-      e.data.ticket_p >= 0? $(".vw_total_ticket_p").addClass('text-success').removeClass('text-danger') : $(".vw_total_ticket_p").addClass('text-danger').removeClass('text-success') ;
+    if (e.status == true) {     
+      $("#html_top_5_productos").html('');
+      e.data.data_producto.forEach( (val, key) => {
+        $("#html_top_5_productos").append( ` <div class="card custom-card mb-2">
+          <div class="card-body py-2">
+            <div class="d-flex align-items-top">
+              <div class="me-3">
+                <span class="avatar avatar-md p-1 bg-primary">
+                  <img src="../assets/modulo/productos/${val.imagen == null || val.imagen == "" ? 'no-producto-white.png' : val.imagen }" alt="">                                  
+                </span>
+              </div>
+              <div class="flex-fill">
+                <div class="d-flex mb-1 align-items-top justify-content-between">
+                  <h5 class="fw-semibold mb-0 lh-1">${formato_miles(val.total_vendido_mes_actual)}</h5>
+                  <div class="text-danger fw-semibold"><i class="ri-arrow-down-s-fill me-1 align-middle"></i>${val.porcentaje_incremento}%</div>
+                </div>
+                <p class="mb-0 fs-10 op-7 text-muted fw-semibold">${val.nombre_categoria} ${val.nombre_producto} - S/. ${val.precio_promedio_mes_actual} </p>
+              </div>
+            </div>
+          </div>
+        </div>` );
+      });
+      
+      if (chart_barra) { chart_barra.destroy(); }
 
       // MINI CHART
       var options_ultimos_6_meses = {
-        series: [
-          { name: 'Factura', data: e.data.factura_line }, 
-          { name: 'Boleta', data: e.data.boleta_line }, 
-          { name: 'Ticket', data: e.data.ticket_line }
-        ],
+        series: e.data.data_line,
         chart: { type: 'bar', height: 210, stacked: true },
         plotOptions: { bar: { horizontal: false, columnWidth: '25%', endingShape: 'rounded', }, },
         grid: { borderColor: '#f2f5f7', },
         dataLabels: { enabled: false },
-        colors: ["#4b9bfa", "#28d193", "#ffbe14", "#f3f6f8"],
+        colors: ["#4b9bfa", "#28d193", "#ffbe14", "#f3f6f8", "#9c27b0"],
         stroke: { show: true, colors: ['transparent'] },
         xaxis: {
           categories: e.data.mes_nombre,
@@ -206,9 +205,9 @@ function mini_reporte() {
           }
         },
         fill: { opacity: 1 },
-        tooltip: { y: {  formatter: function (val) { return "S/ " + val ; } } }
+        tooltip: { y: {  formatter: function (val) { return "cant " + val ; } } }
       };
-      var chart_barra = new ApexCharts(document.querySelector("#invoice-list-stats"), options_ultimos_6_meses);
+      chart_barra = new ApexCharts(document.querySelector("#invoice-list-stats"), options_ultimos_6_meses);
       chart_barra.render();
 
       
@@ -222,7 +221,7 @@ function mini_reporte() {
 function mini_reporte_v2() {
   $('#avance-plan tbody').html(`<tr><td colspan="3" class="" ><div class="text-center my-3"><div class="spinner-border" style="width: 3rem; height: 3rem;" role="status"></div></div></td></tr>`);
 
-  $.getJSON(`../ajax/facturacion.php?op=mini_reporte_v2`, { filtro_periodo:$("#filtro-periodo-cobro").val(), filtro_trabajador:$("#filtro-trabajador").val() }, function (e, textStatus, jqXHR) {
+  $.getJSON(`../ajax/facturacion.php?op=mini_reporte_v2`, { filtro_periodo:$("#filtro-periodo").val(), filtro_trabajador:$("#filtro-trabajador").val() }, function (e, textStatus, jqXHR) {
     
     $('.total_avance_cobrado').html(`${e.data.total.cant_cobrado}`);
     $('.total_avance_cobrado_porcent').html(`${ redondearExp(e.data.total.avance, 1)}%`);
@@ -600,7 +599,7 @@ function es_valido_cliente() {
     var tipo_documento    = $('#f_idpersona_cliente').select2('data')[0].element.attributes.tipo_documento.value;
     var numero_documento  = $('#f_idpersona_cliente').select2('data')[0].element.attributes.numero_documento.value;
     var direccion         = $('#f_idpersona_cliente').select2('data')[0].element.attributes.direccion.value;  
-    var dia_cancelacion = $('#f_idpersona_cliente').select2('data')[0].element.attributes.dia_cancelacion.value;  
+    // var dia_cancelacion = $('#f_idpersona_cliente').select2('data')[0].element.attributes.dia_cancelacion.value;  
     var campos_requeridos = ""; 
     var es_valido = true; 
     

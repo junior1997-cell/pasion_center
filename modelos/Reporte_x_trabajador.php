@@ -51,7 +51,7 @@ class Reporte_x_trabajador
 		filtro_p_all_mes_pago: Mayo
 		filtro_tipo_comprob: 03*/
 
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_sql_trab = "AND pt.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 
@@ -150,7 +150,7 @@ class Reporte_x_trabajador
 		$data  = array();
 
 
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_sql_trab = "AND pt.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 
@@ -292,7 +292,7 @@ class Reporte_x_trabajador
 		// ------------------------ pendiente
 		$new_totalpendiente = array('nombre' => 'PENDIENTE', 'cantidad' => 0, 'total' => 0);
 
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_sql_trab_pend = "AND pt.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 
@@ -350,7 +350,7 @@ class Reporte_x_trabajador
 		$filtro_sql_trab_pend  = '';
 		$filtro_sql_es_c = '';
 
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_sql_trab = "AND pt.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 
@@ -379,7 +379,7 @@ class Reporte_x_trabajador
 		array_push($array_pay_nombre, "PENDIENTE");
 		$total_comprob_tp = 0;
 
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_sql_trab_pend = "AND pt.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 
@@ -443,7 +443,7 @@ class Reporte_x_trabajador
 		$filtro_sql_es_c  = '';
 		$filtro_sql_trab_pend  = '';
 
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_sql_trab = "AND pt.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 
@@ -508,7 +508,7 @@ class Reporte_x_trabajador
 	public function select2_filtro_trabajador()
 	{
 		$filtro_id_trabajador  = '';
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_id_trabajador = "WHERE pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 		$sql = "SELECT LPAD(pt.idpersona_trabajador, 5, '0') as idtrabajador, pt.idpersona_trabajador, pt.idpersona,  per_t.nombre_razonsocial
@@ -525,7 +525,7 @@ class Reporte_x_trabajador
 	public function select2_filtro_anio_pago()
 	{
 		$filtro_id_trabajador  = '';
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 		$sql = "SELECT DISTINCT v.name_year as anio_cancelacion
@@ -539,7 +539,7 @@ class Reporte_x_trabajador
 	public function select2_filtro_mes_pago()
 	{
 		$filtro_id_trabajador  = '';
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 		$sql = "SELECT DISTINCT v.name_month as mes_cancelacion
@@ -553,7 +553,7 @@ class Reporte_x_trabajador
 	public function select2_filtro_tipo_comprob()
 	{
 		$filtro_id_trabajador  = '';
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_id_trabajador =  "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		}
 		$sql = "SELECT DISTINCT v.tipo_comprobante, tc.abreviatura

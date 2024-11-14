@@ -139,36 +139,27 @@ class Trabajador
 
 	//Implementar un método para listar los registros
 	public function listar_tabla_principal()	{
-		$sql = "SELECT p.*, pt.idpersona_trabajador, pt.ruc, pt.usuario_sol, pt.clave_sol, pt.sueldo_mensual, pt.sueldo_diario, t.nombre as tipo_persona, c.nombre as cargo_trabajador, sdi.abreviatura as tipo_documento, 
-		( SELECT COUNT(*) FROM persona_cliente as pc WHERE pc.idpersona_trabajador = pt.idpersona_trabajador ) AS cant_cliente
+		$sql = "SELECT p.*, pt.idpersona_trabajador, pt.ruc, pt.usuario_sol, pt.clave_sol, pt.sueldo_mensual, pt.sueldo_diario, t.nombre as tipo_persona, 
+		c.nombre as cargo_trabajador, s_c06.abreviatura as tipo_documento, 
+		0 AS cant_cliente
 		FROM  persona as p
 		inner join persona_trabajador as pt on pt.idpersona = p.idpersona
 		INNER JOIN tipo_persona as t ON t.idtipo_persona = p.idtipo_persona
 		INNER JOIN cargo_trabajador as c ON c.idcargo_trabajador = p.idcargo_trabajador
-		INNER JOIN sunat_c06_doc_identidad as sdi ON sdi.code_sunat = p.tipo_documento
+		INNER JOIN sunat_c06_doc_identidad as s_c06 ON s_c06.code_sunat = p.tipo_documento
 		WHERE p.estado = '1' AND p.estado_delete = '1';";
 		return ejecutarConsulta($sql);
 	}
 	//Implementar un método para listar los registros
 	public function clientes_x_trabajador($id)	{
-		$sql = "SELECT pc.idpersona_cliente, pc.idpersona_trabajador, pc.idzona_antena, pc.idplan , pc.ip_personal, pc.fecha_cancelacion,
-		pc.fecha_afiliacion, pc.descuento,pc.estado_descuento,
-		CASE 
-		WHEN p.tipo_persona_sunat = 'NATURAL' 		THEN CONCAT(p.nombre_razonsocial, ' ', p.apellidos_nombrecomercial) 
-		WHEN p.tipo_persona_sunat = 'JURÍDICA' THEN p.nombre_razonsocial 
-		ELSE '-'
-		END AS nombre_completo, 
-		p.tipo_documento, p.numero_documento, p.celular, p.foto_perfil, p.direccion,p.distrito,p1.nombre_razonsocial, pl.nombre as nombre_plan,pl.costo,za.nombre as zona, 
-		za.ip_antena,pc.estado, i.abreviatura as tipo_doc
-
-		FROM persona_cliente as pc
-		INNER JOIN persona AS p on pc.idpersona=p.idpersona
-		INNER JOIN persona_trabajador AS pt on pc.idpersona_trabajador= pt.idpersona_trabajador
-		INNER JOIN persona as p1 on pt.idpersona=p1.idpersona
-		INNER JOIN plan as pl on pc.idplan=pl.idplan
-		INNER JOIN zona_antena as za on pc.idzona_antena=za.idzona_antena
-		INNER JOIN sunat_c06_doc_identidad as i on p.tipo_documento=i.code_sunat  
-		where pc.estado='1' and pc.estado_delete='1' AND  pc.idpersona_trabajador = '$id'  ORDER BY idpersona_cliente DESC";
+		$sql = "SELECT v.*, LPAD(v.idventa, 5, '0') AS idventa_v2, 
+		CASE v.tipo_comprobante WHEN '07' THEN v.venta_total * -1 ELSE v.venta_total END AS venta_total_v2, 
+		CASE v.tipo_comprobante WHEN '03' THEN 'BOLETA' WHEN '07' THEN 'NOTA CRED.' ELSE tc.abreviatura END AS tp_comprobante_v2,
+		DATE_FORMAT(v.fecha_emision, '%Y-%m-%d') as fecha_emision_format, vw_c.*
+		FROM vw_cliente_all as vw_c
+		INNER JOIN venta as v on v.idpersona_cliente = vw_c.idpersona_cliente
+		INNER JOIN sunat_c01_tipo_comprobante AS tc ON tc.idtipo_comprobante = v.idsunat_c01
+		WHERE v.estado = '1' AND v.estado_delete = '1' and v.sunat_estado = 'ACEPTADA' and v.user_created = '$id'  ORDER BY vw_c.idpersona_cliente DESC";
 		return ejecutarConsulta($sql);
 	}
 

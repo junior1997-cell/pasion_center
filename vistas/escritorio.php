@@ -81,7 +81,7 @@
                             </div>
                           </div>  
                           <!-- ::::::::::::::::::::: FILTRO CLIENTE :::::::::::::::::::::: -->
-                          <div class="col-sm-6 col-md-6 col-lg-3 col-xl-4 col-xxl-4" <?php echo $_SESSION['user_cargo'] == 'TÉCNICO DE RED' ? 'style="display: none;"' : '' ; ?> >
+                          <div class="col-sm-6 col-md-6 col-lg-3 col-xl-4 col-xxl-4" <?php echo $_SESSION['user_cargo'] == 'VENDEDOR' ? 'style="display: none;"' : '' ; ?> >
                             <div class="form-group">
                               <label for="filtro_trabajador" class="form-label">                         
                                 <span class="badge bg-info m-r-4px cursor-pointer" onclick="reload_filtro_trabajador();" data-bs-toggle="tooltip" title="Actualizar"><i class="las la-sync-alt"></i></span>

@@ -1797,7 +1797,7 @@
               <div class="px-4">
                 <p class="fw-semibold mb-3"><a href="index.html"><img src="assets/images/brand-logos/desktop-dark.png" alt="" width="200px"></a></p>
                 <p class="mb-2 op-6 fw-normal">
-                Somos una empresa proveedora de servicios de internet. Con experiencia en soporte técnico de redes, laptops, Pc's e instalación de camaras.
+                Somos una empresa proveedora de servicios de internet. Con experiencia en soporte VENDEDORes, laptops, Pc's e instalación de camaras.
                 </p>
                 <p class="mb-0 op-6 fw-normal">Conéctate al futuro, hoy mismo.</p>
               </div>

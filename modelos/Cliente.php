@@ -187,7 +187,7 @@ class Cliente
 
 	public function select2_filtro_anio_pago()	{
 		$filtro_id_trabajador  = '';
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		} 
 		$sql = "SELECT YEAR(vd.periodo_pago_format) as anio_cancelacion, COUNT(pc.idpersona_cliente) AS cant_cliente
@@ -212,7 +212,7 @@ class Cliente
 
 	public function select2_filtro_zona_antena()	{
 		$filtro_id_trabajador  = '';
-		if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+		if ($_SESSION['user_cargo'] == 'VENDEDOR') {
 			$filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
 		} 
 		$sql = "SELECT za.idzona_antena, za.nombre, za.ip_antena, COUNT(pc.idpersona_cliente) AS cant_cliente

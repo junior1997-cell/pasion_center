@@ -174,198 +174,49 @@ if (!isset($_SESSION["user_nombre"])) {
             <!-- REPORTE- MINI -->
             <div class="col-xl-3" id="div-mini-reporte"  >
 
-              <div class="" <?php echo $_SESSION['user_cargo'] == 'TÉCNICO DE RED' ? ''  : 'style="display: none;"' ; ?>>
+              <div class="" >
                 
                 <div class="row">
 
+                  <div class="mb-2 col-xxl-12 col-xl-12 col-lg-12 col-md-12 bd-blue-100 border br-5" >
+                    <div class=" my-2 d-flex align-items-center justify-content-between">
+                      <h6 class="fw-semibold mb-0">Top 5 productos:</h6>
+                      <div>
+                        <button class="btn btn-sm btn-primary-light btn-wave waves-effect waves-light border-success">Ver mas</button>
+                      </div>
+                    </div>  
+                  </div>
+
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <label for="filtro-periodo-cobro" class="fs-10">Periodo Cobro</label>                     
-                      <input type="month" class="form-control form-control-primary form-control-sm" id="filtro-periodo-cobro" value="<?php echo date('Y-m'); ?>" onchange=" mini_reporte_v2()" >
+                      <label for="filtro-periodo" class="fs-10">Periodo Emitido</label>                     
+                      <input type="month" class="form-control form-control-primary form-control-sm" id="filtro-periodo" value="<?php echo date('Y-m'); ?>" onchange=" mini_reporte()" >
                     </div>     
                   </div>                  
 
-                  <div class="col-lg-6" <?php echo $_SESSION['user_cargo'] == 'TÉCNICO DE RED' ? 'style="display: none;"' : '' ; ?>>
+                  <div class="col-lg-6" >
                     <div class="form-group">
                       <label for="filtro-trabajador" class="fs-10">Trabajador</label>
-                      <select class="form-select form-control-primary text-primary form-select-sm mb-3" aria-label=".form-select-sm example" id="filtro-trabajador" onchange=" mini_reporte_v2()">
+                      <select class="form-select form-control-primary text-primary form-select-sm mb-3" aria-label=".form-select-sm example" id="filtro-trabajador" onchange=" mini_reporte()">
                         <option selected="">Buscando datos...</option>                     
                       </select>
                     </div>  
                   </div>
 
                   <div class="col-lg-12 mt-2">
-                    <div class="row">
+                    <div class="row">                      
 
-                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                        <div class="card custom-card shadow-none ">
-                          <div class="card-body py-3 px-3">
-                            <a href="javascript:void(0);">
-                              <div class="d-flex justify-content-between flex-wrap">
-                                <div class="me-1">
-                                  <span class="avatar avatar-rounded fw-bold avatar-md bg-success-transparent total_avance_cobrado_porcent">0%</span>
-                                </div>
-                                <div>
-                                  <span class="fw-semibold mb-1 total_avance_cobrado">0</span>
-                                  <span class="fs-10 d-block text-muted text-end"> Cobrado</span>
-                                </div>
-                              </div>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-                        <div class="card custom-card shadow-none ">
-                          <div class="card-body py-3 px-3">
-                            <a href="javascript:void(0);">
-                              <div class="d-flex justify-content-between flex-wrap">
-                                <div class="me-1">
-                                  <span class="avatar avatar-rounded fw-bold avatar-md bg-danger-transparent total_avance_por_cobrar_porcent">0%</span>
-                                </div>
-                                <div>
-                                  <span class="fw-semibold mb-1 total_avance_por_cobrar">0</span>
-                                  <span class="fs-10 d-block text-muted text-end">Por Cobrar</span>
-                                </div>
-                              </div>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                      <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12" id="html_top_5_productos" >
+                      </div> 
 
-                  <div class="col-xxl-12 col-xl-12">
-                    <div class="card custom-card overflow-hidden shadow-none ">
-                      
-                      <div class="card-body p-0 ">
-                        <div id="recent-jobs">
-                          <div class="table-responsive">
-                            <table class="table table-hover text-nowrap " id="avance-plan">
-                              <thead>
-                                <tr>
-                                  <th scope="col" class="font-size-12px ">Plan</th>
-                                  <th scope="col" class="font-size-12px ">Avance</th>
-                                </tr>
-                              </thead>
-                              <tbody class="">
-                                <tr>
-                                  <td colspan="3" class="">
-                                    <div class="text-center my-3"><div class="spinner-border" style="width: 3rem; height: 3rem;" role="status"></div></div>
-                                  </td>                          
-                                </tr>                                
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                        
-                      </div>
                     </div>
                   </div>
                   
                 </div>                
               </div>
 
-              <div class="card custom-card" <?php echo $_SESSION['user_cargo'] == 'TÉCNICO DE RED' ? 'style="display: none;"' : '' ; ?>>
-                <div class="card-body p-0">
-
-                  <div class="px-2 pt-2 border-bottom border-block-end-dashed">
-                    <div class="form-group">
-                      <label for="filtro-periodo-facturado" class="fs-10">Periodo Facturado</label>
-                      <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example" id="filtro-periodo-facturado" onchange="mini_reporte();">
-                        <option selected="">Buscando datos...</option>                     
-                      </select>
-                    </div>                    
-                  </div>
-
-                  <div class="p-4 border-bottom border-block-end-dashed d-flex align-items-top">
-                    <div class="svg-icon-background bg-info-transparent me-4 cursor-pointer" onclick="mini_reporte();" data-bs-toggle="tooltip" title="Actualizar">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-info">
-                        <path d="M11.5,20h-6a1,1,0,0,1-1-1V5a1,1,0,0,1,1-1h5V7a3,3,0,0,0,3,3h3v5a1,1,0,0,0,2,0V9s0,0,0-.06a1.31,1.31,0,0,0-.06-.27l0-.09a1.07,1.07,0,0,0-.19-.28h0l-6-6h0a1.07,1.07,0,0,0-.28-.19.29.29,0,0,0-.1,0A1.1,1.1,0,0,0,11.56,2H5.5a3,3,0,0,0-3,3V19a3,3,0,0,0,3,3h6a1,1,0,0,0,0-2Zm1-14.59L15.09,8H13.5a1,1,0,0,1-1-1ZM7.5,14h6a1,1,0,0,0,0-2h-6a1,1,0,0,0,0,2Zm4,2h-4a1,1,0,0,0,0,2h4a1,1,0,0,0,0-2Zm-4-6h1a1,1,0,0,0,0-2h-1a1,1,0,0,0,0,2Zm13.71,6.29a1,1,0,0,0-1.42,0l-3.29,3.3-1.29-1.3a1,1,0,0,0-1.42,1.42l2,2a1,1,0,0,0,1.42,0l4-4A1,1,0,0,0,21.21,16.29Z" />
-                      </svg>
-                    </div>
-                    <div class="flex-fill">
-                      <h6 class="mb-2 fs-12">Total Factura
-                        <span class="badge bg-info fw-semibold float-end vw_count_factura"> 0 </span>
-                      </h6>
-                      <div class="pb-0 mt-0">
-                        <div>
-                          <h4 class="fs-18 fw-semibold mb-2">S/ <span class="vw_total_factura" data-count="0"><div class="spinner-border spinner-border-sm" role="status"></div></span></h4>
-                          <p class="text-muted fs-11 mb-0 lh-1">
-                            <span class="text-success me-1 fw-semibold vw_total_factura_p">
-                              <i class="ri-arrow-up-s-line me-1 align-middle"></i>0%
-                            </span>
-                            <span>this month</span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="p-4 border-bottom border-block-end-dashed d-flex align-items-top">
-                    <div class="svg-icon-background bg-success-transparent me-4 cursor-pointer" onclick="mini_reporte();" data-bs-toggle="tooltip" title="Actualizar">                      
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-success">
-                        <path d="M11.5,20h-6a1,1,0,0,1-1-1V5a1,1,0,0,1,1-1h5V7a3,3,0,0,0,3,3h3v5a1,1,0,0,0,2,0V9s0,0,0-.06a1.31,1.31,0,0,0-.06-.27l0-.09a1.07,1.07,0,0,0-.19-.28h0l-6-6h0a1.07,1.07,0,0,0-.28-.19.29.29,0,0,0-.1,0A1.1,1.1,0,0,0,11.56,2H5.5a3,3,0,0,0-3,3V19a3,3,0,0,0,3,3h6a1,1,0,0,0,0-2Zm1-14.59L15.09,8H13.5a1,1,0,0,1-1-1ZM7.5,14h6a1,1,0,0,0,0-2h-6a1,1,0,0,0,0,2Zm4,2h-4a1,1,0,0,0,0,2h4a1,1,0,0,0,0-2Zm-4-6h1a1,1,0,0,0,0-2h-1a1,1,0,0,0,0,2Zm13.71,6.29a1,1,0,0,0-1.42,0l-3.29,3.3-1.29-1.3a1,1,0,0,0-1.42,1.42l2,2a1,1,0,0,0,1.42,0l4-4A1,1,0,0,0,21.21,16.29Z" />
-                      </svg>
-                    </div>
-                    <div class="flex-fill">
-                      <h6 class="mb-2 fs-12">Total Boleta
-                        <span class="badge bg-success fw-semibold float-end vw_count_boleta">0  </span>
-                      </h6>
-                      <div>
-                        <h4 class="fs-18 fw-semibold mb-2">S/ <span class="vw_total_boleta" data-count="0"><div class="spinner-border spinner-border-sm" role="status"></div></span></h4>
-                        <p class="text-muted fs-11 mb-0 lh-1">
-                          <span class="text-success me-1 fw-semibold vw_total_boleta_p">
-                            <i class="ri-arrow-down-s-line me-1 align-middle"></i>0%
-                          </span>
-                          <span>this month</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-top p-4 border-bottom border-block-end-dashed">
-                    <div class="svg-icon-background bg-warning-transparent me-4 cursor-pointer" onclick="mini_reporte();" data-bs-toggle="tooltip" title="Actualizar">
-                      <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" class="svg-warning">
-                        <path d="M13,16H7a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2ZM9,10h2a1,1,0,0,0,0-2H9a1,1,0,0,0,0,2Zm12,2H18V3a1,1,0,0,0-.5-.87,1,1,0,0,0-1,0l-3,1.72-3-1.72a1,1,0,0,0-1,0l-3,1.72-3-1.72a1,1,0,0,0-1,0A1,1,0,0,0,2,3V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM5,20a1,1,0,0,1-1-1V4.73L6,5.87a1.08,1.08,0,0,0,1,0l3-1.72,3,1.72a1.08,1.08,0,0,0,1,0l2-1.14V19a3,3,0,0,0,.18,1Zm15-1a1,1,0,0,1-2,0V14h2Zm-7-7H7a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2Z" />
-                      </svg>
-                    </div>
-                    <div class="flex-fill">
-                      <h6 class="mb-2 fs-12">Total Ticket
-                        <span class="badge bg-warning fw-semibold float-end vw_count_ticket">0 </span>
-                      </h6>
-                      <div>
-                        <h4 class="fs-18 fw-semibold mb-2">S/ <span class="vw_total_ticket" data-count="0"><div class="spinner-border spinner-border-sm" role="status"></div></span></h4>
-                        <p class="text-muted fs-11 mb-0 lh-1">
-                          <span class="text-success me-1 fw-semibold vw_total_ticket_p">
-                            <i class="ri-arrow-up-s-line me-1 align-middle"></i>0%
-                          </span>
-                          <span>this month</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- <div class="d-flex align-items-top p-4 border-bottom border-block-end-dashed">
-                    <div class="svg-icon-background bg-light me-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" class="svg-dark">
-                        <path d="M19,12h-7V5c0-0.6-0.4-1-1-1c-5,0-9,4-9,9s4,9,9,9s9-4,9-9C20,12.4,19.6,12,19,12z M12,19.9c-3.8,0.6-7.4-2.1-7.9-5.9C3.5,10.2,6.2,6.6,10,6.1V13c0,0.6,0.4,1,1,1h6.9C17.5,17.1,15.1,19.5,12,19.9z M15,2c-0.6,0-1,0.4-1,1v6c0,0.6,0.4,1,1,1h6c0.6,0,1-0.4,1-1C22,5.1,18.9,2,15,2z M16,8V4.1C18,4.5,19.5,6,19.9,8H16z" />
-                      </svg>
-                    </div>
-                    <div class="flex-fill">
-                      <h6 class="mb-2 fs-12">Overdue Invoices
-                        <span class="badge bg-light text-default fw-semibold float-end">
-                          1,105
-                        </span>
-                      </h6>
-                      <div>
-                        <h4 class="fs-18 fw-semibold mb-2">$<span class="count-up" data-count="32.47">32.47</span>K</h4>
-                        <p class="text-muted fs-11 mb-0 lh-1">
-                          <span class="text-success me-1 fw-semibFold">
-                            <i class="ri-arrow-down-s-line me-1 align-middle"></i>0.46%
-                          </span>
-                          <span>this month</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div> -->
+              <div class="card custom-card" >
+                <div class="card-body p-0">                  
                   <div class="p-4">
                     <p class="fs-15 fw-semibold">Mini reporte <span class="text-muted fw-normal">(Últimos 6 meses) :</span></p>
                     <div id="invoice-list-stats"></div>

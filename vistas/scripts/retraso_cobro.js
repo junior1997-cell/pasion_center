@@ -58,7 +58,7 @@ function templateComprobante (state) {
 
 function show_hide_form(flag) {
 	if (flag == 1) {        // TABLA PRINCIPAL
-    if (localStorage.getItem('nube_cargo') == 'TÉCNICO DE RED') {
+    if (localStorage.getItem('nube_cargo') == 'VENDEDOR') {
       $("#div-tabla").show().removeClass('col-xl-9').addClass('col-xl-12');
       $("#div-mini-reporte").hide();
     } else {
@@ -304,7 +304,7 @@ function ver_pagos_x_cliente(idcliente) {
   $('#modal-ver-detalle-cobro').modal('show');
   $('#html-detalle-cobro').html(`<div class="pt-5" ><div class="col-lg-12 text-center"><div class="spinner-border me-4" style="width: 3rem; height: 3rem;" role="status"></div> <h4 class="bx-flashing">Cargando...</h4></div></div>`);
   
-  $.get(`../ajax/persona_cliente.php?op=ver_pagos_x_cliente&idcliente=${idcliente}`,  function (e, textStatus, jqXHR) {
+  $.get(`../ajax/cliente.php?op=ver_pagos_x_cliente&idcliente=${idcliente}`,  function (e, textStatus, jqXHR) {
     $('#html-detalle-cobro').html(e);
     
     $('[data-bs-toggle="tooltip"]').tooltip();
@@ -318,7 +318,7 @@ function pagos_cliente_x_mes(idpersona_cliente, mes, anio){
   $("#pago-cliente-mes").modal("show");
   $('#div_tabla_pagos_Cx_mes').html(`<div class="pt-5" ><div class="col-lg-12 text-center"><div class="spinner-border me-4" style="width: 3rem; height: 3rem;" role="status"></div> <h4 class="bx-flashing">Cargando...</h4></div></div>`);
 
-  $.get(`../ajax/persona_cliente.php?op=pagos_cliente_x_mes&id=${idpersona_cliente}&mes=${mes}&filtroA=&filtroB=&filtroC=&filtroD=&filtroE=`,  function (e, textStatus, jqXHR) {
+  $.get(`../ajax/cliente.php?op=pagos_cliente_x_mes&id=${idpersona_cliente}&mes=${mes}&filtroA=&filtroB=&filtroC=&filtroD=&filtroE=`,  function (e, textStatus, jqXHR) {
     $('#div_tabla_pagos_Cx_mes').html(e);
     $('#id_buscando_tabla_pago_xmes').hide();
     $('[data-bs-toggle="tooltip"]').tooltip();
@@ -416,7 +416,7 @@ function filtros() {
 }
 
 function reload_filtro_periodo_anio(){ var filtro = $("#filtro_periodo_anio").val(); lista_select2("../ajax/retraso_cobro.php?op=select2_filtro_anio_cobro",  '#filtro_periodo_anio',  filtro, '.charge_filtro_periodo_anio'); } 
-function reload_filtro_trabajador(){ lista_select2("../ajax/persona_cliente.php?op=select2_filtro_trabajador", '#filtro_trabajador', localStorage.getItem('nube_id_persona_trabajador'), '.charge_filtro_trabajador'); } 
+function reload_filtro_trabajador(){ lista_select2("../ajax/cliente.php?op=select2_filtro_trabajador", '#filtro_trabajador', localStorage.getItem('nube_id_persona_trabajador'), '.charge_filtro_trabajador'); } 
 
 
 

@@ -284,7 +284,7 @@
 
     public function select2_filtro_trabajador()	{
       $filtro_id_trabajador  = '';
-      // if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+      // if ($_SESSION['user_cargo'] == 'VENDEDOR') {
       //   $filtro_id_trabajador = "WHERE pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
       // } 
       $sql = "SELECT LPAD(pt.idpersona_trabajador, 5, '0') as idtrabajador, pt.idpersona_trabajador, pt.idpersona,  per_t.nombre_razonsocial, COUNT(pc.idpersona_cliente) AS cant_cliente
@@ -299,7 +299,7 @@
 
     public function select2_filtro_anio_cobro()	{
       $filtro_id_trabajador  = '';
-      // if ($_SESSION['user_cargo'] == 'TÉCNICO DE RED') {
+      // if ($_SESSION['user_cargo'] == 'VENDEDOR') {
       //   $filtro_id_trabajador = "AND pc.idpersona_trabajador = '$this->id_trabajador_sesion'";
       // } 
       $sql = "SELECT YEAR(vd.periodo_pago_format) as anio_cancelacion, COUNT(pc.idpersona_cliente) AS cant_cliente

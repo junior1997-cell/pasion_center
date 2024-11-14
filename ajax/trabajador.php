@@ -173,12 +173,9 @@ if (!isset($_SESSION["user_nombre"])) {
     
           $data[] = array(
             "0" => $count++,                        
-            "1" =>  '<span class="text-primary">'.$reg->nombre_completo.'</span> <br> <span class="text-muted">'.$reg->tipo_doc .': '. $reg->numero_documento.'</span> ',
-            "2" => '<div class="text-start font-size-12px" >
-              <span class="d-block text-primary fw-semibold"> <i class="bx bx-broadcast bx-burst fa-1x" ></i> ' . $reg->ip_antena . '</span>
-              <span class="text-muted"><i class="bx bx-wifi bx-burst" ></i>' . $reg->ip_personal . '</span>
-            </div>',
-            "3" => $reg->fecha_cancelacion,
+            "1" =>  '<span class="text-primary">'.$reg->cliente_nombre_completo.'</span> <br> <span class="text-muted">'.$reg->tipo_documento_abrev_nombre .': '. $reg->numero_documento.'</span> ',
+            "2" =>  '<b>'.$reg->tp_comprobante_v2.'</b>' . ' <br> ' . $reg->serie_comprobante . '-' . $reg->numero_comprobante ,
+            "3" => $reg->fecha_emision_format,
           );
         }
         $results = array(

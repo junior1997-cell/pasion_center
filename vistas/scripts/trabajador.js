@@ -19,8 +19,15 @@ function init() {
   $("#tipo_documento").select2({  theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
   $("#idcargo_trabajador").select2({  theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
   $("#idbanco").select2({  theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
-  $("#distrito").select2({  theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
+  $("#distrito").select2({ templateResult: templateDistrito, theme: "bootstrap4", placeholder: "Seleccione", allowClear: true, });
 
+}
+
+function templateDistrito (state) {
+  //console.log(state);
+  if (!state.id) { return state.text; } 
+  var $state = $(`<span class="fs-11" > ${state.text}</span><span class="fs-9" > (${state.title})</span>`);
+  return $state;
 }
 
 //Función limpiar
@@ -43,7 +50,7 @@ function limpiar_form() {
   $('#usuario_sol').val('');
   $('#clave_sol').val('');
   $('#direccion').val('');
-  $('#distrito').val('').trigger("change");
+  $('#distrito').val('TARAPOTO').trigger("change");
   $('#departamento').val('');
   $('#provincia').val('');
   $('#ubigeo').val('');

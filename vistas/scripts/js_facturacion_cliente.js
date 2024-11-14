@@ -56,23 +56,23 @@ function agregarDetalleComprobante(idproducto, tipo_producto, individual) {
             <td class="py-1 text-nowrap">         
               <input type="hidden" name="idproducto[]" value="${e.data.idproducto}">
 
-              <input type="hidden" name="pr_marca[]" value="${e.data.marca}">
-              <input type="hidden" name="pr_categoria[]" value="${e.data.categoria}">
+              <input type="hidden" name="pr_marca[]" value="${e.data.nombre_marca}">
+              <input type="hidden" name="pr_categoria[]" value="${e.data.nombre_categoria}">
               <input type="hidden" name="pr_nombre[]" value="${e.data.nombre}">
 
               <div class="d-flex flex-fill align-items-center">
                 <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img class="w-35px h-auto" src="${img}" alt="" onclick="ver_img('${img}', '${encodeHtml(e.data.nombre)}')"> </span></div>
                 <div>
                   <span class="d-block fs-11 fw-semibold text-nowrap text-primary">${e.data.nombre}</span>
-                  <span class="d-block fs-10 text-muted">M: <b>${e.data.marca}</b> | C: <b>${e.data.categoria}</b></span> 
+                  <span class="d-block fs-10 text-muted">M: <b>${e.data.nombre_marca}</b> | C: <b>${e.data.nombre_categoria}</b></span> 
                 </div>
               </div>
             </td>
 
             <td class="py-1">
-              <span class="fs-11 um_nombre_${cont}">${e.data.um_abreviatura}</span> 
-              <input type="hidden" class="um_nombre_${cont}" name="um_nombre[]" id="um_nombre[]" value="${e.data.unidad_medida}">
-              <input type="hidden" class="um_abreviatura_${cont}" name="um_abreviatura[]" id="um_abreviatura[]" value="${e.data.um_abreviatura}">
+              <span class="fs-11 um_nombre_${cont}">${e.data.abreviatura_um}</span> 
+              <input type="hidden" class="um_nombre_${cont}" name="um_nombre[]" id="um_nombre[]" value="${e.data.nombre_um}">
+              <input type="hidden" class="um_abreviatura_${cont}" name="um_abreviatura[]" id="um_abreviatura[]" value="${e.data.abreviatura_um}">
             </td>   
             
             <td class="py-1">       
@@ -199,23 +199,23 @@ function listar_producto_x_codigo() {
             <td class="py-1">         
               <input type="hidden" name="idproducto[]" value="${e.data.idproducto}">
 
-              <input type="hidden" name="pr_marca[]" value="${e.data.marca}">
-              <input type="hidden" name="pr_categoria[]" value="${e.data.categoria}">
+              <input type="hidden" name="pr_marca[]" value="${e.data.nombre_marca}">
+              <input type="hidden" name="pr_categoria[]" value="${e.data.nombre_categoria}">
               <input type="hidden" name="pr_nombre[]" value="${e.data.nombre}">
 
               <div class="d-flex flex-fill align-items-center">
                 <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img class="w-35px h-auto" src="${img}" alt="" onclick="ver_img('${img}', '${encodeHtml(e.data.nombre)}')"> </span></div>
                 <div>
                   <span class="d-block fs-11 fw-semibold text-nowrap text-primary">${e.data.nombre}</span>
-                  <span class="d-block fs-10 text-muted">M: <b>${e.data.marca}</b> | C: <b>${e.data.categoria}</b></span> 
+                  <span class="d-block fs-10 text-muted">M: <b>${e.data.nombre_marca}</b> | C: <b>${e.data.nombre_categoria}</b></span> 
                 </div>
               </div>
             </td>
             
             <td class="py-1">
-              <span class="fs-11 um_nombre_${cont}">${e.data.um_abreviatura}</span> 
-              <input type="hidden" class="um_nombre_${cont}" name="um_nombre[]" id="um_nombre[]" value="${e.data.unidad_medida}">
-              <input type="hidden" class="um_abreviatura_${cont}" name="um_abreviatura[]" id="um_abreviatura[]" value="${e.data.um_abreviatura}">
+              <span class="fs-11 um_nombre_${cont}">${e.data.abreviatura_um}</span> 
+              <input type="hidden" class="um_nombre_${cont}" name="um_nombre[]" id="um_nombre[]" value="${e.data.nombre_um}">
+              <input type="hidden" class="um_abreviatura_${cont}" name="um_abreviatura[]" id="um_abreviatura[]" value="${e.data.abreviatura_um}">
             </td>
 
             <td class="py-1">       
@@ -333,23 +333,23 @@ function mostrar_para_nota_credito(input) {
               <td class="py-1">         
                 <input type="hidden" name="idproducto[]" value="${val1.idproducto}">
 
-                <input type="hidden" name="pr_marca[]" value="${e.data.marca}">
-                <input type="hidden" name="pr_categoria[]" value="${e.data.categoria}">
+                <input type="hidden" name="pr_marca[]" value="${e.data.nombre_marca}">
+                <input type="hidden" name="pr_categoria[]" value="${e.data.nombre_categoria}">
                 <input type="hidden" name="pr_nombre[]" value="${e.data.nombre}">
 
                 <div class="d-flex flex-fill align-items-center">
                   <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img class="w-35px h-auto" src="${img}" alt="" onclick="ver_img('${img}', '${encodeHtml(val1.nombre_producto)}')"> </span></div>
                   <div>
                     <span class="d-block fs-11 fw-semibold text-nowrap text-primary">${val1.nombre_producto}</span>
-                    <span class="d-block fs-10 text-muted">M: <b>${val1.marca}</b> | C: <b>${val1.categoria}</b></span> 
+                    <span class="d-block fs-10 text-muted">M: <b>${val1.nombre_marca}</b> | C: <b>${val1.nombre_categoria}</b></span> 
                   </div>
                 </div>
               </td>
 
               <td class="py-1">
-                <span class="fs-11 um_nombre_${cont}">${val1.um_abreviatura}</span> 
-                <input type="hidden" class="um_nombre_${cont}" name="um_nombre[]" id="um_nombre[]" value="${val1.um_nombre}">
-                <input type="hidden" class="um_abreviatura_${cont}" name="um_abreviatura[]" id="um_abreviatura[]" value="${val1.um_abreviatura}">
+                <span class="fs-11 um_nombre_${cont}">${val1.abreviatura_um}</span> 
+                <input type="hidden" class="um_nombre_${cont}" name="um_nombre[]" id="um_nombre[]" value="${val1.nombre_um}">
+                <input type="hidden" class="um_abreviatura_${cont}" name="um_abreviatura[]" id="um_abreviatura[]" value="${val1.abreviatura_um}">
               </td>
 
               <td class="py-1">       
@@ -422,7 +422,7 @@ function mostrar_para_nota_credito(input) {
 }
 
 function listar_producto_x_precio(precio) {
-  $.post("../ajax/persona_cliente.php?op=listar_producto_x_precio", { precio: precio }, function (e, status) {
+  $.post("../ajax/cliente.php?op=listar_producto_x_precio", { precio: precio }, function (e, status) {
     e = JSON.parse(e); console.log(e);
     if (e.status == true) {         
       if (e.data == null) {
@@ -445,23 +445,23 @@ function listar_producto_x_precio(precio) {
           <td class="py-1">         
             <input type="hidden" name="idproducto[]" value="${e.data.idproducto}">
 
-            <input type="hidden" name="pr_marca[]" value="${e.data.marca}">
-            <input type="hidden" name="pr_categoria[]" value="${e.data.categoria}">
+            <input type="hidden" name="pr_marca[]" value="${e.data.nombre_marca}">
+            <input type="hidden" name="pr_categoria[]" value="${e.data.nombre_categoria}">
             <input type="hidden" name="pr_nombre[]" value="${e.data.nombre}">
 
             <div class="d-flex flex-fill align-items-center">
               <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img class="w-35px h-auto" src="${img}" alt="" onclick="ver_img('${img}', '${encodeHtml(e.data.nombre)}')"> </span></div>
               <div>
                 <span class="d-block fs-11 fw-semibold text-nowrap text-primary">${e.data.nombre}</span>
-                <span class="d-block fs-10 text-muted">M: <b>${e.data.marca}</b> | C: <b>${e.data.categoria}</b></span> 
+                <span class="d-block fs-10 text-muted">M: <b>${e.data.nombre_marca}</b> | C: <b>${e.data.nombre_categoria}</b></span> 
               </div>
             </div>
           </td>
           
           <td class="py-1">
-            <span class="fs-11 um_nombre_${cont}">${e.data.um_abreviatura}</span> 
-            <input type="hidden" class="um_nombre_${cont}" name="um_nombre[]" id="um_nombre[]" value="${e.data.unidad_medida}">
-            <input type="hidden" class="um_abreviatura_${cont}" name="um_abreviatura[]" id="um_abreviatura[]" value="${e.data.um_abreviatura}">
+            <span class="fs-11 um_nombre_${cont}">${e.data.abreviatura_um}</span> 
+            <input type="hidden" class="um_nombre_${cont}" name="um_nombre[]" id="um_nombre[]" value="${e.data.nombre_um}">
+            <input type="hidden" class="um_abreviatura_${cont}" name="um_abreviatura[]" id="um_abreviatura[]" value="${e.data.abreviatura_um}">
           </td>
 
           <td class="py-1">       
