@@ -62,16 +62,16 @@ class Papelera{
     }
 
 
-    $sql_3 = "SELECT * FROM categoria WHERE estado = 0 AND estado_delete = 1;";
+    $sql_3 = "SELECT * FROM producto_categoria WHERE estado = 0 AND estado_delete = 1;";
     $categoria = ejecutarConsultaArray($sql_3); 
     if ($categoria['status'] == false) { return $categoria; }
 
     if (!empty($categoria['data'])) {
       foreach ($categoria['data'] as $value3) {
           $data[] = [
-            'nombre_tabla'    => 'categoria',
-            'nombre_id_tabla' => 'idcategoria',
-            'id_tabla'        => $value3['idcategoria'],
+            'nombre_tabla'    => 'producto_categoria',
+            'nombre_id_tabla' => 'idproducto_categoria',
+            'id_tabla'        => $value3['idproducto_categoria'],
             'modulo'          => 'ARTICULOS',
             'nombre_archivo'  => $value3['nombre'],
             'descripcion'     => $value3['descripcion'],
@@ -199,17 +199,17 @@ class Papelera{
     }
 
 
-    $sql_9 = "SELECT * FROM marca WHERE estado = '0' AND estado_delete = '1';";
+    $sql_9 = "SELECT * FROM producto_marca WHERE estado = '0' AND estado_delete = '1';";
     $marca = ejecutarConsultaArray($sql_9);  
     if ($marca['status'] == false) { return $marca; }
 
     if (!empty($marca['data'])) {
       foreach ($marca['data'] as $value9) {
           $data[] = [
-            'nombre_tabla'    => 'marca',
-            'nombre_id_tabla' => 'idmarca',
-            'id_tabla'        => $value9['idmarca'],
-            'modulo'          => 'GASTO DE TRABAJADOR',
+            'nombre_tabla'    => 'producto_marca',
+            'nombre_id_tabla' => 'idproducto_marca',
+            'id_tabla'        => $value9['idproducto_marca'],
+            'modulo'          => 'ARTICULOS',
             'nombre_archivo'  => $value9['nombre'],
             'descripcion'     => $value9['descripcion'],
             'created_at'      => $value9['created_at'],
@@ -219,168 +219,169 @@ class Papelera{
       }
     }
 
-
-    // $sql_10 = "SELECT * FROM noticias_inicio WHERE estado = '0' AND estado_delete = '1';";
-    // $noticias_inicio = ejecutarConsultaArray($sql_10);  
-    // if ($noticias_inicio['status'] == false) { return $noticias_inicio; }
-
-    // if (!empty($noticias_inicio['data'])) {
-    //   foreach ($noticias_inicio['data'] as $value10) {
-    //       $data[] = [
-    //         'nombre_tabla'    => 'noticias_inicio',
-    //         'nombre_id_tabla' => 'idnoticias_inicio',
-    //         'id_tabla'        => $value10['idnoticias_inicio'],
-    //         'modulo'          => 'GASTO DE TRABAJADOR',
-    //         'nombre_archivo'  => '../assets/modulo/noticias_inicio/'.$value10['imagen'],
-    //         'descripcion'     => $value10['titulo'],
-    //         'created_at'      => $value10['created_at'],
-    //         'updated_at'      => $value10['updated_at'],
-    //         'list_archivo'     => $value10['titulo'],
-    //       ];
-    //   }
-    // }
-
-
-    $sql_11 = "SELECT p.nombre_razonsocial, p.apellidos_nombrecomercial, pgt.descripcion, pgt.monto, mpgt.mes_nombre, mpgt.anio
+    $sql_10 = "SELECT p.nombre_razonsocial, p.apellidos_nombrecomercial, pgt.descripcion, pgt.monto, mpgt.mes_nombre, mpgt.anio
     FROM pago_trabajador AS pgt
     INNER JOIN mes_pago_trabajador AS mpgt ON pgt.idmes_pago_trabajador = mpgt.idmes_pago_trabajador
     INNER JOIN persona AS p ON mpgt.idpersona = p.idpersona
     WHERE pgt.estado = '0' AND pgt.estado_delete = '1';";
-    $pago_trabajador = ejecutarConsultaArray($sql_11);  
+    $pago_trabajador = ejecutarConsultaArray($sql_10);  
     if ($pago_trabajador['status'] == false) { return $pago_trabajador; }
 
     if (!empty($pago_trabajador['data'])) {
-      foreach ($pago_trabajador['data'] as $value11) {
+      foreach ($pago_trabajador['data'] as $value10) {
           $data[] = [
             'nombre_tabla'    => 'pago_trabajador',
             'nombre_id_tabla' => 'idpago_trabajador',
-            'id_tabla'        => $value11['idpago_trabajador'],
+            'id_tabla'        => $value10['idpago_trabajador'],
             'modulo'          => 'PAGO TRABAJADOR',
-            'nombre_archivo'  => '<b>Trabajador: </b>'.$value11['nombre_razonsocial'].' '.$value11['apellidos_nombrecomercial'] .'<br/>'.
-                                 $value11['mes_nombre'].'-'.$value11['anio'].'<br/>'.
-                                 '<b>S/ </b>'.$value11['monto'],
-            'descripcion'     => $value11['descripcion'],
-            'created_at'      => $value11['created_at'],
-            'updated_at'      => $value11['updated_at'],
-            'list_archivo'     => '<b>Trabajador: </b>'.$value11['nombre_razonsocial'].' '.$value11['apellidos_nombrecomercial'] .' -> <b>S/ </b>'.$value11['monto'],
+            'nombre_archivo'  => '<b>Trabajador: </b>'.$value10['nombre_razonsocial'].' '.$value10['apellidos_nombrecomercial'] .'<br/>'.
+                                 $value10['mes_nombre'].'-'.$value10['anio'].'<br/>'.
+                                 '<b>S/ </b>'.$value10['monto'],
+            'descripcion'     => $value10['descripcion'],
+            'created_at'      => $value10['created_at'],
+            'updated_at'      => $value10['updated_at'],
+            'list_archivo'     => '<b>Trabajador: </b>'.$value10['nombre_razonsocial'].' '.$value10['apellidos_nombrecomercial'] .' -> <b>S/ </b>'.$value10['monto'],
           ];
       }
     }
 
 
-    $sql_12 = "SELECT * FROM permiso WHERE estado = '0' AND estado_delete = '1';";
-    $permiso = ejecutarConsultaArray($sql_12);  
+    $sql_11 = "SELECT * FROM permiso WHERE estado = '0' AND estado_delete = '1';";
+    $permiso = ejecutarConsultaArray($sql_11);  
     if ($permiso['status'] == false) { return $permiso; }
 
     if (!empty($permiso['data'])) {
-      foreach ($permiso['data'] as $value12) {
+      foreach ($permiso['data'] as $value11) {
           $data[] = [
             'nombre_tabla'    => 'permiso',
             'nombre_id_tabla' => 'idpermiso',
-            'id_tabla'        => $value12['idpermiso'],
+            'id_tabla'        => $value11['idpermiso'],
             'modulo'          => 'PERMISO',
-            'nombre_archivo'  => '<b> Modulo: </b>'.$value12['modulo'].'<br/>'.
-                                 '<b>Sub Modulo: </b>'.$value12['submodulo'],
+            'nombre_archivo'  => '<b> Modulo: </b>'.$value11['modulo'].'<br/>'.
+                                 '<b>Sub Modulo: </b>'.$value11['submodulo'],
             'descripcion'     => '- - - - -',
-            'created_at'      => $value12['created_at'],
-            'updated_at'      => $value12['updated_at'],
-            'list_archivo'     => 'Permiso para el Modulo: '.$value12['modulo'],
+            'created_at'      => $value11['created_at'],
+            'updated_at'      => $value11['updated_at'],
+            'list_archivo'     => 'Permiso para el Modulo: '.$value11['modulo'],
           ];
       }
     }
 
 
-    $sql_13 = "SELECT p.idpersona, p.nombre_razonsocial, p.apellidos_nombrecomercial, p.numero_documento, sdi.abreviatura, p.created_at, p.updated_at
+    $sql_12 = "SELECT p.idpersona, p.nombre_razonsocial, p.apellidos_nombrecomercial, p.numero_documento, sdi.abreviatura, p.created_at, p.updated_at
     FROM persona p
     INNER JOIN sunat_c06_doc_identidad as sdi ON sdi.code_sunat = p.tipo_documento
     WHERE p.idtipo_persona = 4 
     AND p.estado = '0' AND p.estado_delete = '1';";
-    $proveedor = ejecutarConsultaArray($sql_13);  
+    $proveedor = ejecutarConsultaArray($sql_12);  
     if ($proveedor['status'] == false) { return $proveedor; }
 
     if (!empty($proveedor['data'])) {
-      foreach ($proveedor['data'] as $value13) {
+      foreach ($proveedor['data'] as $value12) {
           $data[] = [
             'nombre_tabla'    => 'persona',
             'nombre_id_tabla' => 'idpersona',
-            'id_tabla'        => $value13['idpersona'],
+            'id_tabla'        => $value12['idpersona'],
             'modulo'          => 'PROVEEDORES',
-            'nombre_archivo'  => '<b> Razon Social: </b>'.$value13['nombre_razonsocial'].' '.$value13['apellidos_nombrecomercial'] .'<br/>'.
-                                 '<b>'.$value13['abreviatura'].': </b>'.$value13['numero_documento'],
+            'nombre_archivo'  => '<b> Razon Social: </b>'.$value12['nombre_razonsocial'].' '.$value12['apellidos_nombrecomercial'] .'<br/>'.
+                                 '<b>'.$value12['abreviatura'].': </b>'.$value12['numero_documento'],
             'descripcion'     => '- - - - -',
-            'created_at'      => $value13['created_at'],
-            'updated_at'      => $value13['updated_at'],
-            'list_archivo'     => '<b> Razon Social: </b>'.$value13['nombre_razonsocial'].' '.$value13['apellidos_nombrecomercial'],
+            'created_at'      => $value12['created_at'],
+            'updated_at'      => $value12['updated_at'],
+            'list_archivo'     => '<b> Razon Social: </b>'.$value12['nombre_razonsocial'].' '.$value12['apellidos_nombrecomercial'],
           ];
       }
     }
 
 
-    $sql_14 = "SELECT pc.idpersona_cliente, p.nombre_razonsocial, p.apellidos_nombrecomercial, pc.ip_personal, pl.nombre AS plan, pl.costo, pc.created_at, pc.updated_at
+    $sql_13 = "SELECT pc.idpersona_cliente, p.nombre_razonsocial, p.apellidos_nombrecomercial, pc.created_at, pc.updated_at
     FROM persona_cliente AS pc
     INNER JOIN persona AS p ON p.idpersona = pc.idpersona
-    INNER JOIN plan AS pl ON pl.idplan = pc.idplan
     WHERE pc.estado = '0' AND pc.estado_delete = '1';";
-    $persona_cliente = ejecutarConsultaArray($sql_14);  
+    $persona_cliente = ejecutarConsultaArray($sql_13);  
     if ($persona_cliente['status'] == false) { return $persona_cliente; }
 
     if (!empty($persona_cliente['data'])) {
-      foreach ($persona_cliente['data'] as $value14) {
+      foreach ($persona_cliente['data'] as $value13) {
           $data[] = [
             'nombre_tabla'    => 'persona_cliente',
             'nombre_id_tabla' => 'idpersona_cliente',
-            'id_tabla'        => $value14['idpersona_cliente'],
+            'id_tabla'        => $value13['idpersona_cliente'],
             'modulo'          => 'CLIENTES',
-            'nombre_archivo'  => '<b> Cliente: </b>'.$value14['nombre_razonsocial'].' '.$value14['apellidos_nombrecomercial'] .'<br/>'.
-                                 '<b>Plan: </b>'.$value14['plan'].' -- S/ '. $value14['costo']. '</br>'.
-                                 '<b>ID personal: </b>'.$value14['ip_personal'],
+            'nombre_archivo'  => '<b> Cliente: </b>'.$value13['nombre_razonsocial'].' '.$value13['apellidos_nombrecomercial'] .'<br/>',
             'descripcion'     => '- - - - -',
-            'created_at'      => $value14['created_at'],
-            'updated_at'      => $value14['updated_at'],
-            'list_archivo'     => '<b> Cliente: </b>'.$value14['nombre_razonsocial'].' '.$value14['apellidos_nombrecomercial'],
+            'created_at'      => $value13['created_at'],
+            'updated_at'      => $value13['updated_at'],
+            'list_archivo'     => '<b> Cliente: </b>'.$value13['nombre_razonsocial'].' '.$value13['apellidos_nombrecomercial'],
           ];
       }
     }
 
 
-    $sql_15 = "SELECT pt.idpersona_trabajador, pt.ruc, pt.clave_sol, p.nombre_razonsocial, p.apellidos_nombrecomercial, pt.created_at, pt.updated_at
+    $sql_14 = "SELECT pt.idpersona_trabajador, pt.ruc, pt.clave_sol, p.nombre_razonsocial, p.apellidos_nombrecomercial, pt.created_at, pt.updated_at
     FROM persona_trabajador AS pt
     INNER JOIN persona AS p ON p.idpersona = pt.idpersona
     WHERE pt.estado = '0' AND pt.estado_delete = '1';";
-    $persona_trabajador = ejecutarConsultaArray($sql_15);  
+    $persona_trabajador = ejecutarConsultaArray($sql_14);  
     if ($persona_trabajador['status'] == false) { return $persona_trabajador; }
 
     if (!empty($persona_trabajador['data'])) {
-      foreach ($persona_trabajador['data'] as $value15) {
+      foreach ($persona_trabajador['data'] as $value14) {
           $data[] = [
             'nombre_tabla'    => 'persona_trabajador',
             'nombre_id_tabla' => 'idpersona_trabajador',
-            'id_tabla'        => $value15['idpersona_trabajador'],
+            'id_tabla'        => $value14['idpersona_trabajador'],
             'modulo'          => 'TRABAJADORES',
-            'nombre_archivo'  => '<b>Trabajador: </b>'.$value15['nombre_razonsocial'].' '.$value15['apellidos_nombrecomercial'] .'<br/>'.
-                                 '<b>ruc: </b>'.$value15['ruc']. '</br>'.
-                                 '<b>Clave Sol: </b>'.$value15['clave_sol'],
+            'nombre_archivo'  => '<b>Trabajador: </b>'.$value14['nombre_razonsocial'].' '.$value14['apellidos_nombrecomercial'] .'<br/>'.
+                                 '<b>ruc: </b>'.$value14['ruc']. '</br>'.
+                                 '<b>Clave Sol: </b>'.$value14['clave_sol'],
             'descripcion'     => '- - - - -',
-            'created_at'      => $value15['created_at'],
-            'updated_at'      => $value15['updated_at'],
-            'list_archivo'     => '<b>Trabajador: </b>'.$value15['nombre_razonsocial'].' '.$value15['apellidos_nombrecomercial'],
+            'created_at'      => $value14['created_at'],
+            'updated_at'      => $value14['updated_at'],
+            'list_archivo'     => '<b>Trabajador: </b>'.$value14['nombre_razonsocial'].' '.$value14['apellidos_nombrecomercial'],
           ];
       }
     }
 
 
-    $sql_16 = "SELECT * FROM plan WHERE estado = '0' AND estado_delete = '1';";
-    $plan = ejecutarConsultaArray($sql_16);  
-    if ($plan['status'] == false) { return $plan; }
+    $sql_15 = "SELECT p.idproducto, p.nombre AS producto, ct.nombre AS categoria, m.nombre AS marca, p.descripcion, p.created_at, p.updated_at
+    FROM producto AS p
+    INNER JOIN producto_categoria AS ct ON ct.idproducto_categoria = p.idproducto_categoria
+    INNER JOIN producto_marca AS m ON m.idproducto_marca = p.idproducto_marca
+    WHERE p.estado = '0' AND p.estado_delete = '1';";
+    $producto = ejecutarConsultaArray($sql_15);  
+    if ($producto['status'] == false) { return $producto; }
 
-    if (!empty($plan['data'])) {
-      foreach ($plan['data'] as $value16) {
+    if (!empty($producto['data'])) {
+      foreach ($producto['data'] as $value15) {
           $data[] = [
-            'nombre_tabla'    => 'plan',
-            'nombre_id_tabla' => 'idplan',
-            'id_tabla'        => $value16['idplan'],
-            'modulo'          => 'PLAN',
-            'nombre_archivo'  => $value16['nombre'].' - '.'<b>S/ </b>'.$value16['costo'],
+            'nombre_tabla'    => 'producto',
+            'nombre_id_tabla' => 'idproducto',
+            'id_tabla'        => $value15['idproducto'],
+            'modulo'          => 'PRODUCTO',
+            'nombre_archivo'  => '<b>Nombre: </b>'.$value15['producto'].'<br/> '.
+                                 '<b>Cateforia: </b>'.$value15['categoria'].' | <b>Marca: </b>'.$value15['marca'],
+            'descripcion'     => $value15['descripcion'],
+            'created_at'      => $value15['created_at'],
+            'updated_at'      => $value15['updated_at'],
+            'list_archivo'     => '<b>Nombre: </b>'.$value15['producto'],
+          ];
+      }
+    }
+
+
+    $sql_16 = "SELECT * FROM sunat_c01_tipo_comprobante WHERE estado = '0' AND estado_delete = '1';";
+    $tipo_comprobante = ejecutarConsultaArray($sql_16);  
+    if ($tipo_comprobante['status'] == false) { return $tipo_comprobante; }
+
+    if (!empty($tipo_comprobante['data'])) {
+      foreach ($tipo_comprobante['data'] as $value16) {
+          $data[] = [
+            'nombre_tabla'    => 'sunat_c01_tipo_comprobante',
+            'nombre_id_tabla' => 'idtipo_comprobante',
+            'id_tabla'        => $value16['idtipo_comprobante'],
+            'modulo'          => 'SUNAT',
+            'nombre_archivo'  => $value16['nombre'],
             'descripcion'     => '- - - - -',
             'created_at'      => $value16['created_at'],
             'updated_at'      => $value16['updated_at'],
@@ -390,228 +391,72 @@ class Papelera{
     }
 
 
-    $sql_17 = "SELECT p.idproducto, p.nombre AS producto, ct.nombre AS categoria, m.nombre AS marca, p.descripcion, p.created_at, p.updated_at
-    FROM producto AS p
-    INNER JOIN categoria AS ct ON ct.idcategoria = p.idcategoria
-    INNER JOIN marca AS m ON m.idmarca = p.idmarca
-    WHERE p.estado = '0' AND p.estado_delete = '1';";
-    $producto = ejecutarConsultaArray($sql_17);  
-    if ($producto['status'] == false) { return $producto; }
-
-    if (!empty($producto['data'])) {
-      foreach ($producto['data'] as $value17) {
-          $data[] = [
-            'nombre_tabla'    => 'producto',
-            'nombre_id_tabla' => 'idproducto',
-            'id_tabla'        => $value17['idproducto'],
-            'modulo'          => 'PRODUCTO',
-            'nombre_archivo'  => '<b>Nombre: </b>'.$value17['producto'].'<br/> '.
-                                 '<b>Cateforia: </b>'.$value17['categoria'].' | <b>Marca: </b>'.$value17['marca'],
-            'descripcion'     => $value17['descripcion'],
-            'created_at'      => $value17['created_at'],
-            'updated_at'      => $value17['updated_at'],
-            'list_archivo'     => '<b>Nombre: </b>'.$value17['producto'],
-          ];
-      }
-    }
-
-
-    $sql_18 = "SELECT * FROM sunat_c01_tipo_comprobante WHERE estado = '0' AND estado_delete = '1';";
-    $tipo_comprobante = ejecutarConsultaArray($sql_18);  
-    if ($tipo_comprobante['status'] == false) { return $tipo_comprobante; }
-
-    if (!empty($tipo_comprobante['data'])) {
-      foreach ($tipo_comprobante['data'] as $value18) {
-          $data[] = [
-            'nombre_tabla'    => 'sunat_c01_tipo_comprobante',
-            'nombre_id_tabla' => 'idtipo_comprobante',
-            'id_tabla'        => $value18['idtipo_comprobante'],
-            'modulo'          => 'SUNAT',
-            'nombre_archivo'  => $value18['nombre'],
-            'descripcion'     => '- - - - -',
-            'created_at'      => $value18['created_at'],
-            'updated_at'      => $value18['updated_at'],
-            'list_archivo'     => $value18['nombre'],
-          ];
-      }
-    }
-
-
-    $sql_19 = "SELECT * FROM sunat_c06_doc_identidad WHERE estado = '0' AND estado_delete = '1';";
-    $tipo_doc_identidad = ejecutarConsultaArray($sql_19);  
+    $sql_17 = "SELECT * FROM sunat_c06_doc_identidad WHERE estado = '0' AND estado_delete = '1';";
+    $tipo_doc_identidad = ejecutarConsultaArray($sql_17);  
     if ($tipo_doc_identidad['status'] == false) { return $tipo_doc_identidad; }
 
     if (!empty($tipo_doc_identidad['data'])) {
-      foreach ($tipo_doc_identidad['data'] as $value19) {
+      foreach ($tipo_doc_identidad['data'] as $value17) {
           $data[] = [
             'nombre_tabla'    => 'sunat_c06_doc_identidad',
             'nombre_id_tabla' => 'idsunat_c06_doc_identidad',
-            'id_tabla'        => $value19['idsunat_c06_doc_identidad'],
+            'id_tabla'        => $value17['idsunat_c06_doc_identidad'],
             'modulo'          => 'SUNAT',
-            'nombre_archivo'  => $value19['nombre'],
+            'nombre_archivo'  => $value17['nombre'],
             'descripcion'     => '- - - - -',
+            'created_at'      => $value17['created_at'],
+            'updated_at'      => $value17['updated_at'],
+            'list_archivo'     => $value17['nombre'],
+          ];
+      }
+    }
+
+    $sql_18 = "SELECT suc.idsunat_usuario_comprobante, p.nombre_razonsocial, p.apellidos_nombrecomercial, scc.abreviatura AS tp_comprobante, suc.created_at, suc.updated_at
+    FROM sunat_usuario_comprobante AS suc
+    INNER JOIN usuario AS u ON u.idusuario = suc.idusuario
+    INNER JOIN persona AS p ON p.idpersona = u.idpersona
+    INNER JOIN sunat_c01_tipo_comprobante AS scc ON scc.idtipo_comprobante = suc.idtipo_comprobante
+    WHERE suc.estado = '0' AND suc.estado_delete = '1';";
+    $user_comprob = ejecutarConsultaArray($sql_18);  
+    if ($user_comprob['status'] == false) { return $user_comprob; }
+
+    if (!empty($user_comprob['data'])) {
+      foreach ($user_comprob['data'] as $value18) {
+          $data[] = [
+            'nombre_tabla'    => 'sunat_usuario_comprobante',
+            'nombre_id_tabla' => 'idsunat_usuario_comprobante',
+            'id_tabla'        => $value18['idsunat_usuario_comprobante'],
+            'modulo'          => 'SUNAT',
+            'nombre_archivo'  => '<b>Usuario: </b>'.$value18['nombre_razonsocial'].' '.$value18['apellidos_nombrecomercial'] .'<br/>'.
+                                 '<b>Tipo Comb.: </b>'.$value18['tp_comprobante'],
+            'descripcion'     => '- - - - -',
+            'created_at'      => $value18['created_at'],
+            'updated_at'      => $value18['updated_at'],
+            'list_archivo'     => '<b>Usuario: </b>'.$value18['nombre_razonsocial'].' '.$value18['apellidos_nombrecomercial'] .' -> <b>Tipo Comb.: </b>'.$value18['tp_comprobante'],
+          ];
+      }
+    }
+
+
+    $sql_19 = "SELECT * FROM tipo_persona WHERE estado = '0' AND estado_delete = '1';";
+    $tipo_persona = ejecutarConsultaArray($sql_19);  
+    if ($tipo_persona['status'] == false) { return $tipo_persona; }
+
+    if (!empty($tipo_persona['data'])) {
+      foreach ($tipo_persona['data'] as $value19) {
+          $data[] = [
+            'nombre_tabla'    => 'tipo_persona',
+            'nombre_id_tabla' => 'idtipo_persona',
+            'id_tabla'        => $value19['idtipo_persona'],
+            'modulo'          => 'GENERAL',
+            'nombre_archivo'  => $value19['nombre'],
+            'descripcion'     => $value19['descripcion'],
             'created_at'      => $value19['created_at'],
             'updated_at'      => $value19['updated_at'],
             'list_archivo'     => $value19['nombre'],
           ];
       }
     }
-
-    /*$sql_20 = "SELECT * FROM sunat_tipo_tributo WHERE estado = '0' AND estado_delete = '1';";
-    $tipo_tributo = ejecutarConsultaArray($sql_20);  
-    if ($tipo_tributo['status'] == false) { return $tipo_tributo; }
-
-    if (!empty($tipo_tributo['data'])) {
-      foreach ($tipo_tributo['data'] as $value20) {
-          $data[] = [
-            'nombre_tabla'    => 'sunat_tipo_tributo',
-            'nombre_id_tabla' => 'idsunat_tipo_tributo',
-            'id_tabla'        => $value20['idsunat_tipo_tributo'],
-            'modulo'          => 'SUNAT',
-            'nombre_archivo'  => $value20['nombre'],
-            'descripcion'     => '- - - - -',
-            'created_at'      => $value20['created_at'],
-            'updated_at'      => $value20['updated_at'],
-            'list_archivo'     => $value20['nombre'],
-          ];
-      }
-    }*/
-
-
-    $sql_21 = "SELECT suc.idsunat_usuario_comprobante, p.nombre_razonsocial, p.apellidos_nombrecomercial, scc.abreviatura AS tp_comprobante, suc.created_at, suc.updated_at
-    FROM sunat_usuario_comprobante AS suc
-    INNER JOIN usuario AS u ON u.idusuario = suc.idusuario
-    INNER JOIN persona AS p ON p.idpersona = u.idpersona
-    INNER JOIN sunat_c01_tipo_comprobante AS scc ON scc.idtipo_comprobante = suc.idtipo_comprobante
-    WHERE suc.estado = '0' AND suc.estado_delete = '1';";
-    $user_comprob = ejecutarConsultaArray($sql_21);  
-    if ($user_comprob['status'] == false) { return $user_comprob; }
-
-    if (!empty($user_comprob['data'])) {
-      foreach ($user_comprob['data'] as $value21) {
-          $data[] = [
-            'nombre_tabla'    => 'sunat_usuario_comprobante',
-            'nombre_id_tabla' => 'idsunat_usuario_comprobante',
-            'id_tabla'        => $value21['idsunat_usuario_comprobante'],
-            'modulo'          => 'SUNAT',
-            'nombre_archivo'  => '<b>Usuario: </b>'.$value21['nombre_razonsocial'].' '.$value21['apellidos_nombrecomercial'] .'<br/>'.
-                                 '<b>Tipo Comb.: </b>'.$value21['tp_comprobante'],
-            'descripcion'     => '- - - - -',
-            'created_at'      => $value21['created_at'],
-            'updated_at'      => $value21['updated_at'],
-            'list_archivo'     => '<b>Usuario: </b>'.$value21['nombre_razonsocial'].' '.$value21['apellidos_nombrecomercial'] .' -> <b>Tipo Comb.: </b>'.$value21['tp_comprobante'],
-          ];
-      }
-    }
-
-
-    $sql_22 = "SELECT * FROM tipo_persona WHERE estado = '0' AND estado_delete = '1';";
-    $tipo_persona = ejecutarConsultaArray($sql_22);  
-    if ($tipo_persona['status'] == false) { return $tipo_persona; }
-
-    if (!empty($tipo_persona['data'])) {
-      foreach ($tipo_persona['data'] as $value22) {
-          $data[] = [
-            'nombre_tabla'    => 'tipo_persona',
-            'nombre_id_tabla' => 'idtipo_persona',
-            'id_tabla'        => $value22['idtipo_persona'],
-            'modulo'          => 'GENERAL',
-            'nombre_archivo'  => $value22['nombre'],
-            'descripcion'     => $value22['descripcion'],
-            'created_at'      => $value22['created_at'],
-            'updated_at'      => $value22['updated_at'],
-            'list_archivo'     => $value22['nombre'],
-          ];
-      }
-    }
-
-
-    // $sql_23 = "SELECT * FROM ubigeo_departamento WHERE estado = '0' AND estado_delete = '1';";
-    // $departamento = ejecutarConsultaArray($sql_23);  
-    // if ($departamento['status'] == false) { return $departamento; }
-
-    // if (!empty($departamento['data'])) {
-    //   foreach ($departamento['data'] as $value23) {
-    //       $data[] = [
-    //         'nombre_tabla'    => 'ubigeo_departamento',
-    //         'nombre_id_tabla' => 'idubigeo_departamento',
-    //         'id_tabla'        => $value23['idubigeo_departamento'],
-    //         'modulo'          => 'DEPARTAMENTO',
-    //         'nombre_archivo'  => $value23['nombre'],
-    //         'descripcion'     => $value23['region'],
-    //         'created_at'      => $value23['created_at'],
-    //         'updated_at'      => $value23['updated_at'],
-    //         'list_archivo'     => $value23['nombre'],
-    //       ];
-    //   }
-    // }
-
-
-    // $sql_24 = "SELECT * FROM ubigeo_distrito WHERE estado = '0' AND estado_delete = '1';";
-    // $distrito = ejecutarConsultaArray($sql_24);  
-    // if ($distrito['status'] == false) { return $distrito; }
-
-    // if (!empty($distrito['data'])) {
-    //   foreach ($distrito['data'] as $value24) {
-    //       $data[] = [
-    //         'nombre_tabla'    => 'ubigeo_distrito',
-    //         'nombre_id_tabla' => 'idubigeo_distrito',
-    //         'id_tabla'        => $value24['idubigeo_distrito'],
-    //         'modulo'          => 'DISTRITO',
-    //         'nombre_archivo'  => $value24['nombre'],
-    //         'descripcion'     => 'Ubigeo Reniec: '.$value24['ubigeo_reniec'],
-    //         'created_at'      => $value24['created_at'],
-    //         'updated_at'      => $value24['updated_at'],
-    //         'list_archivo'     => $value24['nombre'],
-    //       ];
-    //   }
-    // }
-
-
-    // $sql_25 = "SELECT * FROM ubigeo_provincia WHERE estado = '0' AND estado_delete = '1';";
-    // $provincia = ejecutarConsultaArray($sql_25);  
-    // if ($provincia['status'] == false) { return $provincia; }
-
-    // if (!empty($provincia['data'])) {
-    //   foreach ($provincia['data'] as $value25) {
-    //       $data[] = [
-    //         'nombre_tabla'    => 'ubigeo_provincia',
-    //         'nombre_id_tabla' => 'idubigeo_provincia',
-    //         'id_tabla'        => $value25['idubigeo_provincia'],
-    //         'modulo'          => 'PROVINCIA',
-    //         'nombre_archivo'  => $value25['nombre'],
-    //         'descripcion'     => '- - - - -',
-    //         'created_at'      => $value25['created_at'],
-    //         'updated_at'      => $value25['updated_at'],
-    //         'list_archivo'     => $value25['nombre'],
-    //       ];
-    //   }
-    // }
-
-
-    $sql_26 = "SELECT * FROM zona_antena WHERE estado = '0' AND estado_delete = '1';";
-    $zona_antena = ejecutarConsultaArray($sql_26);  
-    if ($zona_antena['status'] == false) { return $zona_antena; }
-
-    if (!empty($zona_antena['data'])) {
-      foreach ($zona_antena['data'] as $value26) {
-          $data[] = [
-            'nombre_tabla'    => 'zona_antena',
-            'nombre_id_tabla' => 'idzona_antena',
-            'id_tabla'        => $value26['idzona_antena'],
-            'modulo'          => 'ZONA ANTENA',
-            'nombre_archivo'  => $value26['nombre'],
-            'descripcion'     => 'IP Antena: '.$value26['ip_antena'],
-            'created_at'      => $value26['created_at'],
-            'updated_at'      => $value26['updated_at'],
-            'list_archivo'     => $value26['nombre'],
-          ];
-      }
-    }
-
-
-    
-
 
     return ['status' => true, 'message' =>'todo okey', 'data'=>$data];
   }

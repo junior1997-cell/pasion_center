@@ -115,7 +115,7 @@ function mostrar_marca(idmarca){
   $.post("../ajax/marca.php?op=mostrar_marca", { idmarca: idmarca }, function (e, status) {
     e = JSON.parse(e); 
     if (e.status) {
-      $("#idmarca").val(e.data.idmarca);
+      $("#idmarca").val(e.data.idproducto_marca);
       $("#nombre_marca").val(e.data.nombre);        
       $("#descr_marca").val(e.data.descripcion);    
 

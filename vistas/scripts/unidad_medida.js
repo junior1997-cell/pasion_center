@@ -99,7 +99,7 @@ function mostrar_u_m(idsunat_unidad_medida){
   $.post("../ajax/unidad_medida.php?op=mostrar_u_m", { idsunat_unidad_medida: idsunat_unidad_medida }, function (e, status) {
     e = JSON.parse(e); 
     if (e.status) {
-      $("#idsunat_unidad_medida").val(e.data.idsunat_unidad_medida);
+      $("#idsunat_unidad_medida").val(e.data.idsunat_c03_unidad_medida);
       $("#nombre_um").val(e.data.nombre);        
       $("#abreviatura_um").val(e.data.abreviatura);        
       $("#equivalencia_um").val(e.data.equivalencia);        

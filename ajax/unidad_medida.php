@@ -35,15 +35,15 @@ if (!isset($_SESSION["user_nombre"])) {
 
             $data[] = array(
               "0" => $cont++,
-              "1" => ($value['idsunat_unidad_medida'] <= 63 ? '<i class="bi bi-exclamation-triangle text-danger fs-6"></i>' : '<button class="btn btn-icon btn-sm btn-warning-light" onclick="mostrar_u_m(' . $value['idsunat_unidad_medida'] . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>'.
-                ' <button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="eliminar_papelera_u_m(' . $value['idsunat_unidad_medida'] . ', \'' . encodeCadenaHtml($value['nombre']) . '\')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>'),         
+              "1" => ($value['idsunat_c03_unidad_medida'] <= 63 ? '<i class="bi bi-exclamation-triangle text-danger fs-6"></i>' : '<button class="btn btn-icon btn-sm btn-warning-light" onclick="mostrar_u_m(' . $value['idsunat_c03_unidad_medida'] . ')" data-bs-toggle="tooltip" title="Editar"><i class="ri-edit-line"></i></button>'.
+                ' <button  class="btn btn-icon btn-sm btn-danger-light product-btn" onclick="eliminar_papelera_u_m(' . $value['idsunat_c03_unidad_medida'] . ', \'' . encodeCadenaHtml($value['nombre']) . '\')" data-bs-toggle="tooltip" title="Eliminar"><i class="ri-delete-bin-line"></i></button>'),         
               "2" => $value['nombre'],
               "3" => $value['abreviatura'],
               "4" => $value['equivalencia'],
               "5" => $value['descripcion'],
               "6" =>  ($value['estado'] == '1') ? '<span class="badge bg-success-transparent"><i class="ri-check-fill align-middle me-1"></i>Activo</span>' : '<span class="badge bg-danger-transparent"><i class="ri-close-fill align-middle me-1"></i>Desactivado</span>',
               
-              "7" => $value['idsunat_unidad_medida'],
+              "7" => $value['idsunat_c03_unidad_medida'],
             );
           }
           $results = [

@@ -18,10 +18,10 @@
     function listar_tabla(){
       $sql= "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca
       FROM producto AS p
-      INNER JOIN sunat_unidad_medida AS sum ON p.idsunat_unidad_medida = sum.idsunat_unidad_medida
-      INNER JOIN categoria AS cat ON p.idcategoria = cat.idcategoria
-      INNER JOIN marca AS mc ON p.idmarca = mc.idmarca
-      WHERE p.idcategoria = 2 AND p.estado = 1 AND p.estado_delete = 1 
+      INNER JOIN sunat_c03_unidad_medida AS sum ON p.idsunat_c03_unidad_medida = sum.idsunat_c03_unidad_medida
+      INNER JOIN producto_categoria AS cat ON p.idproducto_categoria = cat.idproducto_categoria
+      INNER JOIN producto_marca AS mc ON p.idproducto_marca = mc.idproducto_marca
+      WHERE p.idproducto_categoria = 2 AND p.estado = 1 AND p.estado_delete = 1 
       ORDER BY p.nombre ASC;";
       return ejecutarConsulta($sql);
     }
@@ -33,7 +33,7 @@
       $existe = ejecutarConsultaArray($sql_0); if ($existe['status'] == false) { return $existe;}      
     
       if ( empty($existe['data']) ) {
-        $sql = "INSERT INTO producto(idsunat_unidad_medida, idcategoria, idmarca, tipo, codigo_alterno, nombre, stock, stock_minimo, precio_compra, precio_venta, precioB, 
+        $sql = "INSERT INTO producto(idsunat_c03_unidad_medida, idproducto_categoria, idproducto_marca, tipo, codigo_alterno, nombre, stock, stock_minimo, precio_compra, precio_venta, precioB, 
         precioC, precioD, descripcion, imagen) 
         VALUES ('$idsunat_unidad_medida', '$idcategoria', '$idmarca', '$tipo', '$codigo_alterno', '$nombre', $stock, '2', '0', '$precio_v', '0', '0', '0', '$descripcion', '$img_servicio');";
         $id_new = ejecutarConsulta_retornarID($sql, 'C');	if ($id_new['status'] == false) {  return $id_new; }
@@ -62,7 +62,7 @@
         
       if ( empty($existe['data']) ) {
 
-        $sql = "UPDATE producto SET idsunat_unidad_medida = '$idsunat_unidad_medida', idcategoria = '$idcategoria', idmarca = '$idmarca', tipo = '$tipo', codigo_alterno = '$codigo_alterno', 
+        $sql = "UPDATE producto SET idsunat_c03_unidad_medida = '$idsunat_unidad_medida', idproducto_categoria = '$idcategoria', idproducto_marca = '$idmarca', tipo = '$tipo', codigo_alterno = '$codigo_alterno', 
         nombre = '$nombre', stock = $stock, stock_minimo = '2', precio_compra = '0', precio_venta = '$precio_v', precioB = '0', precioC = '0', precioD = '0', 
         descripcion = '$descripcion', imagen = '$img_servicio'
         WHERE idproducto = '$idproducto'";

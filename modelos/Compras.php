@@ -122,9 +122,9 @@
       $sql = "SELECT dc.*, p.nombre, p.codigo, p.codigo_alterno, p.imagen, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca
       FROM compra_detalle AS dc
         INNER JOIN producto AS p ON p.idproducto = dc.idproducto
-        INNER JOIN sunat_unidad_medida AS sum ON p.idsunat_unidad_medida = sum.idsunat_unidad_medida
-        INNER JOIN categoria AS cat ON p.idcategoria = cat.idcategoria
-        INNER JOIN marca AS mc ON p.idmarca = mc.idmarca
+        INNER JOIN sunat_c03_unidad_medida AS sum ON p.idsunat_c03_unidad_medida = sum.idsunat_c03_unidad_medida
+        INNER JOIN producto_categoria AS cat ON p.idproducto_categoria = cat.idproducto_categoria
+        INNER JOIN producto_marca AS mc ON p.idproducto_marca = mc.idproducto_marca
       WHERE dc.idcompra = '$id'
         AND p.estado = 1
         AND p.estado_delete = 1;";
@@ -150,19 +150,19 @@
     public function listar_tabla_producto(){
       $sql = "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca
       FROM producto AS p
-      INNER JOIN sunat_unidad_medida AS sum ON p.idsunat_unidad_medida = sum.idsunat_unidad_medida
-      INNER JOIN categoria AS cat ON p.idcategoria = cat.idcategoria
-      INNER JOIN marca AS mc ON p.idmarca = mc.idmarca
-      WHERE p.idcategoria <> 2  AND p.estado = 1 AND p.estado_delete = 1;";
+      INNER JOIN sunat_c03_unidad_medida AS sum ON p.idsunat_c03_unidad_medida = sum.idsunat_c03_unidad_medida
+      INNER JOIN producto_categoria AS cat ON p.idproducto_categoria = cat.idproducto_categoria
+      INNER JOIN producto_marca AS mc ON p.idproducto_marca = mc.idproducto_marca
+      WHERE p.idproducto_categoria <> 2  AND p.estado = 1 AND p.estado_delete = 1;";
       return ejecutarConsulta($sql);
     }
 
     public function mostrar_producto($idproducto){
       $sql = "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca
       FROM producto AS p
-      INNER JOIN sunat_unidad_medida AS sum ON p.idsunat_unidad_medida = sum.idsunat_unidad_medida
-      INNER JOIN categoria AS cat ON p.idcategoria = cat.idcategoria
-      INNER JOIN marca AS mc ON p.idmarca = mc.idmarca
+      INNER JOIN sunat_c03_unidad_medida AS sum ON p.idsunat_c03_unidad_medida = sum.idsunat_c03_unidad_medida
+      INNER JOIN producto_categoria AS cat ON p.idproducto_categoria = cat.idproducto_categoria
+      INNER JOIN producto_marca AS mc ON p.idproducto_marca = mc.idproducto_marca
       WHERE p.idproducto = '$idproducto'  AND p.estado = 1 AND p.estado_delete = 1;";
       return ejecutarConsultaSimpleFila($sql);
     }
@@ -170,9 +170,9 @@
     public function listar_producto_x_codigo($codigo){
       $sql = "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca
       FROM producto AS p
-      INNER JOIN sunat_unidad_medida AS sum ON p.idsunat_unidad_medida = sum.idsunat_unidad_medida
-      INNER JOIN categoria AS cat ON p.idcategoria = cat.idcategoria
-      INNER JOIN marca AS mc ON p.idmarca = mc.idmarca
+      INNER JOIN sunat_c03_unidad_medida AS sum ON p.idsunat_c03_unidad_medida = sum.idsunat_c03_unidad_medida
+      INNER JOIN producto_categoria AS cat ON p.idproducto_categoria = cat.idproducto_categoria
+      INNER JOIN producto_marca AS mc ON p.idproducto_marca = mc.idproducto_marca
       WHERE (p.codigo = '$codigo' OR p.codigo_alterno = '$codigo' ) AND p.estado = 1 AND p.estado_delete = 1;";
         return ejecutarConsultaSimpleFila($sql);
       

@@ -46,7 +46,7 @@ if (!isset($_SESSION["user_nombre"])) {
                   $nombre_arc = '<img src="' . $value['nombre_archivo'] . '" width="100px" height="auto" alt="Image">';
               } else {
                   // SI nombre_archivo es equivalente a TEXTO
-                  $nombre_arc = '<div class="bg-color-242244245 " style="overflow: auto; resize: vertical; height: 45px;"> ' . $value['nombre_archivo'] . '</div>';
+                  $nombre_arc = '<div class="bg-color-242244245 fw-semibold bg-light " style="overflow: auto; resize: vertical; height: 45px;"> ' . $value['nombre_archivo'] . '</div>';
               }
       
               $data[] = [

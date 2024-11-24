@@ -227,7 +227,7 @@ if (!isset($_SESSION["user_nombre"])) {
         if ($rspta['status']) {
   
           foreach ($rspta['data'] as $key => $value) {
-            $data  .= '<option value="' . $value['idcategoria'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] . '</option>';
+            $data  .= '<option value="' . $value['idproducto_categoria'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] . '</option>';
           }
   
           $retorno = array( 'status' => true, 'message' => 'Salió todo ok', 'data' => $data, );
@@ -245,7 +245,7 @@ if (!isset($_SESSION["user_nombre"])) {
         if ($rspta['status']) {
   
           foreach ($rspta['data'] as $key => $value) {
-            $data  .= '<option value="' . $value['idsunat_unidad_medida'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] .' - '. $value['abreviatura']. '</option>';
+            $data  .= '<option value="' . $value['idsunat_c03_unidad_medida'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] .' - '. $value['abreviatura']. '</option>';
           }
   
           $retorno = array( 'status' => true, 'message' => 'Salió todo ok', 'data' => $data, );
@@ -263,7 +263,7 @@ if (!isset($_SESSION["user_nombre"])) {
         if ($rspta['status']) {
   
           foreach ($rspta['data'] as $key => $value) {
-            $data  .= '<option value="' . $value['idmarca'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] . '</option>';
+            $data  .= '<option value="' . $value['idproducto_marca'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] . '</option>';
           }
   
           $retorno = array( 'status' => true, 'message' => 'Salió todo ok', 'data' => $data, );
@@ -282,7 +282,7 @@ if (!isset($_SESSION["user_nombre"])) {
         if ($rspta['status']) {
   
           foreach ($rspta['data'] as $key => $value) {
-            $data  .= '<option value="' . $value['idcategoria'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] . '</option>';
+            $data  .= '<option value="' . $value['idproducto_categoria'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] . '</option>';
           }
   
           $retorno = array( 'status' => true,  'message' => 'Salió todo ok', 'data' => $data, );  
@@ -299,7 +299,7 @@ if (!isset($_SESSION["user_nombre"])) {
         if ($rspta['status']) {
   
           foreach ($rspta['data'] as $key => $value) {
-            $data  .= '<option value="' . $value['idsunat_unidad_medida'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] .' - '. $value['abreviatura']. '</option>';
+            $data  .= '<option value="' . $value['idsunat_c03_unidad_medida'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] .' - '. $value['abreviatura']. '</option>';
           }
   
           $retorno = array('status' => true, 'message' => 'Salió todo ok', 'data' => $data, );  
@@ -316,7 +316,7 @@ if (!isset($_SESSION["user_nombre"])) {
         if ($rspta['status']) {
   
           foreach ($rspta['data'] as $key => $value) {
-            $data  .= '<option value="' . $value['idmarca'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] . '</option>';
+            $data  .= '<option value="' . $value['idproducto_marca'] . '" title ="' . $value['descripcion'] . '" >' . $value['nombre'] . '</option>';
           }
   
           $retorno = array('status' => true,'message' => 'Salió todo ok', 'data' => $data, );

@@ -205,12 +205,12 @@ function mostrar_producto(idproducto){
 	show_hide_form(2);
 	$('#cargando-1-fomulario').hide();	$('#cargando-2-fomulario').show(); 
 	$.post("../ajax/producto.php?op=mostrar", { idproducto: idproducto }, function (e, status) {
-		e = JSON.parse(e);
+		e = JSON.parse(e);   
 
 		$('#idproducto').val(e.data.idproducto);
-    $('#categoria').val(e.data.idcategoria).trigger('change');
-    $('#u_medida').val(e.data.idsunat_unidad_medida).trigger('change');
-    $('#marca').val(e.data.idmarca).trigger('change');
+    $('#categoria').val(e.data.idproducto_categoria).trigger('change');
+    $('#u_medida').val(e.data.idsunat_c03_unidad_medida).trigger('change');
+    $('#marca').val(e.data.idproducto_marca).trigger('change');
 
     $('#codigo').val(e.data.codigo);
     $('#codigo_alterno').val(e.data.codigo_alterno);

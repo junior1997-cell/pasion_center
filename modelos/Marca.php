@@ -11,16 +11,16 @@
     }
 
     function listar_marca(){
-      $sql = "SELECT * FROM marca WHERE estado = 1 AND estado_delete = 1;";
+      $sql = "SELECT * FROM producto_marca WHERE estado = 1 AND estado_delete = 1;";
       return ejecutarConsulta($sql);		
     }
 
     public function insertar($nombre, $descripcion) {		
-      $sql_0 = "SELECT * FROM marca  WHERE nombre = '$nombre';";
+      $sql_0 = "SELECT * FROM producto_marca  WHERE nombre = '$nombre';";
       $existe = ejecutarConsultaArray($sql_0); if ($existe['status'] == false) { return $existe;}
         
       if ( empty($existe['data']) ) {
-        $sql="INSERT INTO marca(nombre, descripcion)VALUES('$nombre', '$descripcion')";
+        $sql="INSERT INTO producto_marca(nombre, descripcion)VALUES('$nombre', '$descripcion')";
         $insertar =  ejecutarConsulta_retornarID($sql, 'C'); if ($insertar['status'] == false) {  return $insertar; } 
         
         //add registro en nuestra bitacora
@@ -44,11 +44,11 @@
     }
 
     public function editar($idmarca, $nombre, $descripcion) {
-      $sql_0 = "SELECT * FROM marca  WHERE nombre = '$nombre' AND idmarca <> '$idmarca';";
+      $sql_0 = "SELECT * FROM producto_marca  WHERE nombre = '$nombre' AND idproducto_marca <> '$idmarca';";
       $existe = ejecutarConsultaArray($sql_0); if ($existe['status'] == false) { return $existe;}
         
       if ( empty($existe['data']) ) {
-        $sql="UPDATE marca SET nombre='$nombre', descripcion='$descripcion' WHERE idmarca='$idmarca';";
+        $sql="UPDATE producto_marca SET nombre='$nombre', descripcion='$descripcion' WHERE idproducto_marca='$idmarca';";
         $editar =  ejecutarConsulta($sql, 'U');	if ( $editar['status'] == false) {return $editar; } 
       
         //add registro en nuestra bitacora
@@ -73,12 +73,12 @@
     }
 
     public function mostrar($idmarca) {
-      $sql="SELECT * FROM marca WHERE idmarca='$idmarca';";
+      $sql="SELECT * FROM producto_marca WHERE idproducto_marca='$idmarca';";
       return ejecutarConsultaSimpleFila($sql);
     }
 
     public function desactivar($idmarca) {
-      $sql="UPDATE marca SET estado='0' WHERE idmarca='$idmarca'";
+      $sql="UPDATE producto_marca SET estado='0' WHERE idproducto_marca='$idmarca'";
       $desactivar= ejecutarConsulta($sql, 'T'); if ($desactivar['status'] == false) {  return $desactivar; }
       
       // //add registro en nuestra bitacora
@@ -90,7 +90,7 @@
 
     public function eliminar($idmarca) {
 		
-      $sql="UPDATE marca SET estado_delete='0' WHERE idmarca='$idmarca'";
+      $sql="UPDATE producto_marca SET estado_delete='0' WHERE idproducto_marca='$idmarca'";
       $eliminar =  ejecutarConsulta($sql, 'D');	if ( $eliminar['status'] == false) {return $eliminar; }  
       
       //add registro en nuestra bitacora

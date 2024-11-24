@@ -11,16 +11,16 @@
     }
 
     function listar_categoria(){
-      $sql = "SELECT * FROM categoria WHERE estado = 1 AND estado_delete = 1;";
+      $sql = "SELECT * FROM producto_categoria WHERE estado = 1 AND estado_delete = 1;";
       return ejecutarConsulta($sql);		
     }
     
     public function insertar_cat($nombre, $descripcion) {		
-      $sql_0 = "SELECT * FROM categoria  WHERE nombre = '$nombre';";
+      $sql_0 = "SELECT * FROM producto_categoria  WHERE nombre = '$nombre';";
       $existe = ejecutarConsultaArray($sql_0); if ($existe['status'] == false) { return $existe;}
         
       if ( empty($existe['data']) ) {
-        $sql="INSERT INTO categoria(nombre, descripcion)VALUES('$nombre', '$descripcion')";
+        $sql="INSERT INTO producto_categoria(nombre, descripcion)VALUES('$nombre', '$descripcion')";
         $insertar =  ejecutarConsulta_retornarID($sql, 'C'); if ($insertar['status'] == false) {  return $insertar; } 
         
         //add registro en nuestra bitacora
@@ -44,11 +44,11 @@
     }
 
     public function editar_cat($idcategoria, $nombre, $descripcion) {
-      $sql_0 = "SELECT * FROM categoria  WHERE nombre = '$nombre' AND idcategoria <> '$idcategoria';";
+      $sql_0 = "SELECT * FROM producto_categoria  WHERE nombre = '$nombre' AND idproducto_categoria <> '$idcategoria';";
       $existe = ejecutarConsultaArray($sql_0); if ($existe['status'] == false) { return $existe;}
         
       if ( empty($existe['data']) ) {
-        $sql="UPDATE categoria SET nombre='$nombre', descripcion='$descripcion' WHERE idcategoria='$idcategoria';";
+        $sql="UPDATE producto_categoria SET nombre='$nombre', descripcion='$descripcion' WHERE idproducto_categoria='$idcategoria';";
         $editar =  ejecutarConsulta($sql, 'U');	if ( $editar['status'] == false) {return $editar; } 
       
         //add registro en nuestra bitacora
@@ -73,12 +73,12 @@
     }
 
     public function mostrar($idcategoria) {
-      $sql="SELECT * FROM categoria WHERE idcategoria='$idcategoria';";
+      $sql="SELECT * FROM producto_categoria WHERE idproducto_categoria='$idcategoria';";
       return ejecutarConsultaSimpleFila($sql);
     }
 
     public function desactivar($idcategoria) {
-      $sql="UPDATE categoria SET estado='0' WHERE idcategoria='$idcategoria'";
+      $sql="UPDATE producto_categoria SET estado='0' WHERE idproducto_categoria='$idcategoria'";
       $desactivar= ejecutarConsulta($sql, 'T'); if ($desactivar['status'] == false) {  return $desactivar; }
       
       // //add registro en nuestra bitacora
@@ -90,7 +90,7 @@
 
     public function eliminar($idcategoria) {
 		
-      $sql="UPDATE categoria SET estado_delete='0' WHERE idcategoria='$idcategoria'";
+      $sql="UPDATE producto_categoria SET estado_delete='0' WHERE idproducto_categoria='$idcategoria'";
       $eliminar =  ejecutarConsulta($sql, 'D');	if ( $eliminar['status'] == false) {return $eliminar; }  
       
       //add registro en nuestra bitacora

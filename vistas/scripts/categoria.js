@@ -117,7 +117,7 @@ function mostrar_categoria(idcategoria){
   $.post("../ajax/categoria.php?op=mostrar_categoria", { idcategoria: idcategoria }, function (e, status) {
     e = JSON.parse(e); 
     if (e.status) {
-      $("#idcategoria").val(e.data.idcategoria);
+      $("#idcategoria").val(e.data.idproducto_categoria);
       $("#nombre_cat").val(e.data.nombre);        
       $("#descr_cat").val(e.data.descripcion);    
 
