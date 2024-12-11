@@ -34,22 +34,22 @@ class Producto
 
       $id_new = ejecutarConsulta_retornarID($sql, 'C'); if ($id_new['status'] == false) {return $id_new;}
 
-      $id = $id_new['data'];
+      $id_pr = $id_new['data'];
 
       $zz = 0;
       $yy = 0;
 
       $sql_1 ="INSERT INTO producto_sucursal
       (idproducto, sucursal_idsucursal, stock, stock_minimo, precio_compra, precio_venta, precio_venta_minima, ganancia_maxima, ganacia_minima) 
-      VALUES ('$id','$idsucursal','$stock','$stock_min','$precio_c','$precio_v','$precio_v_min','$x_ganancia_max','$x_ganancia_min')";
+      VALUES ('$id_pr','$idsucursal','$stock','$stock_min','$precio_c','$precio_v','$precio_v_min','$x_ganancia_max','$x_ganancia_min')";
       $id_new_sucursal = ejecutarConsulta_retornarID($sql_1, 'C'); if ($id_new_sucursal['status'] == false) {return $id_new_sucursal;}
 
-      $id = $id_new_sucursal['data'];
+      $id_suc = $id_new_sucursal['data'];
 
       if (!empty($monto_multip)) {
         
         while ($zz < count($monto_multip)) {
-          $sql_multi_p = "INSERT into producto_precio(idproducto_sucursal, nombre,precio_venta) values ('$id', '$nombre_multip[$zz]','$monto_multip[$zz]')";
+          $sql_multi_p = "INSERT into producto_precio(idproducto_sucursal, nombre,precio_venta) values ('$id_suc', '$nombre_multip[$zz]','$monto_multip[$zz]')";
           $usr_mp = ejecutarConsulta($sql_multi_p, 'C'); if ($usr_mp['status'] == false) { return $usr_mp; }
           $zz = $zz + 1;
         }
@@ -61,7 +61,7 @@ class Producto
 
           $sql_prsent_p = "INSERT INTO producto_presentacion(idproducto, idsunat_c03_unidad_medida, codigo, nombre, precio_compra, precio_venta,
           precio_minimo, cantidad) 
-          VALUES ('$id','$u_medida_present[$yy]','$code_present[$yy]','$nombre_present[$yy]','$precio_c_present[$yy]','$precio_v_present[$yy]',
+          VALUES ('$id_pr','$u_medida_present[$yy]','$code_present[$yy]','$nombre_present[$yy]','$precio_c_present[$yy]','$precio_v_present[$yy]',
           '$precio_vm_present[$yy]', '$cant_present[$yy]')";
 
           $prsent_p = ejecutarConsulta($sql_prsent_p, 'C'); if ($prsent_p['status'] == false) { return $prsent_p; }
@@ -191,13 +191,13 @@ class Producto
     pp.precio_compra, pp.precio_venta, pp.precio_minimo, pp.cantidad, pp.estado, pp.estado_delete, s_um.nombre as unidad_medida_present 
     FROM producto_presentacion as pp 
     INNER JOIN sunat_c03_unidad_medida as s_um on pp.idsunat_c03_unidad_medida=s_um.idsunat_c03_unidad_medida 
-    WHERE idproducto='$id';";
+    WHERE pp.idproducto='$id';";
 
     $present = ejecutarConsultaArray($sql_1); if ($present['status'] == false) { return $present; }
 
     $sql_2 = "SELECT pp.idproducto_precio, ps.idproducto_sucursal,p.idproducto, pp.nombre, pp.precio_venta, pp.estado 
     FROM producto_precio as pp INNER JOIN producto_sucursal as ps on pp.idproducto_sucursal =ps.idproducto_sucursal 
-    INNER JOIN producto as p on ps.idproducto = p.idproducto WHERE idproducto='$id';";
+    INNER JOIN producto as p on ps.idproducto = p.idproducto WHERE p.idproducto='$id';";
 
     $mult_p = ejecutarConsultaArray($sql_2); if ($mult_p['status'] == false) { return $mult_p; }
 

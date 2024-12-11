@@ -134,16 +134,16 @@ if (!isset($_SESSION["user_nombre"])) {
           echo json_encode($rspta, true);
         }
 
-        break;
+      break;
 
       case 'mostrar':
         $rspta = $productos->mostrar($idproducto);
         echo json_encode($rspta, true);
-        break;
+      break;
 
       case 'mostrar_detalle_producto':
         $tipo = $_POST['tipo']; $html_table ='';
-        $rspta = $productos->mostrar($idproducto);
+        $rspta = $productos->mostrar($idproducto); //echo json_encode($rspta, true); die();
         if ($rspta['status']) {
           if ($tipo =='producto'){
 
@@ -196,7 +196,7 @@ if (!isset($_SESSION["user_nombre"])) {
                                   $html_table .='<div class="accordion" id="basicAccordion'.$val['idpp'].'">
                                     <div class="accordion-item border-0 bg-transparent next-step">
                                       <div class="accordion-header" id="headingFour'.$val['idpp'].'">
-                                        <a class="px-0 pt-0 collapsed" href="javascript:void(0)" role="button" data-bs-toggle="collapse" data-bs-target="#basicFour'.$val['idpp'].'" aria-expanded="false" aria-controls="basicFour'.$val['idpp'].'">
+                                        <a class="px-0 pt-0 collapsed" href="javascript:void(0)" role="button" data-bs-toggle="collapse" data-bs-target="#ColapsePresentacion'.$val['idpp'].'" aria-expanded="false" aria-controls="ColapsePresentacion'.$val['idpp'].'">
                                           <div class="d-flex mb-2">
                                             <div class="me-2">
                                               <span class="avatar avatar-md avatar-rounded bg-primary-transparent text-primary border"><i class="fe fe-package fs-12"></i></span>
@@ -208,7 +208,7 @@ if (!isset($_SESSION["user_nombre"])) {
                                           </div>
                                         </a>
                                       </div>
-                                      <div id="basicFour'.$val['idpp'].'" class="accordion-collapse border-top-0 collapse show" aria-labelledby="headingFour'.$val['idpp'].'" data-bs-parent="#basicAccordion'.$val['idpp'].'">
+                                      <div id="ColapsePresentacion'.$val['idpp'].'" class="accordion-collapse border-top-0 collapse '.( count($rspta['data']['present']) > 2 ? '':'show').' " aria-labelledby="headingFour'.$val['idpp'].'" data-bs-parent="#basicAccordion'.$val['idpp'].'">
                                         <div class="accordion-body pt-0 ps-5">
                                           <div class="fs-11">
                                             <p class="mb-2 text-muted"><span class="fw-semibold text-default">U.M : </span>' . $val['unidad_medida_present'] . '</p>
@@ -244,7 +244,7 @@ if (!isset($_SESSION["user_nombre"])) {
                                 $html_table .='<div class="accordion" id="basicAccordion'.$value['idproducto_precio'].'">
                                   <div class="accordion-item border-0 bg-transparent next-step">
                                     <div class="accordion-header" id="headingFour'.$value['idproducto_precio'].'">
-                                      <a class="px-0 pt-0 collapsed" href="javascript:void(0)" role="button" data-bs-toggle="collapse" data-bs-target="#basicFour'.$value['idproducto_precio'].'" aria-expanded="false" aria-controls="basicFour'.$value['idproducto_precio'].'">
+                                      <a class="px-0 pt-0 collapsed" href="javascript:void(0)" role="button" data-bs-toggle="collapse" data-bs-target="#ColapsePrecio'.$value['idproducto_precio'].'" aria-expanded="false" aria-controls="ColapsePrecio'.$value['idproducto_precio'].'">
                                         <div class="d-flex mb-2">
                                           <div class="me-2">
                                             <span class="avatar avatar-md avatar-rounded bg-primary-transparent text-primary border"><i class="fe fe-package fs-12"></i></span>
@@ -256,7 +256,7 @@ if (!isset($_SESSION["user_nombre"])) {
                                         </div>
                                       </a>
                                     </div>
-                                    <div id="basicFour'.$value['idproducto_precio'].'" class="accordion-collapse border-top-0 collapse show" aria-labelledby="headingFour'.$value['idproducto_precio'].'" data-bs-parent="#basicAccordion'.$value['idproducto_precio'].'">
+                                    <div id="ColapsePrecio'.$value['idproducto_precio'].'" class="accordion-collapse border-top-0 collapse show" aria-labelledby="headingFour'.$value['idproducto_precio'].'" data-bs-parent="#basicAccordion'.$value['idproducto_precio'].'">
                                       <div class="accordion-body pt-0 ps-5">
                                         <div class="fs-11">
                                           <p class="mb-2 text-muted"><span class="fw-semibold text-default">Nombre : </span>' . $value['nombre'] . '</p>
@@ -325,12 +325,12 @@ if (!isset($_SESSION["user_nombre"])) {
       case 'eliminar':
         $rspta = $productos->eliminar($_GET["id_tabla"]);
         echo json_encode($rspta, true);
-        break;
+      break;
 
       case 'papelera':
         $rspta = $productos->papelera($_GET["id_tabla"]);
         echo json_encode($rspta, true);
-        break;
+      break;
 
       case 'listar_tabla_p':
         $rspta = $productos->listar_tabla($_GET["categoria"], $_GET["unidad_medida"], $_GET["marca"]);
@@ -389,7 +389,7 @@ if (!isset($_SESSION["user_nombre"])) {
         } else {
           echo $rspta['code_error'] . ' - ' . $rspta['message'] . ' ' . $rspta['data'];
         }
-        break;
+      break;
 
         // ══════════════════════════════════════  VALIDACION DE CODIGO  ══════════════════════════════════════
       case 'validar_code_producto':
