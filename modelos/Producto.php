@@ -40,7 +40,7 @@ class Producto
       $yy = 0;
 
       $sql_1 ="INSERT INTO producto_sucursal
-      (producto_idproducto, sucursal_idsucursal, stock, stock_minimo, precio_compra, precio_venta, precio_venta_minima, ganancia_maxima, ganacia_minima) 
+      (idproducto, sucursal_idsucursal, stock, stock_minimo, precio_compra, precio_venta, precio_venta_minima, ganancia_maxima, ganacia_minima) 
       VALUES ('$id','$idsucursal','$stock','$stock_min','$precio_c','$precio_v','$precio_v_min','$x_ganancia_max','$x_ganancia_min')";
       $id_new_sucursal = ejecutarConsulta_retornarID($sql_1, 'C'); if ($id_new_sucursal['status'] == false) {return $id_new_sucursal;}
 
@@ -114,7 +114,7 @@ class Producto
       $sql_p_s = "UPDATE producto_sucursal SET stock='$stock', 
       stock_minimo='$stock_min', precio_compra='$precio_c', precio_venta='$precio_v', 
       precio_venta_minima='$precio_v_min', ganancia_maxima='$x_ganancia_max', ganacia_minima='$x_ganancia_min' 
-      WHERE producto_idproducto='$idproducto' and sucursal_idsucursal='$idsucursal' ";
+      WHERE idproducto='$idproducto' and sucursal_idsucursal='$idsucursal' ";
       
       $id_new_sucursal = ejecutarConsulta($sql_p_s, 'U'); if ($id_new_sucursal['status'] == false) {return $id_new_sucursal;}
 
@@ -180,7 +180,7 @@ class Producto
 
     $sql = "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca, ps.* 
     FROM producto AS p 
-    INNER JOIN producto_sucursal as ps on p.idproducto = ps.producto_idproducto 
+    INNER JOIN producto_sucursal as ps on p.idproducto = ps.idproducto 
     INNER JOIN sunat_c03_unidad_medida AS sum ON p.idsunat_c03_unidad_medida = sum.idsunat_c03_unidad_medida 
     INNER JOIN producto_categoria AS cat ON p.idproducto_categoria = cat.idproducto_categoria 
     INNER JOIN producto_marca AS mc ON p.idproducto_marca = mc.idproducto_marca WHERE p.idproducto='$id';";
@@ -197,7 +197,7 @@ class Producto
 
     $sql_2 = "SELECT pp.idproducto_precio, ps.idproducto_sucursal,p.idproducto, pp.nombre, pp.precio_venta, pp.estado 
     FROM producto_precio as pp INNER JOIN producto_sucursal as ps on pp.idproducto_sucursal =ps.idproducto_sucursal 
-    INNER JOIN producto as p on ps.producto_idproducto = p.idproducto WHERE idproducto='$id';";
+    INNER JOIN producto as p on ps.idproducto = p.idproducto WHERE idproducto='$id';";
 
     $mult_p = ejecutarConsultaArray($sql_2); if ($mult_p['status'] == false) { return $mult_p; }
 
@@ -228,7 +228,7 @@ class Producto
 
     $sql = "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca, ps.stock, ps.precio_compra, ps.precio_venta 
     FROM producto AS p 
-    INNER JOIN producto_sucursal as ps on p.idproducto = ps.producto_idproducto 
+    INNER JOIN producto_sucursal as ps on p.idproducto = ps.idproducto 
     INNER JOIN sunat_c03_unidad_medida AS sum ON p.idsunat_c03_unidad_medida = sum.idsunat_c03_unidad_medida 
     INNER JOIN producto_categoria AS cat ON p.idproducto_categoria = cat.idproducto_categoria 
     INNER JOIN producto_marca AS mc ON p.idproducto_marca = mc.idproducto_marca 
@@ -242,7 +242,7 @@ class Producto
   {
     $sql = "SELECT p.*, sum.nombre AS unidad_medida, cat.nombre AS categoria, mc.nombre AS marca, ps.stock, ps.precio_compra, ps.precio_venta 
       FROM producto AS p      
-    INNER JOIN producto_sucursal as ps on p.idproducto = ps.producto_idproducto 
+    INNER JOIN producto_sucursal as ps on p.idproducto = ps.idproducto 
       INNER JOIN sunat_c03_unidad_medida AS sum ON p.idsunat_c03_unidad_medida = sum.idsunat_c03_unidad_medida
       INNER JOIN producto_categoria AS cat ON p.idcategoria = cat.idproducto_categoria
       INNER JOIN producto_marca AS mc ON p.idmarca = mc.idproducto_marca
