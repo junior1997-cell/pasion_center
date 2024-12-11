@@ -351,7 +351,7 @@ if (!isset($_SESSION["user_nombre"])) {
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item cursor-pointer " onclick="ver_producto(' . ($value['idproducto']) . ',\'' . $value['nombre'] . '\', \'' . "producto" . '\' )" >Ver Detalle</a></li>
-              <li><a class="dropdown-item cursor-pointer " onclick="ver_producto(' . ($value['idproducto']) . ',\'' . $value['nombre'] . '\', \'' . "en_otras_sucursales" . '\')" >Sucursales</a></li>
+              <li><a class="dropdown-item cursor-pointer " onclick="ver_producto(' . ($value['idproducto']) . ',\'' . $value['nombre'] . '\', \'' . "en_otras_sucursales" . '\')" >Stock - Sucursales</a></li>
               <li><a class="dropdown-item cursor-pointer " onclick="ver_producto(' . ($value['idproducto']) . ',\'' . $value['nombre'] . '\', \'' . "imagenes" . '\')" >Imagenes</a></li>
             </ul>
               </div>'),
