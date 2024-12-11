@@ -300,8 +300,9 @@ class Producto
     return ejecutarConsultaArray($sql);
   }
 
-  public function return_image(){
-
+  public function return_image($id, $nombre){
+    $sql = "SELECT $nombre as imagen FROM producto WHERE idproducto = $id;";
+    return ejecutarConsultaSimpleFila($sql);
   }
 
   // ══════════════════════════════════════  S E L E C T 2 - PARA FILTROS ══════════════════════════════════════ 

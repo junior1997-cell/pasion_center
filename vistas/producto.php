@@ -15,6 +15,17 @@ if (!isset($_SESSION["user_nombre"])) {
   <head>
     <?php $title_page = "Productos";
     include("template/head.php"); ?>
+
+    <style>
+      #tabla-productos td {        
+        vertical-align: middle !important;
+        line-height: 1.462 !important;
+        font-size: .625rem !important;
+        font-weight: 50 !important;
+      }
+      #tabla-productos_filter label{ width: 100% !important; }
+      #tabla-productos_filter label input{ width: 100% !important; }
+    </style>
   </head>
 
   <body id="body-productos">

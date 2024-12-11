@@ -360,7 +360,7 @@ if (!isset($_SESSION["user_nombre"])) {
                         <div class="me-2 cursor-pointer" data-bs-toggle="tooltip" title="Ver imagen"><span class="avatar"> <img src="../assets/modulo/productos/' . $img . '" alt="" onclick="ver_img(\'' . $img . '\', \'' . encodeCadenaHtml(($value['nombre'])) . '\')"> </span></div>
                         <div>
                           <h6 class="d-block fw-semibold text-primary">' . $value['nombre'] . '</h6>
-                          <span class="d-block fs-12 text-muted">Marca: <b>' . $value['marca'] . '</b> | Categoría: <b>' . $value['categoria'] . '</b></span> 
+                          <span class="d-block fs-11 text-muted">Marca: <b>' . $value['marca'] . '</b> | Categoría: <b>' . $value['categoria'] . '</b></span> 
                         </div>
                       </div>',
               "4" => ($value['stock']),
