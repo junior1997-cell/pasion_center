@@ -103,7 +103,7 @@ class Reporte_x_trabajador
 		INNER JOIN persona as p2 on pt.idpersona = p2.idpersona
 		INNER JOIN usuario as u on v.user_created = u.idusuario
 		INNER JOIN persona as pu on u.idpersona = pu.idpersona
-		WHERE v.sunat_estado = 'ACEPTADA' and v.estado='1' and v.estado_delete ='1' and vd.um_nombre='SERVICIOS'
+		WHERE v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') and v.estado='1' and v.estado_delete ='1' and vd.um_nombre='SERVICIOS'
 		and v.tipo_comprobante !='07'
 		
 		$filtro_sql_trab $filtro_sql_ap $filtro_sql_mp $filtro_sql_tc $filtro_sql_es_c
@@ -194,7 +194,7 @@ class Reporte_x_trabajador
 		INNER JOIN usuario AS u ON v.user_created = u.idusuario
 		INNER JOIN persona AS pu ON u.idpersona = pu.idpersona
 		WHERE v.estado = '1' AND v.estado_delete = '1'  AND vd.um_nombre = 'SERVICIOS' and
-			v.tipo_comprobante = '03' AND v.sunat_estado = 'ACEPTADA'
+			v.tipo_comprobante = '03' AND v.sunat_estado in ('ACEPTADA', 'POR ENVIAR')
 			$filtro_sql_trab $filtro_sql_ap $filtro_sql_mp $filtro_sql_tc $filtro_sql_es_c ";
 		$sqlboleta = ejecutarConsultaSimpleFila($sql_boleta);
 		if ($sqlboleta['status'] == false) {
@@ -222,7 +222,7 @@ class Reporte_x_trabajador
 		INNER JOIN usuario AS u ON v.user_created = u.idusuario
 		INNER JOIN persona AS pu ON u.idpersona = pu.idpersona
 		WHERE v.estado = '1' AND v.estado_delete = '1'  AND vd.um_nombre = 'SERVICIOS' and
-			v.tipo_comprobante = '01' AND v.sunat_estado = 'ACEPTADA'
+			v.tipo_comprobante = '01' AND v.sunat_estado in ('ACEPTADA', 'POR ENVIAR')
 			$filtro_sql_trab $filtro_sql_ap $filtro_sql_mp $filtro_sql_tc $filtro_sql_es_c ";
 
 		$sqlfactura = ejecutarConsultaSimpleFila($sql_factura);
@@ -249,7 +249,7 @@ class Reporte_x_trabajador
 		INNER JOIN usuario AS u ON v.user_created = u.idusuario
 		INNER JOIN persona AS pu ON u.idpersona = pu.idpersona
 		WHERE v.estado = '1' AND v.estado_delete = '1' AND vd.um_nombre = 'SERVICIOS' and
-			v.tipo_comprobante = '12' AND v.sunat_estado = 'ACEPTADA'
+			v.tipo_comprobante = '12' AND v.sunat_estado in ('ACEPTADA', 'POR ENVIAR')
 			$filtro_sql_trab $filtro_sql_ap $filtro_sql_mp $filtro_sql_tc $filtro_sql_es_c ";
 		$sqlticket = ejecutarConsultaSimpleFila($sql_ticket);
 		if ($sqlticket['status'] == false) {
@@ -274,7 +274,7 @@ class Reporte_x_trabajador
 		INNER JOIN persona AS p2 ON pt.idpersona = p2.idpersona
 		INNER JOIN usuario AS u ON v.user_created = u.idusuario
 		INNER JOIN persona AS pu ON u.idpersona = pu.idpersona
-		WHERE v.estado = '1' AND v.estado_delete = '1' AND vd.um_nombre = 'SERVICIOS' AND v.sunat_estado = 'ACEPTADA'
+		WHERE v.estado = '1' AND v.estado_delete = '1' AND vd.um_nombre = 'SERVICIOS' AND v.sunat_estado in ('ACEPTADA', 'POR ENVIAR')
 		and v.tipo_comprobante !='07'
 				$filtro_sql_trab $filtro_sql_ap $filtro_sql_mp $filtro_sql_tc $filtro_sql_es_c";
 
@@ -418,7 +418,7 @@ class Reporte_x_trabajador
 		INNER JOIN persona as p2 on pt.idpersona = p2.idpersona
 		INNER JOIN usuario as u on v.user_created = u.idusuario
 		INNER JOIN persona as pu on u.idpersona = pu.idpersona
-		WHERE v.sunat_estado = 'ACEPTADA' and v.estado='1' and v.estado_delete ='1'  
+		WHERE v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') and v.estado='1' and v.estado_delete ='1'  
 		and vd.um_nombre='SERVICIOS' AND  v.tipo_comprobante !='07'
 		 $filtro_sql_trab $filtro_sql_ap $filtro_sql_mp $filtro_sql_tc $filtro_sql_es_c
     GROUP by v.user_created,pu.nombre_razonsocial;";
@@ -473,7 +473,7 @@ class Reporte_x_trabajador
     INNER JOIN venta as v ON v.idventa = vd.idventa
 		INNER JOIN persona_cliente as pc on v.idpersona_cliente= pc.idpersona_cliente
 		INNER JOIN producto as pro ON pro.idproducto = vd.idproducto
-    WHERE v.sunat_estado = 'ACEPTADA' and v.estado='1' and v.estado_delete ='1' 
+    WHERE v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') and v.estado='1' and v.estado_delete ='1' 
 		and v.tipo_comprobante !='07'
 		$filtro_sql_trab $filtro_sql_ap $filtro_sql_mp $filtro_sql_tc $filtro_sql_es_c
 		GROUP BY vd.idproducto ORDER BY SUM(vd.cantidad) DESC;";
@@ -487,7 +487,7 @@ class Reporte_x_trabajador
 			INNER JOIN venta_detalle as vd on vd.idventa = v.idventa
 			INNER JOIN usuario as u on v.user_created = u.idusuario
 			INNER JOIN persona as pu on u.idpersona = pu.idpersona
-			WHERE vd.idproducto = '$id' and v.sunat_estado = 'ACEPTADA' and  v.estado='1' and v.estado_delete ='1' 
+			WHERE vd.idproducto = '$id' and v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') and  v.estado='1' and v.estado_delete ='1' 
 			and v.tipo_comprobante !='07'
 			$filtro_sql_trab $filtro_sql_ap $filtro_sql_mp $filtro_sql_tc $filtro_sql_es_c
 			GROUP BY v.user_created, pu.nombre_razonsocial, pu.foto_perfil;";

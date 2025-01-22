@@ -159,7 +159,7 @@ class Trabajador
 		FROM vw_cliente_all as vw_c
 		INNER JOIN venta as v on v.idpersona_cliente = vw_c.idpersona_cliente
 		INNER JOIN sunat_c01_tipo_comprobante AS tc ON tc.idtipo_comprobante = v.idsunat_c01
-		WHERE v.estado = '1' AND v.estado_delete = '1' and v.sunat_estado = 'ACEPTADA' and v.user_created = '$id'  ORDER BY vw_c.idpersona_cliente DESC";
+		WHERE v.estado = '1' AND v.estado_delete = '1' and v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') and v.user_created = '$id'  ORDER BY vw_c.idpersona_cliente DESC";
 		return ejecutarConsulta($sql);
 	}
 

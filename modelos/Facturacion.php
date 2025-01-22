@@ -264,7 +264,7 @@
         FROM venta v
         JOIN venta_detalle vd ON v.idventa = vd.idventa
         WHERE v.fecha_emision >= DATE_FORMAT(DATE('$periodo-01'), '%Y-%m-01') and 
-        sunat_estado = 'ACEPTADA' AND v.estado = 1 AND v.estado_delete = 1 AND v.tipo_comprobante in('01', '03','12') $filtro_id_trabajador
+        sunat_estado in ('ACEPTADA', 'POR ENVIAR') AND v.estado = 1 AND v.estado_delete = 1 AND v.tipo_comprobante in('01', '03','12') $filtro_id_trabajador
         GROUP BY vd.idproducto
       ),
       ventas_mes_anterior AS (
@@ -272,7 +272,7 @@
         FROM venta v
         JOIN venta_detalle vd ON v.idventa = vd.idventa
         WHERE v.fecha_emision >= DATE_FORMAT(DATE_SUB(DATE('$periodo-01'), INTERVAL 1 MONTH), '%Y-%m-01') AND v.fecha_emision < DATE_FORMAT(DATE('$periodo-01'), '%Y-%m-01') and 
-        sunat_estado = 'ACEPTADA' AND v.estado = 1 AND v.estado_delete = 1 AND v.tipo_comprobante in('01', '03','12') $filtro_id_trabajador
+        sunat_estado in ('ACEPTADA', 'POR ENVIAR') AND v.estado = 1 AND v.estado_delete = 1 AND v.tipo_comprobante in('01', '03','12') $filtro_id_trabajador
         GROUP BY vd.idproducto
       )
       SELECT p.idproducto, p.nombre as nombre_producto, p.imagen, p.nombre_categoria, p.nombre_marca, p.nombre_um,
@@ -306,7 +306,7 @@
           $sql_mes = "SELECT MONTHNAME(v.fecha_emision) AS fecha_emision , COALESCE(SUM(vd.cantidad), 0) AS cantidad_total 
           FROM venta as v 
           INNER JOIN venta_detalle as vd on vd.idventa = v.idventa
-          WHERE MONTH(v.fecha_emision) = '$nro_mes' AND v.sunat_estado = 'ACEPTADA' AND v.tipo_comprobante in ('01', '03', '12') 
+          WHERE MONTH(v.fecha_emision) = '$nro_mes' AND v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') AND v.tipo_comprobante in ('01', '03', '12') 
           AND v.estado = '1' AND v.estado_delete = '1' and vd.idproducto = '$idproducto' $filtro_id_trabajador ;";
           $mes_f = ejecutarConsultaSimpleFila($sql_mes); if ($mes_f['status'] == false) {return $mes_f; }
 
@@ -353,7 +353,7 @@
       INNER JOIN venta_detalle as vd ON vd.idventa = v.idventa
       INNER JOIN persona_cliente as pc ON pc.idpersona_cliente = v.idpersona_cliente
       INNER JOIN centro_poblado as cp ON cp.idcentro_poblado = pc.idcentro_poblado
-      WHERE v.estado = 1 AND v.estado_delete = 1 and v.sunat_estado = 'ACEPTADA' AND v.tipo_comprobante in( '01', '03', '12' ) 
+      WHERE v.estado = 1 AND v.estado_delete = 1 and v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') AND v.tipo_comprobante in( '01', '03', '12' ) 
       $filtro_periodo $filtro_trabajador_2
       GROUP BY cp.idcentro_poblado
       order by COUNT(v.idventa) DESC) as co ON pco.idcentro_poblado = co.idcentro_poblado
@@ -378,7 +378,7 @@
       INNER JOIN venta_detalle as vd ON vd.idventa = v.idventa
       INNER JOIN persona_cliente as pc ON pc.idpersona_cliente = v.idpersona_cliente
       INNER JOIN centro_poblado as cp ON cp.idcentro_poblado = pc.idcentro_poblado
-      WHERE v.estado = 1 AND v.estado_delete = 1 and v.sunat_estado = 'ACEPTADA' AND v.tipo_comprobante in( '01', '03', '12' ) $filtro_periodo $filtro_trabajador_2
+      WHERE v.estado = 1 AND v.estado_delete = 1 and v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') AND v.tipo_comprobante in( '01', '03', '12' ) $filtro_periodo $filtro_trabajador_2
       GROUP BY pc.idpersona_trabajador
       order by COUNT(v.idventa) DESC) as co ON pco.idpersona_trabajador = co.idpersona_trabajador
       order by ROUND( COALESCE((( co.cant_cobrado /  pco.cant_cliente) * 100), 0) , 2) DESC ;"; #return $sql;
@@ -541,7 +541,7 @@
      
       $sql="SELECT pco.periodo, pco.idperiodo_contable, pco.periodo_year, pco.periodo_month, count(v.idventa) as cant_comprobante 
       FROM periodo_contable as pco
-      LEFT JOIN venta as v ON v.idperiodo_contable = pco.idperiodo_contable  and v.estado = '1' and v.estado_delete = '1' and v.sunat_estado = 'ACEPTADA' AND v.tipo_comprobante <> '100'
+      LEFT JOIN venta as v ON v.idperiodo_contable = pco.idperiodo_contable  and v.estado = '1' and v.estado_delete = '1' and v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') AND v.tipo_comprobante <> '100'
       WHERE pco.estado = '1' and pco.estado_delete = '1'
       GROUP BY pco.idperiodo_contable, pco.periodo_year, periodo_month
       ORDER BY periodo DESC";

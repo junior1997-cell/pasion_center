@@ -74,7 +74,7 @@ FROM
     INNER JOIN sunat_c06_doc_identidad AS sc06 ON p.tipo_documento = sc06.code_sunat
     INNER JOIN venta v ON v.idpersona_cliente = pc.idpersona_cliente
     INNER JOIN venta_detalle AS vd ON vd.idventa = v.idventa
-    WHERE vd.es_cobro = 'SI' AND v.estado = 1 AND v.estado_delete = 1 AND v.sunat_estado = 'ACEPTADA' AND v.tipo_comprobante IN('01', '03', '12')
+    WHERE vd.es_cobro = 'SI' AND v.estado = 1 AND v.estado_delete = 1 AND v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') AND v.tipo_comprobante IN('01', '03', '12')
     GROUP BY p.idpersona, pc.idpersona_cliente
     ORDER BY pc.idpersona_cliente, cant_total_mes
   ) AS pco
@@ -83,7 +83,7 @@ FROM
       FROM venta AS v
       INNER JOIN venta_detalle AS vd ON vd.idventa = v.idventa
       INNER JOIN persona_cliente AS pc ON pc.idpersona_cliente = v.idpersona_cliente
-      WHERE vd.es_cobro = 'SI' AND v.estado = 1 AND v.estado_delete = 1 AND v.sunat_estado = 'ACEPTADA' AND v.tipo_comprobante IN('01', '03', '12')
+      WHERE vd.es_cobro = 'SI' AND v.estado = 1 AND v.estado_delete = 1 AND v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') AND v.tipo_comprobante IN('01', '03', '12')
       GROUP BY pc.idpersona_cliente
       ORDER BY COUNT(v.idventa)
       DESC

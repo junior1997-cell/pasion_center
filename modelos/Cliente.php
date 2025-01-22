@@ -194,7 +194,7 @@ class Cliente
 		FROM venta as v
 		INNER JOIN venta_detalle as vd ON vd.idventa = v.idventa
 		INNER JOIN persona_cliente as pc on pc.idpersona_cliente = v.idpersona_cliente
-		where v.estado = '1' AND v.estado_delete = '1' AND v.sunat_estado = 'ACEPTADA' AND v.tipo_comprobante in( '01', '03', '12' ) $filtro_id_trabajador
+		where v.estado = '1' AND v.estado_delete = '1' AND v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') AND v.tipo_comprobante in( '01', '03', '12' ) $filtro_id_trabajador
 		GROUP BY YEAR(vd.periodo_pago_format)
 		ORDER BY YEAR(vd.periodo_pago_format) DESC;";
 		return ejecutarConsulta($sql);

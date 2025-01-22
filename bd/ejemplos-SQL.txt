@@ -85,5 +85,5 @@ ORDER BY v.fecha_emision DESC, p1.nombre_razonsocial ASC;
 
 ::::::::::::: ACTUALIZAR DATA :::::::::::::::::::::::::
 SELECT vd.* FROM venta_detalle AS vd inner 
-JOIN venta as v ON v.idventa = vd.idventa AND v.estado = '1' AND v.sunat_estado = 'ACEPTADA' 
+JOIN venta as v ON v.idventa = vd.idventa AND v.estado = '1' AND v.sunat_estado in ('ACEPTADA', 'POR ENVIAR') 
 where vd.es_cobro = 'SI' AND vd.cantidad > 1 ORDER BY vd.idventa ASC;
